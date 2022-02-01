@@ -1,0 +1,66 @@
+@import '../../../Styles/Colors.scss';
+@import '../../../Styles/Fonts.scss';
+
+.container1{
+    height: 656px;
+    width: 100%;
+    background-color: $home-bg;
+    align-items: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    .logo {
+        padding: 70px 0 30px 0; 
+        text-align: center;
+    }
+    .elipse{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+    }
+    .title{
+        padding: 50px 0;
+        font-size: 48px;
+        line-height: 60px;
+        color: white;
+        z-index: 1;
+    }
+    .sub{
+        padding: 50px 0;
+        font-size: 34px;
+        line-height: 42px;
+        color: white;
+        z-index: 1;
+    }
+}
+.footer {
+    height: 144px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .container2{
+        height: 82px;
+        width: 829px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.23);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 37px;
+        align-items: center;
+    }
+    .paqueterias{
+        background-color: #F6F6FB;
+        padding: 0 19px;
+        color: black;
+        position: absolute;
+        top: 22px;
+        left: 456px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+}
