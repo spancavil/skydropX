@@ -1,0 +1,10 @@
+@import '../../Styles/Fonts.scss';
+@import '../../Styles/Colors.scss';
+
+.title {
+    font-family: $font-inter500;
+    font-size: 45px;
+    line-height: 72px;
+    letter-spacing: 0.15px;
+    color: $texto-primary;
+}
