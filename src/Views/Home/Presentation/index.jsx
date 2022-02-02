@@ -2,11 +2,11 @@ import React from 'react';
 import ElipseHome1 from '../../../Assets/svg/elipseHome1';
 import styles from './styles.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
-import estafeta from '../../../Assets/img/estafeta.png';
 import fedEx from '../../../Assets/img/fedEx.png';
 import sendEx from '../../../Assets/img/sendEx.png';
 import redPack from '../../../Assets/img/redPack.png';
 import carsa from '../../../Assets/img/carsa.png';
+import Estafeta from '../../../Assets/svg/estafeta';
 
 const Presentation = () => {
     return (
@@ -24,10 +24,9 @@ const Presentation = () => {
             <footer className={styles.footer}>
                 <h1 className={styles.paqueterias}>Paqueterías con las que trabajamos</h1>
                 <div className={styles.container2}>
-                    <img
-                        src={estafeta}
-                        alt="estafeta"
-                        style={{ width: "144px", objectFit: "contain" }}
+                    
+                    <Estafeta
+                        style={{ width: "155px", objectFit: "contain" }}
                     />
                     <img
                         src={fedEx}

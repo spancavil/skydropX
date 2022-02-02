@@ -25,6 +25,7 @@
         line-height: 60px;
         color: white;
         z-index: 1;
+        font-family: $font-inter300;
     }
     .sub{
         padding: 50px 0;
@@ -32,6 +33,7 @@
         line-height: 42px;
         color: white;
         z-index: 1;
+        font-family: $font-inter300;
     }
 }
 .footer {
@@ -58,9 +60,11 @@
         color: black;
         position: absolute;
         top: 22px;
-        left: 456px;
+        left: 436px;
         font-size: 18px;
         line-height: 24px;
+        font-family: $font-inter400;
+        letter-spacing: 2px;
     }
 
 }

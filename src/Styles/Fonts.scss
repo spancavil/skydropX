@@ -1,0 +1,62 @@
+@font-face {
+    font-family: "Inter-thin";
+    src: url("../Assets/fonts/Inter-Thin.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-extralight";
+    src: url("../Assets/fonts/Inter-ExtraLight.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-light";
+    src: url("../Assets/fonts/Inter-Light.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-regular";
+    src: url("../Assets/fonts/Inter-Regular.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-medium";
+    src: url("../Assets/fonts/Inter-Medium.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-semibold";
+    src: url("../Assets/fonts/Inter-SemiBold.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-bold";
+    src: url("../Assets/fonts/Inter-Bold.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-extrabold";
+    src: url("../Assets/fonts/Inter-ExtraBold.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Inter-black";
+    src: url("../Assets/fonts/Inter-Black.ttf");
+}
+
+$font-inter100: "Inter-thin";
+$font-inter200: "Inter-extralight";
+$font-inter300: "Inter-light";
+$font-inter400: "Inter-regular";
+$font-inter500: "Inter-medium";
+$font-inter600: "Inter-semibold";
+$font-inter700: "Inter-bold";
+$font-inter800: "Inter-extrabold";
+$font-inter900: "Inter-black"
