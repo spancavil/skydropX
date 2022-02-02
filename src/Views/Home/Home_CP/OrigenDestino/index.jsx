@@ -5,17 +5,36 @@ import styles from './styles.module.scss'
 const OrigenDestino = () => {
 
     const [origen, setOrigen] = useState("");
+    const [errorOrigen, setErrorOrigen] = useState("");
     const [destino, setDestino] = useState("");
+    const [errorDestino, setErrorDestino] = useState("");
+
 
     const handleOrigen = (value) => {
         if (value.length <= 5){
             setOrigen(value.replace(/[^0-9]/g, ''))
+        } 
+        if (value.length < 5){
+            setErrorOrigen("Debe tener 5 dígitos")
+        } 
+        else if (parseInt(value) === 0){
+            setErrorOrigen("Código postal no válido")
+        } else {
+            setErrorOrigen("")
         }
     }
-
+    
     const handleDestino = (value) => {
         if (value.length <= 5){
             setDestino(value.replace(/[^0-9]/g, ''))
+        } 
+        if (value.length < 5){
+            setErrorDestino("Debe tener 5 dígitos")
+        } 
+        else if (parseInt(value) === 0){
+            setErrorDestino("Código postal no válido")
+        } else {
+            setErrorDestino("")
         }
     }
 
@@ -26,15 +45,29 @@ const OrigenDestino = () => {
     return (
         <div className={styles.container}>
             <div className={styles.inputContainer}>
-                <input type="text" placeholder='Origen' name="Origen" id="origen" value={origen}
-                onChange={(e)=> handleOrigen(e.target.value)}
-                />
-                {origen !== "" && <h4 className={styles.superTextOrigen}>Origen</h4>}
-                <Arrow/>
-                <input type="text" placeholder='Destino' name="Destino" id="destino" value={destino}
-                onChange={(e)=> handleDestino(e.target.value)}
-                />
-                {destino !== "" && <h4 className={styles.superTextDestino}>Destino</h4>}
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <input type="text" placeholder='Origen' name="Origen" id="origen" value={origen}
+                    className={errorOrigen !== "" ? styles.inputError: null}
+                    onChange={(e)=> handleOrigen(e.target.value)}
+                    />
+                    {origen !== "" && <h4 className={
+                        errorOrigen ? styles.superTextOrigenError: styles.superTextOrigen
+                        }>Origen</h4>}
+                    {errorOrigen && <h4 className={styles.errorText}>{errorOrigen}</h4>}
+                </div>
+
+                <Arrow style={{position: "relative", top: "20px"}}/>
+
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <input type="text" placeholder='Destino' name="Destino" id="destino" value={destino}
+                    className={errorDestino !== "" ? styles.inputError: null}
+                    onChange={(e)=> handleDestino(e.target.value)}
+                    />
+                    {destino !== "" && <h4 className={
+                        errorDestino ? styles.superTextDestinoError: styles.superTextDestino
+                        }>Destino</h4>}
+                    {errorDestino && <h4 className={styles.errorText}>{errorDestino}</h4>}
+                </div>
             </div>
             {
                 origen.length === 5 && destino.length === 5 ?
