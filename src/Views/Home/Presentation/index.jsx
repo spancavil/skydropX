@@ -8,10 +8,10 @@ import redPack from '../../../Assets/img/redPack.png';
 import carsa from '../../../Assets/img/carsa.png';
 import Estafeta from '../../../Assets/svg/estafeta';
 
-const Presentation = () => {
+const Presentation = ({onClick}) => {
     return (
         <>
-            <div className={styles.container1}>
+            <div className={styles.container1} onClick={onClick}>
                 <img
                     src={logo}
                     alt="logoSky"

@@ -1,0 +1,51 @@
+@import '../../../../Styles/Colors.scss';
+@import '../../../../Styles/Fonts.scss';
+
+.container{
+    width: 730px;
+    height: 120px;
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .line1 {
+        position: absolute;
+        left: 33%;
+        height: 100%;
+        border-left: 2px solid rgba(35, 51, 98, 0.23);
+    }
+    .line2 {
+        position: absolute;
+        left: 66%;
+        height: 100%;
+        border-left: 2px solid rgba(35, 51, 98, 0.23);
+    }
+    .link {
+        width: calc(100% /3);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        .iconContainer{
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid #5233EA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footerText{
+            font-family: $font-inter300;
+            font-size: 24px;
+            line-height: 29px;
+            letter-spacing: 0.25px;
+            text-align: center;
+            color: $texto-primary;
+        }
+    }
+}
