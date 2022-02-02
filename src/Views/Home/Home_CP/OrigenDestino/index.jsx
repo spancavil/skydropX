@@ -70,7 +70,7 @@ const OrigenDestino = () => {
                 </div>
             </div>
             {
-                origen.length === 5 && destino.length === 5 ?
+                !errorDestino && destino.length > 0 && !errorOrigen && origen.length > 0 ?
                 <button className={styles.buttonContinueEnabled}
                 onClick={()=> handleContinue()}
                 >
