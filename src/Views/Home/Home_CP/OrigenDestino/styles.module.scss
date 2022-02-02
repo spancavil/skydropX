@@ -2,7 +2,7 @@
 @import '../../../../Styles/Fonts.scss';
 
 .container{
-    width: 500px;
+    width: 498px;
     overflow: visible;
     display: flex;
     flex-direction: column;
@@ -31,6 +31,7 @@
             border: 2px solid rgba(35, 51, 98, 0.23);
             -webkit-transition: 0.3s;
             transition: 0.3s;
+            height: 64px;
         }
         input::placeholder{
             font-family: $font-inter300;
@@ -47,22 +48,22 @@
             padding: 0 5px;
             top: -15px;
             left: 14px;
-            background-color: $font-paqueterias;
+            background-color: white;
             color: $text-secondary;
             font-size: 20px;
             font-family: $font-inter300;
-            line-height: 32px;
+            line-height: 25px;
         }
         .superTextDestino{
             position: absolute;
             padding: 0 5px;
             top: -15px;
             left: 305px;
-            background-color: $font-paqueterias;
+            background-color: white;
             color: $text-secondary;
             font-size: 20px;
             font-family: $font-inter300;
-            line-height: 32px;
+            line-height: 25px;
         }
         .inputError{
             text-align: center;
@@ -74,6 +75,7 @@
             width: 200px;
             border-radius: 6px;
             border: 2px solid rgba(35, 51, 98, 0.23);
+            height: 64px;
         }
     }
 
