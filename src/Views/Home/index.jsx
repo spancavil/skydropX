@@ -8,10 +8,10 @@ const Home = () => {
 
 
     return (
-        <>
+        <div>
             {!cp && <Presentation onClick = {()=> setCp(true)}/>}
             {cp && <HomeCP/>}
-        </>
+        </div>
     );
 };
 

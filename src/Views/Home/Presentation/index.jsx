@@ -7,13 +7,14 @@ import sendEx from '../../../Assets/img/sendEx.png';
 import redPack from '../../../Assets/img/redPack.png';
 import carsa from '../../../Assets/img/carsa.png';
 import Estafeta from '../../../Assets/svg/estafeta';
-import FullscreenIcon from '../../../Assets/svg/fullScreenIcon';
+import fullScreenIcon from '../../../Assets/img/fullScreenIcon.png';
 
 const Presentation = ({onClick}) => {
 
     const [fullscreen, setFullscreen] = useState(false)
 
-    const requestFull = () => {
+    const requestFull = (e) => {
+        e.stopPropagation();
         const elemento = document.getElementById("root")
         if (elemento.requestFullscreen){
             elemento.requestFullscreen();
@@ -25,14 +26,20 @@ const Presentation = ({onClick}) => {
         <>
             <div className={styles.container1} onClick={onClick}>
 
-                {/* Mostramos el ícono solamente si no está en full screen */}
-                {!fullscreen && <FullscreenIcon style = {{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                }}
-                onClick = {()=> requestFull()}
-                />}
+                {!fullscreen &&
+                    <img
+                        src={fullScreenIcon}
+                        alt="logoSky"
+                        style = {{
+                            transform: "scale(0.25)",
+                            position: "absolute",
+                            top: '-220px',
+                            right: '-220px',
+                            cursor: 'pointer',
+                        }}
+                        onClick = {(e)=> requestFull(e)}
+                    />
+                }
 
                 <img
                     src={logo}
