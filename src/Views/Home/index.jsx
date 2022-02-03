@@ -4,11 +4,14 @@ import Presentation from './Presentation';
 
 const Home = () => {
     const [cp, setCp] = useState(false)
+    
+
+
     return (
-        <div>
+        <>
             {!cp && <Presentation onClick = {()=> setCp(true)}/>}
             {cp && <HomeCP/>}
-        </div>
+        </>
     );
 };
 
