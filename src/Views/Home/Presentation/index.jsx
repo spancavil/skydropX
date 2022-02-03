@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ElipseHome1 from '../../../Assets/svg/elipseHome1';
 import styles from './styles.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
@@ -7,11 +7,33 @@ import sendEx from '../../../Assets/img/sendEx.png';
 import redPack from '../../../Assets/img/redPack.png';
 import carsa from '../../../Assets/img/carsa.png';
 import Estafeta from '../../../Assets/svg/estafeta';
+import FullscreenIcon from '../../../Assets/svg/fullScreenIcon';
 
 const Presentation = ({onClick}) => {
+
+    const [fullscreen, setFullscreen] = useState(false)
+
+    const requestFull = () => {
+        const elemento = document.getElementById("root")
+        if (elemento.requestFullscreen){
+            elemento.requestFullscreen();
+            setFullscreen(true);
+        }
+    }
+
     return (
         <>
             <div className={styles.container1} onClick={onClick}>
+
+                {/* Mostramos el ícono solamente si no está en full screen */}
+                {!fullscreen && <FullscreenIcon style = {{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                }}
+                onClick = {()=> requestFull()}
+                />}
+
                 <img
                     src={logo}
                     alt="logoSky"

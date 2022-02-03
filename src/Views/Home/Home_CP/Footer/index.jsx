@@ -4,12 +4,12 @@ import PrivacyIcon from '../../../../Assets/svg/privacyIcon';
 import SupportIcon from '../../../../Assets/svg/supportIcon';
 import styles from './styles.module.scss'
 
-const Footer = () => {
+const Footer = ({onPrivacy, onForbidden, onSupport}) => {
     return (
         <div className={styles.container}>
             <div className={styles.line1}></div>
             <div className={styles.line2}></div>
-            <div className={styles.link}>
+            <div className={styles.link} onClick={onPrivacy}>
                 <div className={styles.iconContainer}>
                     <PrivacyIcon />
                 </div>
@@ -17,7 +17,7 @@ const Footer = () => {
                     Aviso de <br/> privacidad
                 </h1>
             </div>
-            <div className={styles.link}>
+            <div className={styles.link} onClick={onForbidden}>
                 <div className={styles.iconContainer}>
                     <BoxIcon />
                 </div>
@@ -25,7 +25,7 @@ const Footer = () => {
                     Artículos <br/> prohibidos
                 </h1>
             </div>
-            <div className={styles.link}>
+            <div className={styles.link} onClick={onSupport}>
                 <div className={styles.iconContainer}>
                     <SupportIcon />
                 </div>
