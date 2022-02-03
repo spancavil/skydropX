@@ -18,14 +18,14 @@ const HomeCP = () => {
             <div className={styles.container}>
                 <TitleText
                     text="¡Hola, te damos la bienvenida!"
-                    style={{ paddingTop: "32px" }} 
+                    style={{ paddingTop: "60px" }} 
                 />
                 <h2 className={styles.text2}>
                     Desde aquí puedes crear envíos de forma sencilla, rápida y segura.
                 </h2>
-                <h3 className={styles.text3}>
-                    Ingresa el código postal de origen y destino de tu envío. 
-                </h3>
+                <p className={styles.text3}>
+                    Ingresa el <strong>Código postal</strong> de origen y destino de tu envío. 
+                </p>
                 <OrigenDestino/>
                 <Footer />
             </div>
