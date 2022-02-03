@@ -28,4 +28,5 @@ const ElipseHome1 = (props) => (
   </svg>
 )
 
-export default ElipseHome1
+export default ElipseHome1;
+
