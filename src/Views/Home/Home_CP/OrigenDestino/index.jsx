@@ -11,8 +11,10 @@ const OrigenDestino = () => {
 
 
     const handleOrigen = (value) => {
+        let valorRecortado = origen;
         if (value.length <= 5){
-            setOrigen(value.replace(/[^0-9]/g, ''))
+            valorRecortado = value.replace(/[^0-9]/g, '')
+            setOrigen(valorRecortado)
         } 
         if (value.length < 5){
             setErrorOrigen("Debe tener 5 dígitos")
@@ -25,13 +27,15 @@ const OrigenDestino = () => {
     }
     
     const handleDestino = (value) => {
+        let valorRecortado = destino;
         if (value.length <= 5){
-            setDestino(value.replace(/[^0-9]/g, ''))
-        } 
-        if (value.length < 5){
+            valorRecortado = value.replace(/[^0-9]/g, '')
+            setDestino(valorRecortado)
+        }
+        if (valorRecortado.length < 5){
             setErrorDestino("Debe tener 5 dígitos")
         } 
-        else if (parseInt(value) === 0){
+        else if (parseInt(valorRecortado) === 0){
             setErrorDestino("Código postal no válido")
         } else {
             setErrorDestino("")

@@ -18,7 +18,6 @@ const Presentation = ({onClick}) => {
                     className={styles.logo}
                 />
                 <h1 className={styles.title}>Toca la pantalla para crear tu envío</h1>
-                <h1 className={styles.sub}>(Protector de pantalla)</h1>
                 <ElipseHome1 className={styles.elipse} />
             </div>
             <footer className={styles.footer}>
