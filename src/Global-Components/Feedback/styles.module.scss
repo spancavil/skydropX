@@ -1,0 +1,48 @@
+@import '../../Styles/Colors.scss';
+@import '../../Styles/Fonts.scss';
+
+.feedbackContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    height: 84px;
+    border-radius: 100px;
+    background-color: white;
+
+    .feedbackComponent{
+        padding: 0 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
+        .formatContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 72px;
+    
+            .title{
+                font-family: $font-inter300;
+                font-size: 20px;
+                line-height: 32px;
+                color: $texto-primary
+            }
+    
+            .content{
+                font-family: $font-inter600;
+                font-size: 20px;
+                line-height: 32px;
+                color: $texto-primary
+            }
+        }
+        .line{
+            height: 55px;
+            border-left: 2px solid rgba(0, 0, 0, 0.23);
+        }
+    }
+}

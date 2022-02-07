@@ -6,6 +6,9 @@
     width: 100vw;
     height: 100vh;
     background-color: $flow-bg;
+    position: absolute;
+    top: 0;
+    left: 0;
 
     .appHeader {
         width: 100%;

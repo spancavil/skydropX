@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './Views/Home';
 import './Styles/Global.scss';
-import DefineWeight from './Views/DefineWeight';
+import DefineParams from './Views/DefineParams';
 
 function App() {
   
@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/definir-peso" element ={<DefineWeight/>}/>
+        <Route path="/definir-peso" element ={<DefineParams/>}/>
       </Routes>
     </BrowserRouter>
   );

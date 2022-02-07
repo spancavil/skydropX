@@ -1,0 +1,29 @@
+@import '../../Styles/Colors.scss';
+@import '../../Styles/Fonts.scss';
+
+.container {
+    width: 100vw;
+    height: calc(100vh - 60px);
+
+    .title{
+        position: absolute;
+        top: 210px;
+        width: 100vw;
+        text-align: center;
+        font-size: 40px;
+        line-height: 48px;
+        font-family: $font-inter500;
+        color: $texto-primary;
+    }
+    .cardContainer{
+        position: absolute;
+        top: 295px;
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        overflow: visible;
+    }
+}
