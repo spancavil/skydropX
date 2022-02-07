@@ -26,4 +26,22 @@
         gap: 32px;
         overflow: visible;
     }
+
+    .subContainer{
+        position: absolute;
+        bottom: 150px;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        gap: 11px;
+
+        .subtitle{
+            font-family: $font-inter400;
+            font-size: 20px;
+            line-height: 32px;
+            color: $texto-primary;
+        }
+    }
 }
