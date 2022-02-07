@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Arrow from '../../../../Assets/svg/arrow';
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
+
 
 const OrigenDestino = () => {
+
+    let navigate = useNavigate()
 
     const [origen, setOrigen] = useState("");
     const [errorOrigen, setErrorOrigen] = useState("");
@@ -44,6 +48,7 @@ const OrigenDestino = () => {
 
     const handleContinue = () => {
         alert("Se continuará con el llamado a la API");
+        navigate('/definir-peso');
     }
 
     return (
