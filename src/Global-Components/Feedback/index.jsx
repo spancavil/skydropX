@@ -2,7 +2,7 @@ import React from "react";
 import LocationIcon from "../../Assets/svg/locationIcon";
 import styles from './styles.module.scss';
 
-const Feedback = ({position, origenDestino, peso = true, servicio = null}) => {
+const Feedback = ({position, codigosPostales, peso = true, servicio = null}) => {
     return(
         <div className={styles.feedbackContainer}
         style={{
@@ -15,12 +15,12 @@ const Feedback = ({position, origenDestino, peso = true, servicio = null}) => {
                 <LocationIcon className={styles.icon}/>
                 <div className={styles.formatContainer}>
                     <h3 className={styles.title}>Origen</h3>
-                    <h3 className={styles.content}>20202</h3>
+                    <h3 className={styles.content}>{codigosPostales.origen}</h3>
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.formatContainer}>
                     <h3 className={styles.title}>Destino</h3>
-                    <h3 className={styles.content}>40202</h3>
+                    <h3 className={styles.content}>{codigosPostales.destino}</h3>
                 </div>
             </div>
             {peso && (
