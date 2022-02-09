@@ -17,7 +17,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
             setTimeout(()=> {
                 setBlock(false)
                 onClick(data)
-            }, 700)
+            }, 400)
         }
     }
 
