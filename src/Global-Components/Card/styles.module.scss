@@ -30,3 +30,39 @@
         color: $text-secondary;
     }
 }
+
+.cardService {
+    background-color: white;
+    width: 358px;
+    height: 272px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
+        0px 4px 18px 3px rgba(152, 167, 204, 0.12);
+    border-radius: 6px;
+    cursor: pointer;
+    .titleService{
+        padding-top: 24px;
+        font-family: $font-inter600;
+        font-size: 34px;
+        line-height: 43px;
+        text-align: center;
+        color: $home-bg;
+    }
+    .subService1{
+        padding-top: 12px;
+        font-family: $font-inter500;
+        font-size: 20px;
+        line-height: 160%;
+        text-align: center;
+        color: $texto-primary;
+    }
+    .subService2{
+        font-family: $font-inter500;
+        font-size: 18px;
+        line-height: 160%;
+        text-align: center;
+        color: $texto-primary;
+    }
+}

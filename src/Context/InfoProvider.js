@@ -8,7 +8,12 @@ const InfoProvider = ({ children }) => {
     const [stateAndCity, setStateAndCity] = useState(
         {stateOrigen: "", stateDestino: "", cityOrigen: "", cityDestino: ""})
 
+    const [servicePackage, setServicePackage] = useState({})
+
+    const [sizePackage, setSizePackage] = useState(""); 
+
     const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
+    const SERVICE_TYPES = ["359", "249"]
 
     useEffect (()=> {
 
@@ -16,7 +21,9 @@ const InfoProvider = ({ children }) => {
 
     return (
         <InfoData.Provider 
-        value = {{setCodigosPostales, setStateAndCity, codigosPostales, stateAndCity, WEIGHTS}}
+        value = {
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage,
+            codigosPostales, stateAndCity, servicePackage, sizePackage, WEIGHTS, SERVICE_TYPES}}
         >
             {children}
         </InfoData.Provider>
