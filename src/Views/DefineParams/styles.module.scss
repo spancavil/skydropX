@@ -1,0 +1,56 @@
+@import '../../Styles/Colors.scss';
+@import '../../Styles/Fonts.scss';
+
+.container {
+    width: 100vw;
+    height: calc(100vh - 60px);
+
+    .title{
+        position: absolute;
+        top: 210px;
+        width: 100vw;
+        text-align: center;
+        font-size: 40px;
+        line-height: 48px;
+        font-family: $font-inter500;
+        color: $texto-primary;
+    }
+    .cardContainer{
+        position: absolute;
+        top: 295px;
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        overflow: visible;
+    }
+
+    .subContainer{
+        position: absolute;
+        bottom: 150px;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        gap: 11px;
+
+        .subtitle{
+            font-family: $font-inter400;
+            font-size: 20px;
+            line-height: 32px;
+            color: $texto-primary;
+        }
+    }
+
+    .buttonContainer{
+        position: absolute;
+        right: 135px;
+        bottom: 37px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
