@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../../../Assets/svg/arrow';
 import { InfoData } from '../../../../Context/InfoProvider';
-import SkydropService from '../../../../Services/Skydrop.service';
+//import SkydropService from '../../../../Services/Skydrop.service';
 import styles from './styles.module.scss';
 
 
@@ -15,7 +15,7 @@ const OrigenDestino = () => {
     const [destino, setDestino] = useState("");
     const [errorDestino, setErrorDestino] = useState("");
 
-    const {setCodigosPostales, setCiudades} = useContext(InfoData);
+    const {setCodigosPostales} = useContext(InfoData);
 
     const handleOrigen = (value) => {
         let valorRecortado = origen;
