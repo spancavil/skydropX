@@ -8,9 +8,9 @@ const InfoProvider = ({ children }) => {
     const [stateAndCity, setStateAndCity] = useState(
         {stateOrigen: "", stateDestino: "", cityOrigen: "", cityDestino: ""})
 
-    const [servicePackage, setServicePackage] = useState({})
-
     const [sizePackage, setSizePackage] = useState(""); 
+    const [servicePackage, setServicePackage] = useState("")
+    const [shippingPackage, setShippingPackage] = useState("")
 
     const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
     const SERVICE_TYPES = ["359", "249"]
@@ -22,8 +22,9 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage,
-            codigosPostales, stateAndCity, servicePackage, sizePackage, WEIGHTS, SERVICE_TYPES}}
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage,
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage,
+            WEIGHTS, SERVICE_TYPES}}
         >
             {children}
         </InfoData.Provider>

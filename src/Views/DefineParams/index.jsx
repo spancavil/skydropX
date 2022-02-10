@@ -6,16 +6,20 @@ import styles from './styles.module.scss';
 import InfoIcon from '../../Assets/svg/infoIcon';
 import { InfoData } from "../../Context/InfoProvider";
 import Button from "../../Global-Components/Button";
+import { useNavigate } from "react-router-dom";
 
 const DefineParams = () => {
 
     const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
-    const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [form, setForm] = useState(false);
 
+    const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
+
     const { WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage } = useContext(InfoData);
+
+    const navigate = useNavigate();
 
     const defineSize = (size) => {
         setSizePackage(size);
@@ -36,7 +40,20 @@ const DefineParams = () => {
     }
 
     const handleBack = () => {
-        console.log("quiere backear");
+        if (weight && !service && !shipping){
+            setSizePackage("")
+            navigate("/");
+        }
+        if (!weight && service && !shipping){
+            setServicePackage("")
+            setService(false)
+            setWeight(true)
+        }
+        if (!weight && !service && shipping){
+            setShippingPackage("")
+            setShipping(false)
+            setService(true)
+        }
     }
 
     return (
