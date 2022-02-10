@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/definir-peso" element ={<DefineParams/>}/>
+        <Route path="/definir-parametros" element ={<DefineParams/>}/>
       </Routes>
     </BrowserRouter>
   );

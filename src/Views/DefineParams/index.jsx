@@ -6,16 +6,26 @@ import styles from './styles.module.scss';
 import InfoIcon from '../../Assets/svg/infoIcon';
 import { InfoData } from "../../Context/InfoProvider";
 import Button from "../../Global-Components/Button";
+import { useNavigate } from "react-router-dom";
 
 const DefineParams = () => {
 
+    //States for show or hide
     const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
-    const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [form, setForm] = useState(false);
 
-    const { WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage } = useContext(InfoData);
+    //State contains information
+    const [shippingsAvailable, setShippingsAvailable] = useState([])
+
+    const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
+
+    const { 
+        WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage, //getShippingServices
+    } = useContext(InfoData);
+
+    const navigate = useNavigate();
 
     const defineSize = (size) => {
         setSizePackage(size);
@@ -23,9 +33,16 @@ const DefineParams = () => {
         setService(true);
     }
 
-    const defineService = (service) => {
+    const defineService = async (service) => {
         setServicePackage(service);
         setService(false)
+        
+        /* const shippings = await getShippingServices()
+        console.log(shippings); */
+
+        const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
+        setShippingPackage(shippingsHardcoded); //Saves in context
+        setShippingsAvailable(shippingsHardcoded) //Saves in state
         setShipping(true)
     }
 
@@ -36,7 +53,25 @@ const DefineParams = () => {
     }
 
     const handleBack = () => {
-        console.log("quiere backear");
+        if (weight && !service && !shipping){
+            setSizePackage("")
+            navigate("/");
+        }
+        if (!weight && service && !shipping){
+            setServicePackage("")
+            setService(false)
+            setWeight(true)
+        }
+        if (!weight && !service && shipping){
+            setShippingPackage("")
+            setShipping(false)
+            setService(true)
+        }
+        if (!weight && !service && !shipping && form){
+            // setFormPackage({});
+            setForm(false)
+            setShipping(true)
+        }
     }
 
     return (
@@ -72,9 +107,9 @@ const DefineParams = () => {
                 {shipping &&
                     <>
                         <h1 className={styles.title}>¿Qué paquetería elijes para realizar el envío?</h1>
-                        <div className={styles.cardContainer}>
-                            {WEIGHTS.map(weight => {
-                                return <Card type="shipping" content={weight} key={weight} onClick={defineShipping} block={block} setBlock = {setBlock} />
+                        <div className={styles.cardContainerShipping}>
+                            {shippingsAvailable.map(shipping => {
+                                return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock = {setBlock} />
                             })}
                         </div>
                     </>

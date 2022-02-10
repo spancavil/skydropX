@@ -80,7 +80,7 @@ const OrigenDestino = () => {
             origen,
             destino
         })
-        navigate('/definir-peso');
+        navigate('/definir-parametros');
     }
 
     return (
