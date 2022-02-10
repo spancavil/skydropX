@@ -10,14 +10,20 @@ import { useNavigate } from "react-router-dom";
 
 const DefineParams = () => {
 
+    //States for show or hide
     const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
     const [form, setForm] = useState(false);
 
+    //State contains information
+    const [shippingsAvailable, setShippingsAvailable] = useState([])
+
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
 
-    const { WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage } = useContext(InfoData);
+    const { 
+        WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage, //getShippingServices
+    } = useContext(InfoData);
 
     const navigate = useNavigate();
 
@@ -27,9 +33,16 @@ const DefineParams = () => {
         setService(true);
     }
 
-    const defineService = (service) => {
+    const defineService = async (service) => {
         setServicePackage(service);
         setService(false)
+        
+        /* const shippings = await getShippingServices()
+        console.log(shippings); */
+
+        const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
+        setShippingPackage(shippingsHardcoded); //Saves in context
+        setShippingsAvailable(shippingsHardcoded) //Saves in state
         setShipping(true)
     }
 
@@ -53,6 +66,11 @@ const DefineParams = () => {
             setShippingPackage("")
             setShipping(false)
             setService(true)
+        }
+        if (!weight && !service && !shipping && form){
+            // setFormPackage({});
+            setForm(false)
+            setShipping(true)
         }
     }
 
@@ -89,9 +107,9 @@ const DefineParams = () => {
                 {shipping &&
                     <>
                         <h1 className={styles.title}>¿Qué paquetería elijes para realizar el envío?</h1>
-                        <div className={styles.cardContainer}>
-                            {WEIGHTS.map(weight => {
-                                return <Card type="shipping" content={weight} key={weight} onClick={defineShipping} block={block} setBlock = {setBlock} />
+                        <div className={styles.cardContainerShipping}>
+                            {shippingsAvailable.map(shipping => {
+                                return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock = {setBlock} />
                             })}
                         </div>
                     </>
