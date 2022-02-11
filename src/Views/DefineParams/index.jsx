@@ -16,13 +16,11 @@ const DefineParams = () => {
     const [shipping, setShipping] = useState(false)
     const [form, setForm] = useState(false);
 
-    //State contains information
-    const [shippingsAvailable, setShippingsAvailable] = useState([])
-
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
+    const [shippingsOn, setShippingsOn] = useState(false)
 
     const { 
-        WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage, //getShippingServices
+        WEIGHTS, SERVICE_TYPES, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -41,8 +39,9 @@ const DefineParams = () => {
         console.log(shippings); */
 
         const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
-        setShippingPackage(shippingsHardcoded); //Saves in context
-        setShippingsAvailable(shippingsHardcoded) //Saves in state
+
+        setShippingAvailable(shippingsHardcoded) //Saves in context
+        setShippingsOn(shippingsHardcoded);
         setShipping(true)
     }
 
@@ -58,17 +57,17 @@ const DefineParams = () => {
             navigate("/");
         }
         if (!weight && service && !shipping){
-            setServicePackage("")
+            setSizePackage("")
             setService(false)
             setWeight(true)
         }
         if (!weight && !service && shipping){
-            setShippingPackage("")
+            setServicePackage("")
             setShipping(false)
             setService(true)
         }
         if (!weight && !service && !shipping && form){
-            // setFormPackage({});
+            setShippingPackage("");
             setForm(false)
             setShipping(true)
         }
@@ -78,11 +77,7 @@ const DefineParams = () => {
         <FlowBackground>
             <div className={styles.container}>
                 <Feedback
-                    position={{ x: "135px", y: "92px" }}
-                    codigosPostales={codigosPostales}
-                    weight={weight}
-                    service={service}
-                    shipping={shipping}
+                    position={{ x: "70px", y: "92px" }}
                 />
                 {weight && (
                     <>
@@ -108,7 +103,7 @@ const DefineParams = () => {
                     <>
                         <h1 className={styles.title}>¿Qué paquetería elijes para realizar el envío?</h1>
                         <div className={styles.cardContainerShipping}>
-                            {shippingsAvailable.map(shipping => {
+                            {shippingsOn.map(shipping => {
                                 return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock = {setBlock} />
                             })}
                         </div>
