@@ -11,7 +11,10 @@ export const getFullDate = () => {
     const hours = date.getHours();
     const {hours: hoursFormatted, ampm} = formatAmPm(hours)
 
-    const minutes = date.getMinutes();
+    let minutes = date.getMinutes();
+    if (minutes <= 9) {
+        minutes = `0${minutes}`; 
+    }
     const day = date.getDate();
     let month = date.getMonth();
     const year = date.getFullYear();

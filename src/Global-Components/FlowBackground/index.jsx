@@ -18,7 +18,7 @@ const FlowBackground = ({children}) => {
             setDate({minutes, hoursFormatted, ampm, day, month, year})
         }
         getTime(); 
-        const myTimer = setInterval(getTime, 60000);
+        const myTimer = setInterval(getTime, 5000);
 
         //On return stop the timer
         return(()=> {    

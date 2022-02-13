@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import './styles.module.scss';
-import BoxSizingIcon from '../../Assets/svg/boxSizingIcon';
 import styles from './styles.module.scss';
-import BoxSizingIconMedium from "../../Assets/svg/boxSizingIconMedium";
-import BoxSizingIconLarge from "../../Assets/svg/boxSizingIconLarge";
+import boxSizingSmall from '../../Assets/img/smallBox.png';
+import boxSizingMedium from '../../Assets/img/mediumBox.png';
+import boxSizingLarge from '../../Assets/img/boxSizingLarge.png';
 import RocketIcon from "../../Assets/svg/rocketIcon";
 
 //SHIPPING IMAGES
@@ -48,32 +48,41 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                 style={border ? {border: "3px solid #5233EA"}: null}
                 >
                     { size === "S" && 
-                    <BoxSizingIcon
+                    <img
                     style={{
                         position: "relative",
-                        marginTop: "73px",
+                        width: "60%",
+                        marginTop: '20px'
                     }}
+                    src={boxSizingSmall}
+                    alt="boxSmall"
                     />
                     }
                     { size === "M" &&
-                    <BoxSizingIconMedium
+                    <img
                     style={{
                         position: "relative",
-                        marginTop: "50px",
-                    }}   
+                        width: "60%",
+                        marginTop: '20px'
+                    }}
+                    alt="boxMedium"
+                    src={boxSizingMedium}
                     />
                     }
 
                     { size === "L" &&
-                    <BoxSizingIconLarge
+                    <img
                     style={{
                         position: "relative",
-                        marginTop: "30px",
+                        width: "60%",
+                        marginTop: '20px'
                     }}
+                    alt="boxLarge"
+                    src={boxSizingLarge}
                     />
                     }
                     <h1 className={styles.cardTitle}>{content} kg</h1>
-                    <h3 className={styles.cardSubtitle}>Medida máxima: 154 cm <br/>lineales*</h3>
+                    <h3 className={styles.cardSubtitle}>Medida máxima:<br/>154 cm lineales*</h3>
                     
                 </div>
             );

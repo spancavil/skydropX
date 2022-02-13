@@ -7,6 +7,7 @@ import InfoIcon from '../../Assets/svg/infoIcon';
 import { InfoData } from "../../Context/InfoProvider";
 import Button from "../../Global-Components/Button";
 import { useNavigate } from "react-router-dom";
+import Form from "../../Global-Components/Form";
 
 const DefineParams = () => {
 
@@ -14,7 +15,8 @@ const DefineParams = () => {
     const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
-    const [form, setForm] = useState(false);
+    const [formSender, setFormSender] = useState(false);
+    const [formReceiver, setFormReceiver] = useState(false);
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
@@ -48,7 +50,15 @@ const DefineParams = () => {
     const defineShipping = (shipping) => {
         setShippingPackage(shipping);
         setShipping(false)
-        setForm(true)
+        setFormSender(true)
+    }
+
+    const handleFormSender = (dataSender) => {
+        console.log(dataSender);
+    }
+
+    const handleFormReceiver = (dataReceiver) => {
+
     }
 
     const handleBack = () => {
@@ -66,9 +76,9 @@ const DefineParams = () => {
             setShipping(false)
             setService(true)
         }
-        if (!weight && !service && !shipping && form){
+        if (!weight && !service && !shipping && formSender){
             setShippingPackage("");
-            setForm(false)
+            setFormSender(false)
             setShipping(true)
         }
     }
@@ -110,13 +120,21 @@ const DefineParams = () => {
                     </>
 
                 }
-                {form && null}
+                {formSender && <Form width={'calc(100vw - 140px)'} height={"414px"}
+                    handleSubmit={handleFormSender}
+                />}
+
+                {formReceiver && <Form width={'calc(100vw - 140px)'} height={"414px"}
+                    handleSubmit={handleFormReceiver}
+                />}
+
                 {weight && (
                     <div className={styles.subContainer}>
                         <InfoIcon />
                         <h2 className={styles.subtitle}>*Para calcular los centímetros lineales suma el largo, ancho y alto del paquete.</h2>
                     </div>
                 )}
+
                 <div className={styles.buttonContainer}>
                     <Button text="Regresar" width="132px" color="outlined" onClick={handleBack} />
                 </div>

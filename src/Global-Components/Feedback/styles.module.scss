@@ -40,10 +40,24 @@
                 line-height: 32px;
                 color: $texto-primary
             }
+            
         }
         .line{
             height: 55px;
             border-left: 2px solid rgba(0, 0, 0, 0.23);
+        }
+
+        .shippingContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 72px;
+            width: 100px;
+            .shippingImage{
+                max-height: 55px;
+                max-width: 100%;
+            }
         }
     }
 }
