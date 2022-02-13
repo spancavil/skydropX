@@ -13,6 +13,8 @@ const InfoProvider = ({ children }) => {
     const [servicePackage, setServicePackage] = useState("")
     const [shippingPackage, setShippingPackage] = useState("")
 
+    const [shippingAvailable, setShippingAvailable] = useState(null)
+
     // const [servicePrices, setServicePrice] = useState({})
     
     const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
@@ -41,8 +43,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices,
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage,
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, 
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable,
             WEIGHTS, SERVICE_TYPES}}
         >
             {children}

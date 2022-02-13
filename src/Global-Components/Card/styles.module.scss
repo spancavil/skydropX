@@ -15,7 +15,7 @@
 
     .cardTitle {
         position: relative;
-        padding: 20px 0px;
+        padding: 10px 0px 20px 0px;
         text-align: center;
         font-family: $font-inter600;
         font-size: 34px;
@@ -78,6 +78,7 @@
     box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
         0px 4px 18px 3px rgba(152, 167, 204, 0.12);
     border-radius: 6px;
+    cursor: pointer;
 
     img {
         transform: scale(0.25);

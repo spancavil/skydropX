@@ -7,6 +7,7 @@ import InfoIcon from '../../Assets/svg/infoIcon';
 import { InfoData } from "../../Context/InfoProvider";
 import Button from "../../Global-Components/Button";
 import { useNavigate } from "react-router-dom";
+import Form from "../../Global-Components/Form";
 
 const DefineParams = () => {
 
@@ -14,15 +15,14 @@ const DefineParams = () => {
     const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
-    const [form, setForm] = useState(false);
-
-    //State contains information
-    const [shippingsAvailable, setShippingsAvailable] = useState([])
+    const [formSender, setFormSender] = useState(false);
+    // const [formReceiver, setFormReceiver] = useState(false);
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
+    const [shippingsOn, setShippingsOn] = useState(false)
 
     const { 
-        WEIGHTS, SERVICE_TYPES, codigosPostales, setSizePackage, setServicePackage, setShippingPackage, //getShippingServices
+        WEIGHTS, SERVICE_TYPES, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -41,16 +41,25 @@ const DefineParams = () => {
         console.log(shippings); */
 
         const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
-        setShippingPackage(shippingsHardcoded); //Saves in context
-        setShippingsAvailable(shippingsHardcoded) //Saves in state
+
+        setShippingAvailable(shippingsHardcoded) //Saves in context
+        setShippingsOn(shippingsHardcoded);
         setShipping(true)
     }
 
     const defineShipping = (shipping) => {
         setShippingPackage(shipping);
         setShipping(false)
-        setForm(true)
+        setFormSender(true)
     }
+
+    const handleFormSender = (dataSender) => {
+        console.log(dataSender);
+    }
+
+    /* const handleFormReceiver = (dataReceiver) => {
+
+    } */
 
     const handleBack = () => {
         if (weight && !service && !shipping){
@@ -58,18 +67,18 @@ const DefineParams = () => {
             navigate("/");
         }
         if (!weight && service && !shipping){
-            setServicePackage("")
+            setSizePackage("")
             setService(false)
             setWeight(true)
         }
         if (!weight && !service && shipping){
-            setShippingPackage("")
+            setServicePackage("")
             setShipping(false)
             setService(true)
         }
-        if (!weight && !service && !shipping && form){
-            // setFormPackage({});
-            setForm(false)
+        if (!weight && !service && !shipping && formSender){
+            setShippingPackage("");
+            setFormSender(false)
             setShipping(true)
         }
     }
@@ -78,11 +87,7 @@ const DefineParams = () => {
         <FlowBackground>
             <div className={styles.container}>
                 <Feedback
-                    position={{ x: "135px", y: "92px" }}
-                    codigosPostales={codigosPostales}
-                    weight={weight}
-                    service={service}
-                    shipping={shipping}
+                    position={{ x: "70px", y: "92px" }}
                 />
                 {weight && (
                     <>
@@ -108,20 +113,28 @@ const DefineParams = () => {
                     <>
                         <h1 className={styles.title}>¿Qué paquetería elijes para realizar el envío?</h1>
                         <div className={styles.cardContainerShipping}>
-                            {shippingsAvailable.map(shipping => {
+                            {shippingsOn.map(shipping => {
                                 return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock = {setBlock} />
                             })}
                         </div>
                     </>
 
                 }
-                {form && null}
+                {formSender && <Form width={'calc(100vw - 140px)'} height={"414px"}
+                    handleSubmit={handleFormSender}
+                />}
+
+                {/* {formReceiver && <Form width={'calc(100vw - 140px)'} height={"414px"}
+                    handleSubmit={handleFormReceiver}
+                />} */}
+
                 {weight && (
                     <div className={styles.subContainer}>
                         <InfoIcon />
                         <h2 className={styles.subtitle}>*Para calcular los centímetros lineales suma el largo, ancho y alto del paquete.</h2>
                     </div>
                 )}
+
                 <div className={styles.buttonContainer}>
                     <Button text="Regresar" width="132px" color="outlined" onClick={handleBack} />
                 </div>
