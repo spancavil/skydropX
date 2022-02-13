@@ -16,7 +16,7 @@ const DefineParams = () => {
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
     const [formSender, setFormSender] = useState(false);
-    const [formReceiver, setFormReceiver] = useState(false);
+    // const [formReceiver, setFormReceiver] = useState(false);
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
@@ -57,9 +57,9 @@ const DefineParams = () => {
         console.log(dataSender);
     }
 
-    const handleFormReceiver = (dataReceiver) => {
+    /* const handleFormReceiver = (dataReceiver) => {
 
-    }
+    } */
 
     const handleBack = () => {
         if (weight && !service && !shipping){
@@ -124,9 +124,9 @@ const DefineParams = () => {
                     handleSubmit={handleFormSender}
                 />}
 
-                {formReceiver && <Form width={'calc(100vw - 140px)'} height={"414px"}
+                {/* {formReceiver && <Form width={'calc(100vw - 140px)'} height={"414px"}
                     handleSubmit={handleFormReceiver}
-                />}
+                />} */}
 
                 {weight && (
                     <div className={styles.subContainer}>
