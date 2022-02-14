@@ -21,7 +21,7 @@ class skydropxService {
      */
 
     async getPricingService(){
-        return await axios.post(BASE_URL + "pricings/services").then (response => {
+        return await axios.get(BASE_URL + "pricings/services").then (response => {
             return response.data
         })
     }

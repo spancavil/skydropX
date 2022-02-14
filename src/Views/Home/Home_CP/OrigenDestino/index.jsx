@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../../../Assets/svg/arrow';
 import { InfoData } from '../../../../Context/InfoProvider';
-//import SkydropService from '../../../../Services/Skydrop.service';
+import SkydropService from '../../../../Services/Skydrop.service';
 import styles from './styles.module.scss';
 
 
@@ -15,7 +15,7 @@ const OrigenDestino = () => {
     const [destino, setDestino] = useState("");
     const [errorDestino, setErrorDestino] = useState("");
 
-    const {setCodigosPostales} = useContext(InfoData);
+    const {setCodigosPostales, setStateAndCity} = useContext(InfoData);
 
     const handleOrigen = (value) => {
         let valorRecortado = origen;
@@ -53,34 +53,46 @@ const OrigenDestino = () => {
     const handleContinue = async () => {
 
         alert("Se continuará con el llamado a la API");
-/*         const responseOrigen = await SkydropService.getCityByPostalCode(origen)
-        const responseDestino = await SkydropService.getCityByPostalCode(destino)
-        if (responseDestino.error !== undefined){
-            setErrorDestino("Código postal no válido")
-        } else if (responseOrigen.error !== undefined) {
-            setErrorOrigen("Código postal no válido")
-        } else {
-            const responseOrigenSplit = responseOrigen.ciudad.split(',')
-            const responseDestinoSplit = responseOrigen.ciudad.split(',')
-
-            setCodigosPostales({
-                origen,
-                destino
-            })
-            setCiudades({
-                stateOrigen: responseOrigenSplit[0],
-                stateDestino: responseDestino[0],
-                cityOrigen: responseOrigenSplit[1] || "",
-                cityDestino: responseDestinoSplit[1] || ""
-            })
-            navigate('/definir-peso');
+        try {
+            const responseOrigen = await SkydropService.getCityByPostalCode(origen)
+            const responseDestino = await SkydropService.getCityByPostalCode(destino)
+            if (responseDestino.error !== undefined){
+                setErrorDestino("Código postal no válido")
+            } else if (responseOrigen.error !== undefined) {
+                setErrorOrigen("Código postal no válido")
+            } else {
+                console.log(responseOrigen, responseDestino);
+                const responseOrigenSplit = responseOrigen.result.city.split(',')
+                const responseDestinoSplit = responseOrigen.result.city.split(',')
+    
+                setCodigosPostales({
+                    origen,
+                    destino
+                })
+                setStateAndCity({
+                    stateOrigen: responseOrigenSplit[0],
+                    stateDestino: responseDestino[0],
+                    cityOrigen: responseOrigenSplit[1] || "",
+                    cityDestino: responseDestinoSplit[1] || ""
+                })
+                navigate('/definir-parametros');
+            }
+            
+        } catch (error) {
+            if (error.response.status === 400){
+                if (error.response.request.responseURL.includes(origen)) setErrorOrigen("Código postal no válido");
+                if (error.response.request.responseURL.includes(destino)) setErrorDestino("Código postal no válido");
+            }
+            else{
+                alert(error.message)
+            }
         }
-        console.log("origen:", responseOrigen, "destino: ", responseDestino); */
-        setCodigosPostales({
-            origen,
-            destino
-        })
-        navigate('/definir-parametros');
+        // console.log("origen:", responseOrigen, "destino: ", responseDestino);
+        // setCodigosPostales({
+        //     origen,
+        //     destino
+        // })
+        // navigate('/definir-parametros');
     }
 
     return (
