@@ -1,4 +1,5 @@
 import React from 'react';
+import SwalAlert from '../../Utils/sweetAlert';
 import { schemaCompleteName, schemaEmail, schemaPhone } from '../../Utils/validateForm';
 import styles from './styles.module.scss';
 
@@ -10,6 +11,8 @@ const Form = ({width, height}) => {
     console.log(res1.error?.message);
     console.log(res2.error?.message);
     console.log(res3.error?.message);
+
+    SwalAlert("Este es un error de ejemplo")
 
   return (
     <div className={styles.container}

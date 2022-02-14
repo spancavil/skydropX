@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState} from "react";
 import SkydropService from "../Services/Skydrop.service";
+import SwalAlert from "../Utils/sweetAlert";
 
 export const InfoData = createContext({})
 
@@ -14,29 +15,34 @@ const InfoProvider = ({ children }) => {
     const [shippingPackage, setShippingPackage] = useState("")
 
     const [shippingAvailable, setShippingAvailable] = useState(null)
-
-    // const [servicePrices, setServicePrice] = useState({})
     
+    const [SERVICE_TYPES, setSERVICE_TYPES] = useState([])
     const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
-    const SERVICE_TYPES = ["359", "249"]
 
     const getShippingServices = async () => {
-        let serviceSTDoEXP = parseInt(servicePackage) > 300 ? "EXP" : "STD"
-        const response = await SkydropService.getAvailableShipping(
-            codigosPostales.origen, codigosPostales.destino, sizePackage, serviceSTDoEXP)
-        console.log(response);
-        return (response.result);
+        try {
+            let serviceSTDoEXP = parseInt(servicePackage) > 300 ? "EXP" : "STD"
+            const response = await SkydropService.getAvailableShipping(
+                codigosPostales.origen, codigosPostales.destino, sizePackage, serviceSTDoEXP)
+            console.log(response);
+            return (response.result);
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     useEffect (()=> {
 
-        // (async ()=> {
-        //     const response = await SkydropService.getPricingService()
-        //     console.log(response);
-        //     if (response) {
-        //      setServicePrice(Object.values(response.result))
-        //     }
-        // })()
+        (async ()=> {
+            try {
+                const response = await SkydropService.getPricingService()
+                if (response) {
+                 setSERVICE_TYPES(Object.values(response.result))
+                }
+            } catch (error) {
+                SwalAlert("No se pudo establecer comunicación con el servidor: " + error.message);
+            }
+        })()
 
     }, [])
 

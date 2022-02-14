@@ -22,7 +22,7 @@ const DefineParams = () => {
     const [shippingsOn, setShippingsOn] = useState(false)
 
     const { 
-        WEIGHTS, SERVICE_TYPES, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable
+        WEIGHTS, SERVICE_TYPES, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -37,13 +37,13 @@ const DefineParams = () => {
         setServicePackage(service);
         setService(false)
         
-        /* const shippings = await getShippingServices()
-        console.log(shippings); */
+        const shippings = await getShippingServices()
 
-        const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
+        /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
+        setShippingAvailable(shippingsHardcoded) //Saves in context */
 
-        setShippingAvailable(shippingsHardcoded) //Saves in context
-        setShippingsOn(shippingsHardcoded);
+        setShippingsOn(shippings);
+        setShippingAvailable(shippings);
         setShipping(true)
     }
 
