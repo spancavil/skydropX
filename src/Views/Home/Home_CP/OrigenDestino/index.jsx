@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Arrow from '../../../../Assets/svg/arrow';
 import { InfoData } from '../../../../Context/InfoProvider';
 import SkydropService from '../../../../Services/Skydrop.service';
+import SwalAlert from '../../../../Utils/sweetAlert';
 import styles from './styles.module.scss';
 
 
@@ -84,7 +85,7 @@ const OrigenDestino = () => {
                 if (error.response.request.responseURL.includes(destino)) setErrorDestino("Código postal no válido");
             }
             else{
-                alert(error.message)
+                SwalAlert("Error de comunicación con el servidor: " + error.message)
             }
         }
         // console.log("origen:", responseOrigen, "destino: ", responseDestino);

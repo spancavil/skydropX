@@ -1,0 +1,81 @@
+@import '../../Styles/Colors.scss';
+@import '../../Styles/Fonts.scss';
+
+.inputFormat {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: visible;
+    input {
+        text-align: left;
+        padding: 10px 0;
+        font-family: $font-inter400;
+        letter-spacing: 0.15px;
+        font-size: 20px;
+        line-height: 32px;
+        width: 200px;
+        border-radius: 6px;
+        border: 2px solid rgba(35, 51, 98, 0.23);
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        height: 56px;
+        padding-left: 12px;
+    }
+    input::placeholder{
+        font-family: $font-inter300;
+        text-align: left;
+        font-size: 20px;
+        line-height: 32px;
+        letter-spacing: 0.25px;
+    }
+    input:focus {
+        border: 2px solid rgba(35, 51, 98, 0.8);
+    }
+
+    .inputError{
+        text-align: left;
+        padding: 10px 0;
+        font-family: $font-inter400;
+        letter-spacing: 0.25px;
+        font-size: 20px;
+        line-height: 32px;
+        border-radius: 6px;
+        border: 2px solid $error-input;
+        height: 56px;
+        padding-left: 12px;
+    }
+    .inputError:focus {
+        border: 2px solid $error-input;
+    }
+    .superTextOrigen{
+        position: absolute;
+        padding: 0 5px;
+        top: -12px;
+        left: 14px;
+        background-color: white;
+        color: $text-secondary;
+        font-size: 20px;
+        font-family: $font-inter300;
+        line-height: 25px;
+        z-index: 30;
+    }
+    .superTextOrigenError{
+        position: absolute;
+        padding: 0 5px;
+        top: -12px;
+        left: 14px;
+        background-color: white;
+        color: $error-input;
+        font-size: 20px;
+        font-family: $font-inter300;
+        line-height: 25px;
+        z-index: 30;
+    }
+    .errorText {
+        color: $error-input;
+        font-family: $font-inter300;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 5px;
+    }
+}

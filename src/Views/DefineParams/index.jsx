@@ -12,17 +12,17 @@ import Form from "../../Global-Components/Form";
 const DefineParams = () => {
 
     //States for show or hide
-    const [weight, setWeight] = useState(true)
+    const [weight, setWeight] = useState(false)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
-    const [formSender, setFormSender] = useState(false);
+    const [formSender, setFormSender] = useState(true);
     // const [formReceiver, setFormReceiver] = useState(false);
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
 
     const { 
-        WEIGHTS, SERVICE_TYPES, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices
+        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -120,7 +120,11 @@ const DefineParams = () => {
                     </>
 
                 }
-                {formSender && <Form width={'calc(100vw - 140px)'} height={"414px"}
+                {formSender && <Form 
+                    width={'calc(100vw - 140px)'} 
+                    // height={"490px"}
+                    codigoPostal = {codigosPostales.origen}
+                    stateAndCity = {stateAndCity}
                     handleSubmit={handleFormSender}
                 />}
 
@@ -136,7 +140,7 @@ const DefineParams = () => {
                 )}
 
                 <div className={styles.buttonContainer}>
-                    <Button text="Regresar" width="132px" color="outlined" onClick={handleBack} />
+                    <Button text="Regresar" width="132px" color="outlined" onClick={()=> handleBack()} />
                 </div>
             </div>
         </FlowBackground>

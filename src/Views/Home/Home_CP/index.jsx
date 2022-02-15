@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
 import Footer from './Footer';
@@ -7,12 +7,18 @@ import OrigenDestino from './OrigenDestino';
 import Support from './Modals/Support';
 import Privacy from './Modals/Privacy';
 import Forbidden from './Modals/Forbidden';
+import { useNavigate } from 'react-router-dom';
 
 const HomeCP = () => {
     
     const [support, setSupport] = useState(false)
     const [forbidden, setForbidden] = useState(false)
     const [privacy, setPrivacy] = useState(false)
+
+    const navigate = useNavigate();
+    useEffect(()=> {
+        navigate('/definir-parametros')
+    }, [navigate])
 
     return (
         <div className={styles.background}>
