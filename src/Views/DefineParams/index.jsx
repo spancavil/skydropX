@@ -121,7 +121,7 @@ const DefineParams = () => {
 
                 }
                 {formSender && <Form 
-                    width={'calc(100vw - 140px)'} 
+                    width={'calc(100vw - 170px)'} 
                     // height={"490px"}
                     codigoPostal = {codigosPostales.origen}
                     stateAndCity = {stateAndCity}
