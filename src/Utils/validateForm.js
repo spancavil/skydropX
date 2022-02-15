@@ -29,9 +29,34 @@ export const schemaEmail = Joi.object({
     })
         
 export const schemaPhone = Joi.object({
-    phone: Joi.string()
-        .pattern(new RegExp('^[0-9]{10}'))
+    phone: Joi.number()
+        .integer()
+        .min(1000000000)
+        .max(9999999999)
         .messages({
-            "string.pattern.base": "El teléfono debe tener 10 dígitos"
+            "number.base": "Sólo ingrese números",
+            "number.min": "El teléfono debe tener 10 dígitos",
+            "number.max": "El teléfono debe tener 10 dígitos",
+            "number.empty": "Este campo es obligatorio"
+        })
+})
+
+export const schemaCalle = Joi.object({
+    calle: Joi.string()
+        .empty()
+        .min(2)
+        .messages({
+            "string.base": "El formato no es válido",
+            "string.empty": "El formato no es válido",
+            "string.min: ": "El formato no es válido",
+    })
+})
+
+export const schemaCalleNumero = Joi.object({
+    numero: Joi.number()
+        .empty()
+        .messages({
+            "num.base": "El formato no es válido",
+            "num.empty": "El formato no es válido",
         })
 })

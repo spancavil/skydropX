@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState} from "react";
+import { createContext, useState} from "react";
 import SkydropService from "../Services/Skydrop.service";
 import SwalAlert from "../Utils/sweetAlert";
 
@@ -16,7 +16,7 @@ const InfoProvider = ({ children }) => {
 
     const [shippingAvailable, setShippingAvailable] = useState(null)
     
-    const [SERVICE_TYPES, setSERVICE_TYPES] = useState([])
+    // const [SERVICE_TYPES, setSERVICE_TYPES] = useState([])
     const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
 
     const getShippingServices = async () => {
@@ -27,11 +27,11 @@ const InfoProvider = ({ children }) => {
             console.log(response);
             return (response.result);
         } catch (error) {
-            alert(error.message)
+            SwalAlert("Error de comunicación con el servidor: " + error.message)
         }
     }
 
-    useEffect (()=> {
+   /*  useEffect (()=> {
 
         (async ()=> {
             try {
@@ -40,18 +40,20 @@ const InfoProvider = ({ children }) => {
                  setSERVICE_TYPES(Object.values(response.result))
                 }
             } catch (error) {
-                SwalAlert("No se pudo establecer comunicación con el servidor: " + error.message);
+                SwalAlert("Error de comunicación con el servidor: " + error.message);
             }
         })()
 
-    }, [])
+    }, []) */
 
     return (
         <InfoData.Provider 
         value = {
             {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, 
             codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable,
-            WEIGHTS, SERVICE_TYPES}}
+            WEIGHTS, 
+            //SERVICE_TYPES
+        }}
         >
             {children}
         </InfoData.Provider>
