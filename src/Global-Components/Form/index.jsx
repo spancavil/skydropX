@@ -125,16 +125,20 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
         />
       </div>
       <h2 className={styles.sub}>Dirección</h2>
-      <div className={styles.remitente}>
+      <div className={styles.remitente}
+      style={{
+        height: '75px'
+      }}
+      >
         <Input
-          width={'466px'}
+          width={'700px'}
           inputName="Calle y número"
           inputValue={calle}
           errorMessage={errorCalle}
           handleChange={handleCalle}
         />
         <InputDisabled
-          width={'460px'}
+          width={'226px'}
           inputName="Código Postal"
           inputValue={12000}
           // inputValue={codigoPostal}
@@ -142,7 +146,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
       </div>
       <div className={styles.remitente}
       style ={{
-        padding: "24px"
+        padding: "24px",
       }}
       >
         <InputDisabled
