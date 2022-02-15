@@ -100,8 +100,14 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
       }}
     >
       <h2 className={styles.title}> ¡Falta poco! Ingresa los datos de quien envía el paquete</h2>
-      <h2 className={styles.sub}>Remitente</h2>
-      <div className={styles.remitente}>
+      <h2 className={styles.sub}
+        style={{paddingTop: '24px'}}
+      >Remitente</h2>
+      <div className={styles.remitente}
+      style={{
+        height: '75px',
+      }}
+      >
         <Input
           width={'300px'}
           inputName="Nombre Completo"
