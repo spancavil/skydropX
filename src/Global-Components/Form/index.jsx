@@ -153,6 +153,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
       <div className={styles.remitente}
       style ={{
         padding: "24px",
+        height: '115px'
       }}
       >
         <InputDisabled
