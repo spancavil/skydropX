@@ -4,7 +4,8 @@ import styles from './styles.module.scss';
 import boxSizingSmall from '../../Assets/img/smallBox.png';
 import boxSizingMedium from '../../Assets/img/mediumBox.png';
 import boxSizingLarge from '../../Assets/img/boxSizingLarge.png';
-import RocketIcon from "../../Assets/svg/rocketIcon";
+import fastTruck from '../../Assets/img/fastTruck.png';
+import slowTruck from '../../Assets/img/slowTruck.png';
 
 //SHIPPING IMAGES
 import estafeta from '../../Assets/img/shippings/estafeta.png';
@@ -23,6 +24,7 @@ import sendEx from '../../Assets/img/shippings/sendEx.png';
 const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
     const [border, setBorder] = useState(false);
+    const express = Object.keys(content)[0].includes("express");
 
     const handleClick = (data) => {
         if (!block){
@@ -93,16 +95,15 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                 onClick={()=> handleClick(content)}
                 style={border ? {border: "3px solid #5233EA"}: null}
                 >
-                    <RocketIcon
-                    style={{
-                        position: "relative",
-                        marginTop: "30px",
-                    }}
+                    <img
+                        src={express ? fastTruck : slowTruck}
+                        alt="fast-van"
                     />
-                    <h2 className={styles.titleService}>${content} MXN</h2>
+                    
+                    <h2 className={styles.titleService}>${Object.values(content)[0]} MXN</h2>
 
-                    <h3 className={styles.subService1}> {parseInt(content) > 300 ? exp[0] : std[0]}</h3>
-                    <h3 className={styles.subService2}> {parseInt(content) > 300 ? exp[1] : std[1]}</h3>
+                    <h3 className={styles.subService1}> {express ? exp[0] : std[0]}</h3>
+                    <h3 className={styles.subService2}> {express ? exp[1] : std[1]}</h3>
 
                 </div>
             );

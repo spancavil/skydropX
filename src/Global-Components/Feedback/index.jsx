@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-// import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BoxIconFilled from "../../Assets/svg/boxIconFilled";
 import LightningIcon from "../../Assets/svg/lightiningIcon";
 import LocationIcon from "../../Assets/svg/locationIcon";
@@ -23,11 +23,14 @@ import sendEx from '../../Assets/img/shippings/sendEx.png';
 
 const Feedback = ({position}) => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const {codigosPostales, servicePackage, sizePackage, shippingPackage} = useContext(InfoData);
 
     const size = sizePackage === "S" ? "0 - 1" : sizePackage === "M" ? "2 - 5" : "6 - 10";
-    const service = parseInt(servicePackage) > 300 ? "express" : "estándar";
+    let service = ""
+    if (Object.keys(servicePackage).length !== 0){
+        service = Object.keys(servicePackage)[0].includes("standard") ? "estándar" : "express";
+    }
 
     const shipping = shippingPackage === "EST" ? estafeta :
                     shippingPackage === "CAR" ? carsa :
@@ -37,9 +40,9 @@ const Feedback = ({position}) => {
 
     console.log(codigosPostales, servicePackage, sizePackage, shippingPackage);
 
-    // useEffect(()=> {
-    //     !codigosPostales.origen && navigate('/')
-    // })
+    useEffect(()=> {
+        !codigosPostales.origen && navigate('/')
+    })
 
     return(
         <div className={styles.feedbackContainer}
@@ -72,12 +75,12 @@ const Feedback = ({position}) => {
             </div>
             }
 
-            {servicePackage && (
+            {Object.keys(servicePackage).length !== 0 && (
             <div className={styles.feedbackComponent}>
                 <LightningIcon className={styles.icon}/>
                 <div className={styles.formatContainer}>
                     <h3 className={styles.title}>Servicio {service}</h3>
-                    <h3 className={styles.content}>${servicePackage} MXN</h3>
+                    <h3 className={styles.content}>${Object.values(servicePackage)[0]} MXN</h3>
                 </div>
             </div>
             )}

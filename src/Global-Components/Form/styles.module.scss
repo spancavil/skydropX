@@ -35,3 +35,12 @@
         overflow: visible;
     }
 }
+.buttonContainer{
+    position: absolute;
+    bottom: 37px;
+    right: 135px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}

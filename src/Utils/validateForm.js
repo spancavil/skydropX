@@ -60,3 +60,14 @@ export const schemaCalleNumero = Joi.object({
             "num.empty": "El formato no es válido",
         })
 })
+
+export const schemaReferencias = Joi.object({
+    referencias: Joi.string()
+        .empty()
+        .min(5)
+        .messages({
+            "string.base": "El formato no es válido",
+            "string.empty": "Este campo es obligatorio",
+            "string.min": "Mínimo 5 caracteres",
+    })
+})

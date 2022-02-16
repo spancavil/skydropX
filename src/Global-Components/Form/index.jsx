@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { schemaCalle, schemaCalleNumero, schemaCompleteName, schemaEmail, schemaPhone } from '../../Utils/validateForm';
+import React, { useEffect, useState } from 'react';
+import { schemaCalle, schemaCalleNumero, schemaCompleteName, schemaEmail, schemaPhone, schemaReferencias } from '../../Utils/validateForm';
 import Input from '../Input';
 import InputDisabled from '../Input/Components/InputDisabled';
 import styles from './styles.module.scss';
 
-const Form = ({ width, height, codigoPostal, stateAndCity }) => {
+const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender = false}) => {
 
+  //Form states and validations
   const [nombreCompleto, setNombreCompleto] = useState("")
   const [errorNombreCompleto, setErrorNombreCompleto] = useState("")
 
@@ -22,15 +23,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
   const [errorColonia, setErrorColonia] = useState("")
 
   const [referencias, setReferencia] = useState("")
-
-  /* const res1 = schemaCompleteName.validate({ username: "SA" });
-  const res2 = schemaPhone.validate({ phone: "0000000000" })
-  const res3 = schemaEmail.validate({ email: "alalallalalala" })
-  console.log(res1.error?.message);
-  console.log(res2.error?.message);
-  console.log(res3.error?.message); */
-
-  // SwalAlert("Este es un error de ejemplo")
+  const [errorReferencias, setErrorReferencia] = useState("");
 
   const handleNombreCompleto = (value) => {
     setNombreCompleto(value);
@@ -55,7 +48,6 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
   const handleTelefono = (value) => {
     setTelefono(value);
     const validate = schemaPhone.validate({ phone: value })
-    console.log(validate);
     if (validate.error?.message) {
       setErrorTelefono(validate.error.message)
     } else {
@@ -66,13 +58,13 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
   const handleCalle = (value) => {
     setCalle(value);
     const calleYNumero = (value.split(" "));
-    console.log(calleYNumero[calleYNumero.length - 1]);
-    if (value === ""){
+    if (value === "") {
       setErrorCalle("Este campo es obligatorio")
     }
     else {
-      const validateCalle = schemaCalle.validate({ calle: calleYNumero[0]})
-      const validateNumero = schemaCalleNumero.validate({numero: calleYNumero[calleYNumero.length - 1]})
+      const validateCalle = schemaCalle.validate({ calle: calleYNumero[0] })
+      //Validate the last value in the array calleYNumero
+      const validateNumero = schemaCalleNumero.validate({ numero: calleYNumero[calleYNumero.length - 1] })
       if (validateCalle.error?.message || validateNumero.error?.message) {
         setErrorCalle("El formato no es válido")
       } else {
@@ -92,6 +84,62 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
     }
   }
 
+  const handleReferencia = (value) => {
+    setReferencia(value);
+    //Se utiliza el mismo esquema que complete name.
+    const validate = schemaReferencias.validate({ referencias: value })
+    if (validate.error?.message) {
+      setErrorReferencia(validate.error.message)
+    } else {
+      setErrorReferencia("")
+    }
+  }
+
+  useEffect(()=> {
+    if (formSender){
+
+      if (!errorNombreCompleto && 
+        !errorCorreoElectronico && 
+        !errorCalle && 
+        !errorTelefono && 
+        !errorColonia && 
+        calle &&
+        nombreCompleto &&
+        correoElectronico &&
+        calle &&
+        telefono &&
+        colonia) {
+        setData({
+          nombreCompleto, correoElectronico, calle, telefono, colonia 
+        });
+      } else {
+        setData({})
+      }
+
+    } else {
+      if (!errorNombreCompleto && 
+        !errorCorreoElectronico && 
+        !errorCalle && 
+        !errorTelefono && 
+        !errorColonia &&
+        !errorReferencias &&
+        calle &&
+        nombreCompleto &&
+        correoElectronico &&
+        calle &&
+        telefono &&
+        colonia &&
+        referencias) {
+        setData({
+          nombreCompleto, correoElectronico, calle, telefono, colonia 
+        });
+      } else {
+        setData({})
+      }
+    }
+  }, [setData, errorNombreCompleto, errorCorreoElectronico, errorCalle, errorTelefono, errorColonia, errorReferencias,
+    nombreCompleto, correoElectronico, calle, telefono, colonia, referencias, formSender])
+
   return (
     <div className={styles.container}
       style={{
@@ -99,14 +147,18 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
         height
       }}
     >
-      <h2 className={styles.title}> ¡Falta poco! Ingresa los datos de quien envía el paquete</h2>
+      <h2 className={styles.title}> 
+        {formSender ? '¡Falta poco! Ingresa los datos de quien envía el paquete' : 'Ahora, completa los datos de quien recibe el paquete'}
+      </h2>
       <h2 className={styles.sub}
-        style={{paddingTop: '24px'}}
-      >Remitente</h2>
+        style={{ paddingTop: '24px' }}
+      >
+        {formSender ? 'Remitente' : 'Destinatario'}
+      </h2>
       <div className={styles.remitente}
-      style={{
-        height: '75px',
-      }}
+        style={{
+          height: '75px',
+        }}
       >
         <Input
           width={'300px'}
@@ -132,9 +184,9 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
       </div>
       <h2 className={styles.sub}>Dirección</h2>
       <div className={styles.remitente}
-      style={{
-        height: '75px'
-      }}
+        style={{
+          height: '75px'
+        }}
       >
         <Input
           width={'700px'}
@@ -146,35 +198,32 @@ const Form = ({ width, height, codigoPostal, stateAndCity }) => {
         <InputDisabled
           width={'226px'}
           inputName="Código Postal"
-          inputValue={12000}
-          // inputValue={codigoPostal}
+          inputValue={codigoPostal}
         />
       </div>
       <div className={styles.remitente}
-      style ={{
-        padding: "24px",
-        height: '115px'
-      }}
+        style={{
+          padding: "24px",
+          height: '115px'
+        }}
       >
         <InputDisabled
-        width={'400px'}
-        inputName="Ciudad y Estado"
-        inputValue={'Ciudad de México, Ciudad de México'}
-        // inputValue={`${stateAndCity.cityOrigen}, ${stateAndCity.stateOrigen}`}
+          width={'400px'}
+          inputName="Ciudad y Estado"
+          inputValue={`${formSender ? stateAndCity.cityOrigen : stateAndCity.cityDestino}, ${ formSender ? stateAndCity.stateOrigen : stateAndCity.stateDestino}`}
         />
         <Input
-        width={'300px'}
-        inputName="Colonia"
-        inputValue={colonia}
-        errorMessage={errorColonia}
-        handleChange={handleColonia}
+          width={'300px'}
+          inputName="Colonia"
+          inputValue={colonia}
+          errorMessage={errorColonia}
+          handleChange={handleColonia}
         />
         <Input
-        // width={'fit-content'}
-        inputName="Referencias"
-        inputValue={referencias}
-        errorMessage={""}
-        handleChange={(value) => setReferencia(value)}
+          inputName="Referencias"
+          inputValue={referencias}
+          errorMessage={formSender ? "" : errorReferencias}
+          handleChange={handleReferencia}
         />
       </div>
     </div>
