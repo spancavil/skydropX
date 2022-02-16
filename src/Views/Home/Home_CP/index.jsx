@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './style.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
 import Footer from './Footer';
@@ -7,18 +7,12 @@ import OrigenDestino from './OrigenDestino';
 import Support from './Modals/Support';
 import Privacy from './Modals/Privacy';
 import Forbidden from './Modals/Forbidden';
-import { useNavigate } from 'react-router-dom';
 
 const HomeCP = () => {
-    
+
     const [support, setSupport] = useState(false)
     const [forbidden, setForbidden] = useState(false)
     const [privacy, setPrivacy] = useState(false)
-
-    const navigate = useNavigate();
-    useEffect(()=> {
-        navigate('/definir-parametros')
-    }, [navigate])
 
     return (
         <div className={styles.background}>
@@ -31,31 +25,31 @@ const HomeCP = () => {
             <div className={styles.container}>
                 <TitleText
                     text="¡Hola, te damos la bienvenida!"
-                    style={{ paddingTop: "60px" }} 
+                    style={{ paddingTop: "60px" }}
                 />
                 <h2 className={styles.text2}>
                     Desde aquí puedes crear envíos de forma sencilla, rápida y segura.
                 </h2>
                 <p className={styles.text3}>
-                    Ingresa el <strong>Código postal</strong> de origen y destino de tu envío. 
+                    Ingresa el <strong>Código postal</strong> de origen y destino de tu envío.
                 </p>
-                <OrigenDestino/>
-                <Footer 
-                onSupport={()=> setSupport(true)} 
-                onForbidden={()=>setForbidden(true)}
-                onPrivacy={()=> setPrivacy(true)}
+                <OrigenDestino />
+                <Footer
+                    onSupport={() => setSupport(true)}
+                    onForbidden={() => setForbidden(true)}
+                    onPrivacy={() => setPrivacy(true)}
                 />
-                {support && <Support 
-                width = "452px" height = "660px"
-                handleClose={()=> setSupport(false)}/>}
+                {support && <Support
+                    width="452px" height="660px"
+                    handleClose={() => setSupport(false)} />}
 
-                {privacy && <Privacy 
-                width = "1000px" height = "660px"
-                handleClose={()=> setPrivacy(false)}/>}
+                {privacy && <Privacy
+                    width="1000px" height="660px"
+                    handleClose={() => setPrivacy(false)} />}
 
                 {forbidden && <Forbidden
-                width = "1000px" height = "660px"
-                handleClose={()=> setForbidden(false)}/>}
+                    width="1000px" height="660px"
+                    handleClose={() => setForbidden(false)} />}
             </div>
         </div>
     )

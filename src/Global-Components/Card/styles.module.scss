@@ -34,7 +34,7 @@
 .cardService {
     background-color: white;
     width: 358px;
-    height: 272px;
+    height: 279px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,6 +42,11 @@
         0px 4px 18px 3px rgba(152, 167, 204, 0.12);
     border-radius: 6px;
     cursor: pointer;
+
+    img {
+        width: 50%;
+        margin-top: 17px;
+    }
     .titleService{
         padding-top: 24px;
         font-family: $font-inter600;
@@ -52,18 +57,19 @@
     }
     .subService1{
         padding-top: 12px;
-        font-family: $font-inter500;
+        font-family: $font-inter400;
         font-size: 20px;
         line-height: 160%;
         text-align: center;
         color: $texto-primary;
     }
     .subService2{
-        font-family: $font-inter500;
+        font-family: $font-inter400;
         font-size: 18px;
         line-height: 160%;
         text-align: center;
         color: $texto-primary;
+        padding-bottom: 10px;
     }
 }
 

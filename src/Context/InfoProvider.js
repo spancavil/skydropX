@@ -1,4 +1,4 @@
-import { createContext, useState} from "react";
+import { createContext, useState } from "react";
 import SkydropService from "../Services/Skydrop.service";
 import SwalAlert from "../Utils/sweetAlert";
 
@@ -11,13 +11,32 @@ const InfoProvider = ({ children }) => {
         {stateOrigen: "", stateDestino: "", cityOrigen: "", cityDestino: ""})
 
     const [sizePackage, setSizePackage] = useState(""); 
-    const [servicePackage, setServicePackage] = useState("")
-    const [shippingPackage, setShippingPackage] = useState("")
+    const [servicePackage, setServicePackage] = useState({});
+    const [shippingPackage, setShippingPackage] = useState("");
+    const [senderDataCtx, setSenderDataCtx] = useState({})
+    const [receiverDataCtx, setReceiverDataCtx] = useState({})
 
     const [shippingAvailable, setShippingAvailable] = useState(null)
     
-    // const [SERVICE_TYPES, setSERVICE_TYPES] = useState([])
+    const [SERVICE_TYPES, setSERVICE_TYPES] = useState([])
     const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
+
+    const getServices = async (size) => {
+        try {
+            const response = await SkydropService.getPricingService(size)
+            if (response) {
+                const values = Object.keys(response.result).map(llave => {
+                    const objeto = {}
+                    objeto[llave] = response.result[llave]
+                    return objeto;
+                })
+                console.log(values);
+                setSERVICE_TYPES(values)
+            }
+        } catch (error) {
+            SwalAlert("Error de comunicación con el servidor: " + error.message);
+        }
+    }
 
     const getShippingServices = async () => {
         try {
@@ -31,28 +50,12 @@ const InfoProvider = ({ children }) => {
         }
     }
 
-   /*  useEffect (()=> {
-
-        (async ()=> {
-            try {
-                const response = await SkydropService.getPricingService()
-                if (response) {
-                 setSERVICE_TYPES(Object.values(response.result))
-                }
-            } catch (error) {
-                SwalAlert("Error de comunicación con el servidor: " + error.message);
-            }
-        })()
-
-    }, []) */
-
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, 
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable,
-            WEIGHTS, 
-            //SERVICE_TYPES
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx,
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx,
+            WEIGHTS, SERVICE_TYPES
         }}
         >
             {children}

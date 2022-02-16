@@ -10,6 +10,7 @@ class skydropxService {
      */
  
     async getCityByPostalCode(postalCode){
+        console.log(BASE_URL);
         return await axios.get(BASE_URL + `postal-codes/${postalCode}/city`)
         .then( response => {
             return response.data
@@ -17,11 +18,11 @@ class skydropxService {
     }
     /**
      * 
-     * @returns STD o EXP standar, express
+     * @param {*} size S M o L => small medium o large
+     * @returns 
      */
-
-    async getPricingService(){
-        return await axios.get(BASE_URL + "pricings/services").then (response => {
+    async getPricingService(size){
+        return await axios.get(BASE_URL + `pricings/services/${size}`).then (response => {
             return response.data
         })
     }

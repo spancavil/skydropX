@@ -8,27 +8,35 @@ import { InfoData } from "../../Context/InfoProvider";
 import Button from "../../Global-Components/Button";
 import { useNavigate } from "react-router-dom";
 import Form from "../../Global-Components/Form";
+import Button2 from "../../Global-Components/Button2";
 
 const DefineParams = () => {
 
     //States for show or hide
-    const [weight, setWeight] = useState(false)
+    const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
-    const [formSender, setFormSender] = useState(true);
-    // const [formReceiver, setFormReceiver] = useState(false);
+
+    //Sender form states
+    const [formSender, setFormSender] = useState(false);
+    const [senderData, setSenderData] = useState({});
+
+    const [formReceiver, setFormReceiver] = useState(false);
+    const [receiverData, setReceiverData] = useState({});
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
 
     const { 
-        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, setSizePackage, setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices
+        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, setSizePackage, getServices, senderDataCtx, receiverDataCtx,
+        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx
     } = useContext(InfoData);
 
     const navigate = useNavigate();
 
     const defineSize = (size) => {
         setSizePackage(size);
+        getServices(size);
         setWeight(false);
         setService(true);
     }
@@ -53,13 +61,44 @@ const DefineParams = () => {
         setFormSender(true)
     }
 
-    const handleFormSender = (dataSender) => {
-        console.log(dataSender);
+    const handleFormSender = () => {
+        setSenderDataCtx({
+            ...senderDataCtx,
+            address_from:{
+                province: stateAndCity.stateOrigen,
+                city: stateAndCity.cityOrigen || "",
+                name: senderData.nombreCompleto,
+                zip: codigosPostales.origen,
+                country: "MX",
+                address1: senderData.calle,
+                company: "skydropx",
+                address2: senderData.colonia,
+                phone: senderData.telefono,
+                email: senderData.correoElectronico
+            }
+        })
+        setFormSender(false);
+        setFormReceiver(true)
     }
 
-    /* const handleFormReceiver = (dataReceiver) => {
-
-    } */
+    const handleFormReceiver = (dataReceiver) => {
+        setReceiverDataCtx({
+            ...receiverDataCtx,
+            address_to:{
+                province: stateAndCity.stateDestino,
+                city: stateAndCity.cityDestino || "",
+                name: receiverData.nombreCompleto,
+                zip: codigosPostales.destino,
+                country: "MX",
+                address1: receiverData.calle,
+                company: "skydropx",
+                address2: receiverData.colonia,
+                phone: receiverData.telefono,
+                email: receiverData.correoElectronico
+            }
+        })
+        setFormReceiver(false)
+    }
 
     const handleBack = () => {
         if (weight && !service && !shipping){
@@ -80,6 +119,11 @@ const DefineParams = () => {
             setShippingPackage("");
             setFormSender(false)
             setShipping(true)
+        }
+        if (!weight && !service && !shipping && !formSender && formReceiver){
+            setSenderDataCtx({}); //Hay que cambiar esto, así cuando backean ya tienen los datos disponibles para cambiarlos
+            setFormReceiver(false);
+            setFormSender(true);
         }
     }
 
@@ -103,8 +147,8 @@ const DefineParams = () => {
                     <>
                         <h1 className={styles.title}>¿Qué precio y tipo de servicio prefieres?</h1>
                         <div className={styles.cardContainer}>
-                            {SERVICE_TYPES.map(serviceCost => {
-                                return <Card type="service" content={serviceCost} key={serviceCost} onClick={defineService} block={block} setBlock = {setBlock}/>
+                            {SERVICE_TYPES.map((serviceCost, idx) => {
+                                return <Card type="service" content={serviceCost} key={idx} onClick={defineService} block={block} setBlock = {setBlock} />
                             })}
                         </div>
                     </>
@@ -125,12 +169,18 @@ const DefineParams = () => {
                     // height={"490px"}
                     codigoPostal = {codigosPostales.origen}
                     stateAndCity = {stateAndCity}
-                    handleSubmit={handleFormSender}
+                    setData = {setSenderData}
+                    formSender = {true}
                 />}
 
-                {/* {formReceiver && <Form width={'calc(100vw - 140px)'} height={"414px"}
-                    handleSubmit={handleFormReceiver}
-                />} */}
+                {formReceiver && <Form 
+                    width={'calc(100vw - 170px)'} 
+                    // height={"414px"}
+                    codigoPostal = {codigosPostales.destino}
+                    stateAndCity = {stateAndCity}
+                    setData={setReceiverData}
+                    formReceiver = {true}
+                />}
 
                 {weight && (
                     <div className={styles.subContainer}>
@@ -141,6 +191,8 @@ const DefineParams = () => {
 
                 <div className={styles.buttonContainer}>
                     <Button text="Regresar" width="132px" color="outlined" onClick={()=> handleBack()} />
+                    {formSender && <Button2 text="Continuar" width='132px' canContinue={Object.keys(senderData).length !== 0} handleContinue={handleFormSender}/>}
+                    {formReceiver && <Button2 text="Continuar" width='132px' canContinue={Object.keys(receiverData).length !== 0} handleContinue={handleFormReceiver}/>}
                 </div>
             </div>
         </FlowBackground>

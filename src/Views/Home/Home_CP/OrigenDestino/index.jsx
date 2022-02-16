@@ -57,14 +57,15 @@ const OrigenDestino = () => {
         try {
             const responseOrigen = await SkydropService.getCityByPostalCode(origen)
             const responseDestino = await SkydropService.getCityByPostalCode(destino)
+            console.log(responseOrigen);
             if (responseDestino.error !== undefined){
                 setErrorDestino("Código postal no válido")
             } else if (responseOrigen.error !== undefined) {
                 setErrorOrigen("Código postal no válido")
             } else {
-                console.log(responseOrigen, responseDestino);
-                const responseOrigenSplit = responseOrigen.result.city.split(',')
-                const responseDestinoSplit = responseOrigen.result.city.split(',')
+                //console.log(responseOrigen, responseDestino);
+                const responseOrigenSplit = responseOrigen.result.city.split(', ')
+                const responseDestinoSplit = responseDestino.result.city.split(', ')
     
                 setCodigosPostales({
                     origen,
@@ -72,7 +73,7 @@ const OrigenDestino = () => {
                 })
                 setStateAndCity({
                     stateOrigen: responseOrigenSplit[0],
-                    stateDestino: responseDestino[0],
+                    stateDestino: responseDestinoSplit[0],
                     cityOrigen: responseOrigenSplit[1] || "",
                     cityDestino: responseDestinoSplit[1] || ""
                 })
@@ -80,7 +81,7 @@ const OrigenDestino = () => {
             }
             
         } catch (error) {
-            if (error.response.status === 400){
+            if (error.response?.status === 400){
                 if (error.response.request.responseURL.includes(origen)) setErrorOrigen("Código postal no válido");
                 if (error.response.request.responseURL.includes(destino)) setErrorDestino("Código postal no válido");
             }
