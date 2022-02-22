@@ -32,6 +32,9 @@ const DefineParams = () => {
     const [delivery, setDelivery] = useState(false);
     const [deliveryData, setDeliveryData] = useState({})
 
+    //Confirm data state
+    const [confirmData, setConfirmData] = useState(false);
+
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
 
@@ -114,6 +117,7 @@ const DefineParams = () => {
     const defineDelivery = (delivery) => {
         setDeliveryTypeSelected(delivery);
         setDelivery(false);
+        setConfirmData(true);
     }
 
     const handleBack = () => {
@@ -146,9 +150,9 @@ const DefineParams = () => {
     return (
         <FlowBackground>
             <div className={styles.container}>
-                <Feedback
+                {!confirmData && <Feedback
                     position={{ x: "70px", y: "92px" }}
-                />
+                />}
                 {weight && (
                     <>
                         <h1 className={styles.title}>¿Cuál es el peso de tu envío?</h1>
@@ -207,8 +211,21 @@ const DefineParams = () => {
                         })}
                     </div>
                 </>
+                }
 
-
+                {confirmData &&
+                <>
+                    <h1 className={styles.titleConfirm}>Este es tu resumen de envío</h1>
+                    <h3 className={styles.subtitleConfirm}>Con estos datos imprimiremos tu guía. Si necesitas editarlos, puedes hacerlo.</h3>
+                    <div className={styles.confirmDataContainer}>
+                        <Card
+                        type="resumeSenderReceiver"
+                        />
+                        <Card
+                        type="resumeShipping"
+                        />
+                    </div>
+                </>
                 }
 
                 {weight && (

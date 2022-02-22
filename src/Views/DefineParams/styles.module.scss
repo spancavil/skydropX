@@ -16,6 +16,7 @@
         font-family: $font-inter500;
         color: $texto-primary;
     }
+
     
     .cardContainer{
         position: absolute;
@@ -57,7 +58,7 @@
         align-items: center;
         gap: 24px;
     }
-
+    
     .cardContainerShipping{
         position: absolute;
         padding: 0 90px;
@@ -70,5 +71,36 @@
         flex-wrap: wrap;
         gap: 32px;
         overflow: visible;
+    }
+    .titleConfirm{
+        position: absolute;
+        top: 84px;
+        left: 40px;
+        text-align: left;
+        font-size: 40px;
+        line-height: 48px;
+        font-family: $font-inter500;
+        color: $texto-primary;
+    }
+
+    .subtitleConfirm{
+        position: absolute;
+        top: 145px;
+        left: 40px;
+        text-align: left;
+        font-size: 20px;
+        line-height: 32px;
+        font-family: $font-inter500;
+        color: $texto-primary;
+    }
+
+    .confirmDataContainer{
+        position: absolute;
+        left: 40px;
+        top: 200px;
+        display: flex;
+        flex-direction: row;
+        overflow: visible;
+        gap: 10px;
     }
 }

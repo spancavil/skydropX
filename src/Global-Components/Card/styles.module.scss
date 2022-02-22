@@ -47,7 +47,7 @@
         width: 50%;
         margin-top: 17px;
     }
-    .titleService{
+    .titleService {
         padding-top: 24px;
         font-family: $font-inter600;
         font-size: 34px;
@@ -55,7 +55,7 @@
         text-align: center;
         color: $home-bg;
     }
-    .subService1{
+    .subService1 {
         padding-top: 12px;
         font-family: $font-inter400;
         font-size: 20px;
@@ -63,7 +63,7 @@
         text-align: center;
         color: $texto-primary;
     }
-    .subService2{
+    .subService2 {
         font-family: $font-inter400;
         font-size: 18px;
         line-height: 160%;
@@ -109,7 +109,7 @@
         // transform: scale(0.25);
         height: 120px;
     }
-    .title{
+    .title {
         font-family: $font-inter500;
         font-size: 24px;
         line-height: 28px;
@@ -123,12 +123,154 @@
         letter-spacing: 0.25px;
         color: $texto-primary;
     }
-    .text{
+    .text {
         font-family: $font-inter400;
         font-size: 16px;
         line-height: 24px;
         color: $text-secondary;
         text-align: center;
         padding: 0 30px;
+    }
+}
+
+.senderReceiver {
+    background-color: white;
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
+        0px 4px 18px 3px rgba(152, 167, 204, 0.12);
+    border-radius: 6px;
+    cursor: pointer;
+
+    .titulo {
+        font-family: $font-inter500;
+        font-size: 24px;
+        line-height: 38px;
+        color: $texto-primary;
+        padding-left: 24px;
+        // padding-top: 24px;
+        padding-bottom: 8px;
+    }
+    .senderContainer {
+        padding: 0px 24px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .content {
+            width: 48%;
+            .title {
+                font-family: $font-inter500;
+                font-size: 18px;
+                line-height: 30px;
+                color: $texto-primary;
+                padding-bottom: 8px;
+            }
+            .text {
+                font-family: $font-inter300;
+                font-size: 18px;
+                line-height: 30px;
+                color: $texto-primary;
+                word-wrap: break-word;
+            }
+        }
+    }
+    .packageContent {
+        padding-left: 24px;
+        .title {
+            font-family: $font-inter500;
+            font-size: 18px;
+            line-height: 30px;
+            color: $texto-primary;
+            padding-bottom: 8px;
+            text-align: left;
+        }
+        .text {
+            font-family: $font-inter300;
+            font-size: 18px;
+            line-height: 30px;
+            color: $texto-primary;
+            text-align: left;
+        }
+    }
+}
+
+.shippingContainer {
+    background-color: white;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
+        0px 4px 18px 3px rgba(152, 167, 204, 0.12);
+    border-radius: 6px;
+    cursor: pointer;
+
+    .titleShipping {
+        font-family: $font-inter500;
+        font-size: 18px;
+        line-height: 30px;
+        color: $texto-primary;
+        padding-bottom: 8px;
+        text-align: left;
+        padding-left: 24px;
+    }
+    .textShipping {
+        font-family: $font-inter300;
+        font-size: 18px;
+        line-height: 30px;
+        color: $texto-primary;
+        text-align: left;
+        padding-left: 24px;
+    }
+    .line {
+        border-top: 2px solid rgba(35, 51, 98, 0.23);
+        margin-left: 24px;
+        width: 90%;
+    }
+    .costContainer{
+        padding: 18px 24px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+
+        .left {
+            font-family: $font-inter300;
+            font-size: 18px;
+            line-height: 26px;
+            color: $text-secondary
+        }
+        .right{
+            font-family: $font-inter300;
+            font-size: 20px;
+            line-height: 28px;
+            color: $texto-primary;
+        }
+        .leftPower{
+            font-family: $font-inter500;
+            font-size: 24px;
+            line-height: 32px;
+            color: $texto-primary
+        }
+        .leftMinusPower{
+            font-family: $font-inter300;
+            font-size: 16px;
+            line-height: 24px;
+            color: $texto-primary
+        }
+        .rightPower{
+            font-family: $font-inter500;
+            font-size: 24px;
+            line-height: 32px;
+            color: $home-bg;
+        }
     }
 }

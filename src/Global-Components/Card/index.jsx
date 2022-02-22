@@ -25,10 +25,17 @@ import sendEx from '../../Assets/img/shippings/sendEx.png';
 import oxxoDelivery from '../../Assets/img/oxxoDeliveryIcon.png';
 import delivery from '../../Assets/img/deliveryIcon.png';
 
+//ICONS CONFIRM DATA
+import email from '../../Assets/img/mail.png';
+import phone from '../../Assets/img/phone.png';
+
 const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
     const [border, setBorder] = useState(false);
-    const express = Object.keys(content)[0].includes("express");
+    let express;
+    if (content){
+        express = Object.keys(content)[0].includes("express");
+    }
 
     const handleClick = (data) => {
         if (!block){
@@ -154,10 +161,121 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                 <h3 className={styles.text}>{Object.keys(content)[0].includes("oxxo") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal Skydropx o de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3>
                 </div>
             )
+        case "resumeSenderReceiver":
+            return(
+                <div
+                className={styles.senderReceiver}
+                >
+                    <h2 className={styles.titulo}>Datos del remitente</h2>
+
+                    <div className={styles.senderContainer}>
+                        <div className={styles.content}>
+                            <h3 className={styles.title}>Juan Román Riquelme</h3>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: "8px"
+                            }}>
+                                <img src={email} alt="email" style={{height: "19px", minWidth: '19px'}}/>
+                                <h3 className={styles.text}>jesucristooooooooooooooooooooooooooooooooo@gmail.com</h3>
+                            </div>
+                            <div 
+                                style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: "8px"}}
+                            >
+                                <img src={phone} alt="phone" style={{height: "19px"}}/>
+                                <h3 className={styles.text}>+52 telefono</h3>
+                            </div>
+                        </div>
+                        <div className={styles.content}>
+                            <h3 className={styles.title}>Dirección</h3>
+                            <h3 className={styles.text}>Calle falsa 123</h3>
+                            <h3 className={styles.text}>Colonia, CP: 19292</h3>
+                            <h3 className={styles.text}>Ciudad, estado</h3>
+                        </div>
+                    </div>
+
+                    <h2 className={styles.titulo} style={{paddingTop: '12px'}}>Datos del destinatario</h2>
+
+                    <div className={styles.senderContainer}>
+                        <div className={styles.content}>
+                            <h3 className={styles.title}>Diego Armando Maradona</h3>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: "8px"
+                            }}>
+                                <img src={email} alt="email" style={{height: "19px", minWidth: '19px'}}/>
+                                <h3 className={styles.text}>maradooooo@hotmail.com</h3>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: "8px"
+                            }}>
+                                <img src={phone} alt="phone" style={{height: "19px"}}/>
+                                <h3 className={styles.text}>+52 telefono</h3>
+                            </div>
+                        </div>
+                        <div className={styles.content}>
+                            <h3 className={styles.title}>Dirección</h3>
+                            <h3 className={styles.text}>Calle 123</h3>
+                            <h3 className={styles.text}>Colonia CP, Teniente juan domingo peron 29912 1°C</h3>
+                            <h3 className={styles.text}>Ciudad, estado</h3>
+                        </div>
+                    </div>
+
+                    <div className={styles.packageContent}>
+                        <h3 className={styles.title}>Contenido del paquete</h3>
+                        <h3 className={styles.text}>Teléfono móvil</h3>
+                    </div>
+                </div>
+            )
+        case "resumeShipping":
+            return(
+            <div className={styles.shippingContainer}>
+                <img
+                    src={fedEx}
+                    alt="shipping"
+                    style={{height: '55px', padding: '24px 0 0 24px'}}
+                />
+                <h2 className={styles.titleShipping}>Servicio express</h2>
+                <h3 className={styles.textShipping}>Paquete 2 - 5 kg (Max)</h3>
+
+                <div className={styles.costContainer}>
+                    <h3 className={styles.left}>Precio de envío</h3>
+                    <h3 className={styles.right}>$359 MXN</h3>
+                </div>
+                <div className={styles.costContainer}>
+                    <h3 className={styles.left}>Comisión OXXO <br/>por envío</h3>
+                    <h3 className={styles.right}>$13 MXN</h3>
+                </div>
+                <div className={styles.costContainer}>
+                    <h3 className={styles.left}>Comisión OXXO <br/>por entrega de paquete</h3>
+                    <h3 className={styles.right}>$7 MXN</h3>
+                </div>
+
+                <div className={styles.line}></div>
+
+                <div className={styles.costContainer}>
+                    <h3 className={styles.leftPower}>TOTAL <span className={styles.leftMinusPower}><br/>(incluye IVA)</span></h3>
+                    <h3 className={styles.rightPower}>$379 MXN</h3>
+                </div>
+            </div>)
+
         default:
             return(
                 <div className={styles.cardShipping}>
-
                 </div>
             );
     }
