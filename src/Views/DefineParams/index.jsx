@@ -13,7 +13,7 @@ import Button2 from "../../Global-Components/Button2";
 const DefineParams = () => {
 
     //States for show or hide
-    const [weight, setWeight] = useState(true)
+    const [weight, setWeight] = useState(false)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
 
@@ -21,15 +21,23 @@ const DefineParams = () => {
     const [formSender, setFormSender] = useState(false);
     const [senderData, setSenderData] = useState({});
 
-    const [formReceiver, setFormReceiver] = useState(false);
+    const [formReceiver, setFormReceiver] = useState(true);
     const [receiverData, setReceiverData] = useState({});
+
+    //Category states
+    const [category, setCategory] = useState(false);
+    const [categoryData, setCategoryData] = useState({})
+
+    //Delivery states
+    const [delivery, setDelivery] = useState(false);
+    const [deliveryData, setDeliveryData] = useState({})
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
 
     const { 
-        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, setSizePackage, getServices, senderDataCtx, receiverDataCtx,
-        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx
+        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes,
+        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected,
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -42,10 +50,10 @@ const DefineParams = () => {
     }
 
     const defineService = async (service) => {
-        setServicePackage(service);
+        await setServicePackage(service);
         setService(false)
         
-        const shippings = await getShippingServices()
+        const shippings = await getShippingServices(Object.keys(service)[0])
 
         /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
         setShippingAvailable(shippingsHardcoded) //Saves in context */
@@ -97,7 +105,15 @@ const DefineParams = () => {
                 email: receiverData.correoElectronico
             }
         })
-        setFormReceiver(false)
+        setFormReceiver(false);
+
+        getDeliveryTypes();
+        setDelivery(true);
+    }
+
+    const defineDelivery = (delivery) => {
+        setDeliveryTypeSelected(delivery);
+        setDelivery(false);
     }
 
     const handleBack = () => {
@@ -181,6 +197,19 @@ const DefineParams = () => {
                     setData={setReceiverData}
                     formReceiver = {true}
                 />}
+
+                {delivery &&
+                <>
+                    <h1 className={styles.title}>¿Quieres entregar tu paquete en esta tienda?</h1>
+                    <div className={styles.cardContainer}>
+                        {deliveryTypes.map((delivery,idx) => {
+                            return <Card type="delivery" content = {delivery} key = {idx} onClick = {defineDelivery} block = {block} setBlock={setBlock} />
+                        })}
+                    </div>
+                </>
+
+
+                }
 
                 {weight && (
                     <div className={styles.subContainer}>

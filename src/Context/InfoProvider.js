@@ -13,13 +13,16 @@ const InfoProvider = ({ children }) => {
     const [sizePackage, setSizePackage] = useState(""); 
     const [servicePackage, setServicePackage] = useState({});
     const [shippingPackage, setShippingPackage] = useState("");
-    const [senderDataCtx, setSenderDataCtx] = useState({})
-    const [receiverDataCtx, setReceiverDataCtx] = useState({})
+    const [senderDataCtx, setSenderDataCtx] = useState({});
+    const [receiverDataCtx, setReceiverDataCtx] = useState({});
 
-    const [shippingAvailable, setShippingAvailable] = useState(null)
+    const [shippingAvailable, setShippingAvailable] = useState(null);
     
-    const [SERVICE_TYPES, setSERVICE_TYPES] = useState([])
-    const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"]
+    const [SERVICE_TYPES, setSERVICE_TYPES] = useState([]);
+    const WEIGHTS = ["0 - 1", "2 - 5", "6 - 10"];
+
+    const [deliveryTypes, setDeliveryTypes] = useState([])
+    const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
     const getServices = async (size) => {
         try {
@@ -38,13 +41,24 @@ const InfoProvider = ({ children }) => {
         }
     }
 
-    const getShippingServices = async () => {
+    const getShippingServices = async (service) => {
         try {
-            let serviceSTDoEXP = parseInt(servicePackage) > 300 ? "EXP" : "STD"
+            let serviceSTDoEXP = service.includes("standard") > 300 ? "STD" : "EXP"
             const response = await SkydropService.getAvailableShipping(
                 codigosPostales.origen, codigosPostales.destino, sizePackage, serviceSTDoEXP)
-            console.log(response);
             return (response.result);
+        } catch (error) {
+            SwalAlert("Error de comunicación con el servidor: " + error.message)
+        }
+    }
+
+    const getDeliveryTypes = async () => {
+        try {
+            let response = await SkydropService.getDeliveryTypes();
+            setDeliveryTypes([
+                {base: response.result["delivery"]},
+                {oxxo: response.result["delivery"] + response.result["parcelReception"]}
+            ])
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message)
         }
@@ -53,8 +67,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx,
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx,
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected,
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected,
             WEIGHTS, SERVICE_TYPES
         }}
         >

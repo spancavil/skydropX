@@ -45,6 +45,17 @@ class skydropxService {
             return response.data
         })
     }
+    /**
+     * 
+     * @returns Los tipos de delivery disponible. El "delivery" es el precio base, "parcel reception" sería el costo adicional
+     */
+    async getDeliveryTypes(){
+        return await axios.get(BASE_URL + "pricings/oxxo")
+        .then(response => {
+            console.log(response);
+            return response.data
+        })
+    }
 }
 
 export default new skydropxService();

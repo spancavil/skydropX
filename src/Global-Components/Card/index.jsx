@@ -21,6 +21,10 @@ import sendEx from '../../Assets/img/shippings/sendEx.png';
 // import dhl from '../../Assets/img/shippings/dhl.png';
 // import dostavista from '../../Assets/img/shippings/dostavista.png';
 
+//DELIVERY TYPE ICONS
+import oxxoDelivery from '../../Assets/img/oxxoDeliveryIcon.png';
+import delivery from '../../Assets/img/deliveryIcon.png';
+
 const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
     const [border, setBorder] = useState(false);
@@ -133,7 +137,23 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                     />
                 </div>
             );
-
+        //Card para el tipo de entrega (o sea si se envía desde la tienda o desde alguna sucursal de skydropx)
+        case "delivery":
+            return(
+                <div
+                className={styles.deliveryMode}
+                onClick={() => handleClick(content)}
+                style={border ? {border: "3px solid #5233EA"}: null}
+                >
+                    <img
+                    src={Object.keys(content)[0].includes("oxxo") ? oxxoDelivery: delivery}
+                    alt="delivery-type"
+                    />
+                <h2 className={styles.title}>{Object.keys(content)[0].includes("oxxo") ? "Sí, entregar en esta tienda": "No, entregar en otro lugar" }</h2>
+                <h3 className={styles.sub}>{Object.keys(content)[0].includes("oxxo") ? "El costo de comisión es de $7 MXN por paquete.": "Sin costo de comisión"}</h3>
+                <h3 className={styles.text}>{Object.keys(content)[0].includes("oxxo") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal Skydropx o de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3>
+                </div>
+            )
         default:
             return(
                 <div className={styles.cardShipping}>
