@@ -13,7 +13,7 @@ import Button2 from "../../Global-Components/Button2";
 const DefineParams = () => {
 
     //States for show or hide
-    const [weight, setWeight] = useState(false)
+    const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
 
@@ -21,16 +21,16 @@ const DefineParams = () => {
     const [formSender, setFormSender] = useState(false);
     const [senderData, setSenderData] = useState({});
 
-    const [formReceiver, setFormReceiver] = useState(true);
+    const [formReceiver, setFormReceiver] = useState(false);
     const [receiverData, setReceiverData] = useState({});
 
     //Category states
-    const [category, setCategory] = useState(false);
-    const [categoryData, setCategoryData] = useState({})
+    /* const [category, setCategory] = useState(false);
+    const [categoryData, setCategoryData] = useState({}) */
 
     //Delivery states
     const [delivery, setDelivery] = useState(false);
-    const [deliveryData, setDeliveryData] = useState({})
+    // const [deliveryData, setDeliveryData] = useState({})
 
     //Confirm data state
     const [confirmData, setConfirmData] = useState(false);
@@ -85,14 +85,15 @@ const DefineParams = () => {
                 company: "skydropx",
                 address2: senderData.colonia,
                 phone: senderData.telefono,
-                email: senderData.correoElectronico
+                email: senderData.correoElectronico,
+                reference: senderData.referencia,
             }
         })
         setFormSender(false);
         setFormReceiver(true)
     }
 
-    const handleFormReceiver = (dataReceiver) => {
+    const handleFormReceiver = () => {
         setReceiverDataCtx({
             ...receiverDataCtx,
             address_to:{
@@ -105,7 +106,8 @@ const DefineParams = () => {
                 company: "skydropx",
                 address2: receiverData.colonia,
                 phone: receiverData.telefono,
-                email: receiverData.correoElectronico
+                email: receiverData.correoElectronico,
+                reference: receiverData.referencia,
             }
         })
         setFormReceiver(false);
@@ -141,9 +143,17 @@ const DefineParams = () => {
             setShipping(true)
         }
         if (!weight && !service && !shipping && !formSender && formReceiver){
-            setSenderDataCtx({}); //Hay que cambiar esto, así cuando backean ya tienen los datos disponibles para cambiarlos
             setFormReceiver(false);
             setFormSender(true);
+        }
+        if (!formReceiver && delivery) {
+            setDelivery(false);
+            setFormReceiver(true);
+        }
+        if (!delivery && confirmData) {
+            setDeliveryTypeSelected({});
+            setConfirmData(false);
+            setDelivery(true);
         }
     }
 

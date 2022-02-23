@@ -43,7 +43,7 @@ const InfoProvider = ({ children }) => {
 
     const getShippingServices = async (service) => {
         try {
-            let serviceSTDoEXP = service.includes("standard") > 300 ? "STD" : "EXP"
+            let serviceSTDoEXP = service.includes("standard") ? "STD" : "EXP"
             const response = await SkydropService.getAvailableShipping(
                 codigosPostales.origen, codigosPostales.destino, sizePackage, serviceSTDoEXP)
             return (response.result);

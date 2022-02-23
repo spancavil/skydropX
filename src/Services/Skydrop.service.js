@@ -42,6 +42,7 @@ class skydropxService {
             parcel_tag,
             service_tag
         }).then(response => {
+            console.log(response.data);
             return response.data
         })
     }

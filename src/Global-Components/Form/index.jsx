@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { schemaCalle, schemaCalleNumero, schemaCompleteName, schemaEmail, schemaPhone, schemaReferencias } from '../../Utils/validateForm';
 import Input from '../Input';
 import InputDisabled from '../Input/Components/InputDisabled';
 import styles from './styles.module.scss';
+import {InfoData} from '../../Context/InfoProvider';
 
-const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender = false}) => {
+const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender = false, formReceiver = false}) => {
+
+  //Data loaded from context
+  const {senderDataCtx, receiverDataCtx} = useContext(InfoData);
+
+  const [firstNavigation, setFirstNavigation] = useState(true);
 
   //Form states and validations
   const [nombreCompleto, setNombreCompleto] = useState("")
@@ -24,6 +30,39 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
 
   const [referencias, setReferencia] = useState("")
   const [errorReferencias, setErrorReferencia] = useState("");
+
+  //Este efecto lo usamos para cargar los datos del form previos
+  useEffect(()=> {
+
+    if (firstNavigation){
+      const hayDatosSender = Object.keys(senderDataCtx).length !== 0;
+      const hayDatosReceiver = Object.keys(receiverDataCtx).length !== 0;
+  
+      console.log(`Hay datos sender? ${hayDatosSender}, hay datos receiver? ${hayDatosReceiver}`);
+    
+      if (hayDatosSender && firstNavigation && formSender){
+        console.log("Se modifican los values del sender por unica vez");
+        setNombreCompleto(senderDataCtx.address_from.name);
+        setCorreoElectronico(senderDataCtx.address_from.email);
+        setTelefono(senderDataCtx.address_from.phone);
+        setCalle(senderDataCtx.address_from.address1);
+        setColonia(senderDataCtx.address_from.address2);
+        setReferencia(senderDataCtx.address_from.reference);
+      }
+  
+      if (hayDatosReceiver && firstNavigation && formReceiver){
+        console.log("Se modifican los values del receiver por unica vez");
+        setNombreCompleto(receiverDataCtx.address_to.name);
+        setCorreoElectronico(receiverDataCtx.address_to.email);
+        setTelefono(receiverDataCtx.address_to.phone);
+        setCalle(receiverDataCtx.address_to.address1);
+        setColonia(receiverDataCtx.address_to.address2);
+        setReferencia(receiverDataCtx.address_to.reference);
+      }
+      setFirstNavigation(false);
+    }
+
+  },[senderDataCtx, receiverDataCtx, firstNavigation, formSender, formReceiver])
 
   const handleNombreCompleto = (value) => {
     setNombreCompleto(value);
@@ -110,7 +149,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
         telefono &&
         colonia) {
         setData({
-          nombreCompleto, correoElectronico, calle, telefono, colonia 
+          nombreCompleto, correoElectronico, calle, telefono, colonia, referencia: referencias ? referencias : "" 
         });
       } else {
         setData({})
@@ -131,7 +170,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
         colonia &&
         referencias) {
         setData({
-          nombreCompleto, correoElectronico, calle, telefono, colonia 
+          nombreCompleto, correoElectronico, calle, telefono, colonia, referencia: referencias
         });
       } else {
         setData({})

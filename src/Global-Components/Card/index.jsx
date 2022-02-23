@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import './styles.module.scss';
 import styles from './styles.module.scss';
 import boxSizingSmall from '../../Assets/img/smallBox.png';
@@ -28,13 +28,35 @@ import delivery from '../../Assets/img/deliveryIcon.png';
 //ICONS CONFIRM DATA
 import email from '../../Assets/img/mail.png';
 import phone from '../../Assets/img/phone.png';
+import { InfoData } from "../../Context/InfoProvider";
 
 const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
+    //Importamos los datos del context para utilizalos en el confirm
+    const {senderDataCtx, receiverDataCtx, codigosPostales, stateAndCity, servicePackage: service, sizePackage: size, deliveryTypeSelected, shippingPackage} = useContext(InfoData);
+
     const [border, setBorder] = useState(false);
     let express;
+    let serviceSTDoEXP = "";
+    let peso = "";
+    let precio = "";
+    let oxxo = false;
+
     if (content){
         express = Object.keys(content)[0].includes("express");
+    }
+
+    if (Object.keys(service).length !== 0){
+        serviceSTDoEXP = Object.keys(service)[0].includes("standard") ? "estándar" : "express";
+        precio = Object.values(service)[0];
+    }
+
+    if (size !== ""){
+        peso = size === "S" ? "0 - 1" : size === "M" ? "2 - 5" : "6 - 10";
+    }
+
+    if (Object.keys(deliveryTypeSelected).length !== 0){
+        oxxo = Object.keys(deliveryTypeSelected)[0] === "oxxo" ? true: false
     }
 
     const handleClick = (data) => {
@@ -170,7 +192,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
                     <div className={styles.senderContainer}>
                         <div className={styles.content}>
-                            <h3 className={styles.title}>Juan Román Riquelme</h3>
+                            <h3 className={styles.title}>{senderDataCtx.address_from?.name}</h3>
                             <div style={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -179,7 +201,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                                 gap: "8px"
                             }}>
                                 <img src={email} alt="email" style={{height: "19px", minWidth: '19px'}}/>
-                                <h3 className={styles.text}>jesucristooooooooooooooooooooooooooooooooo@gmail.com</h3>
+                                <h3 className={styles.text}>{senderDataCtx.address_from?.email}</h3>
                             </div>
                             <div 
                                 style={{
@@ -190,14 +212,14 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                                 gap: "8px"}}
                             >
                                 <img src={phone} alt="phone" style={{height: "19px"}}/>
-                                <h3 className={styles.text}>+52 telefono</h3>
+                                <h3 className={styles.text}>+52 {senderDataCtx?.address_from?.phone}</h3>
                             </div>
                         </div>
                         <div className={styles.content}>
                             <h3 className={styles.title}>Dirección</h3>
-                            <h3 className={styles.text}>Calle falsa 123</h3>
-                            <h3 className={styles.text}>Colonia, CP: 19292</h3>
-                            <h3 className={styles.text}>Ciudad, estado</h3>
+                            <h3 className={styles.text}>{senderDataCtx?.address_from?.address1}</h3>
+                            <h3 className={styles.text}>{senderDataCtx?.address_from?.address2}, CP: {codigosPostales?.origen}</h3>
+                            <h3 className={styles.text}>{stateAndCity.cityOrigen}, {stateAndCity.stateOrigen}</h3>
                         </div>
                     </div>
 
@@ -205,7 +227,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
                     <div className={styles.senderContainer}>
                         <div className={styles.content}>
-                            <h3 className={styles.title}>Diego Armando Maradona</h3>
+                            <h3 className={styles.title}>{receiverDataCtx.address_to?.name}</h3>
                             <div style={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -214,7 +236,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                                 gap: "8px"
                             }}>
                                 <img src={email} alt="email" style={{height: "19px", minWidth: '19px'}}/>
-                                <h3 className={styles.text}>maradooooo@hotmail.com</h3>
+                                <h3 className={styles.text}>{receiverDataCtx.address_to?.email}</h3>
                             </div>
                             <div style={{
                                 display: "flex",
@@ -224,14 +246,14 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                                 gap: "8px"
                             }}>
                                 <img src={phone} alt="phone" style={{height: "19px"}}/>
-                                <h3 className={styles.text}>+52 telefono</h3>
+                                <h3 className={styles.text}>+52 {receiverDataCtx.address_to?.phone}</h3>
                             </div>
                         </div>
                         <div className={styles.content}>
                             <h3 className={styles.title}>Dirección</h3>
-                            <h3 className={styles.text}>Calle 123</h3>
-                            <h3 className={styles.text}>Colonia CP, Teniente juan domingo peron 29912 1°C</h3>
-                            <h3 className={styles.text}>Ciudad, estado</h3>
+                            <h3 className={styles.text}>{receiverDataCtx.address_to?.address1}</h3>
+                            <h3 className={styles.text}>{receiverDataCtx.address_to?.address2} CP, {codigosPostales?.destino}</h3>
+                            <h3 className={styles.text}>{stateAndCity.cityDestino}, {stateAndCity.stateDestino}</h3>
                         </div>
                     </div>
 
@@ -245,21 +267,28 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
             return(
             <div className={styles.shippingContainer}>
                 <img
-                    src={fedEx}
+                    src={
+                        shippingPackage === "EST" ? estafeta :
+                        shippingPackage === "CAR" ? carsa :
+                        shippingPackage === "RED" ? redPack :
+                        shippingPackage === "SEN" ? sendEx :
+                        fedEx}
                     alt="shipping"
                     style={{height: '55px', padding: '24px 0 0 24px'}}
                 />
-                <h2 className={styles.titleShipping}>Servicio express</h2>
-                <h3 className={styles.textShipping}>Paquete 2 - 5 kg (Max)</h3>
+                <h2 className={styles.titleShipping}>Servicio {serviceSTDoEXP}</h2>
+                <h3 className={styles.textShipping}>Paquete {peso} kg (Max)</h3>
 
                 <div className={styles.costContainer}>
                     <h3 className={styles.left}>Precio de envío</h3>
-                    <h3 className={styles.right}>$359 MXN</h3>
+                    <h3 className={styles.right}>${precio} MXN</h3>
                 </div>
-                <div className={styles.costContainer}>
-                    <h3 className={styles.left}>Comisión OXXO <br/>por envío</h3>
-                    <h3 className={styles.right}>$13 MXN</h3>
-                </div>
+                {oxxo &&
+                    <div className={styles.costContainer}>
+                        <h3 className={styles.left}>Comisión OXXO <br/>por envío</h3>
+                        <h3 className={styles.right}>$13 MXN</h3>
+                    </div>
+                }
                 <div className={styles.costContainer}>
                     <h3 className={styles.left}>Comisión OXXO <br/>por entrega de paquete</h3>
                     <h3 className={styles.right}>$7 MXN</h3>
@@ -269,7 +298,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
                 <div className={styles.costContainer}>
                     <h3 className={styles.leftPower}>TOTAL <span className={styles.leftMinusPower}><br/>(incluye IVA)</span></h3>
-                    <h3 className={styles.rightPower}>$379 MXN</h3>
+                    <h3 className={styles.rightPower}>${parseInt(precio) + (oxxo ? 20 : 7)} MXN</h3>
                 </div>
             </div>)
 
