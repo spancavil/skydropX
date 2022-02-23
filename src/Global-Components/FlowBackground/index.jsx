@@ -2,14 +2,9 @@ import React, { useEffect, useState } from "react";
 import styles from './styles.module.scss';
 import LogoFooter from "../../Assets/svg/logoFooter";
 import { getFullDate } from "../../Utils/getDate";
-import HelpButton from "../Help-button";
 
 const FlowBackground = ({children}) => {
     const [date, setDate] = useState({});
-
-    const helpFire = () => {
-        console.log("Click en ayuda");
-    }
 
     useEffect(()=> {
 
@@ -41,7 +36,6 @@ const FlowBackground = ({children}) => {
             
             {children}
 
-            <HelpButton onClick={helpFire}/>
         </div>
     )
 }
