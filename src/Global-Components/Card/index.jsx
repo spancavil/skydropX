@@ -56,7 +56,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
     }
 
     if (Object.keys(deliveryTypeSelected).length !== 0){
-        oxxo = Object.keys(deliveryTypeSelected)[0] === "oxxo" ? true: false
+        oxxo = Object.keys(deliveryTypeSelected)[0] === "OXX" ? true: false
     }
 
     const handleClick = (data) => {
@@ -175,12 +175,12 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                 style={border ? {border: "3px solid #5233EA"}: null}
                 >
                     <img
-                    src={Object.keys(content)[0].includes("oxxo") ? oxxoDelivery: delivery}
+                    src={Object.keys(content)[0].includes("OXX") ? oxxoDelivery: delivery}
                     alt="delivery-type"
                     />
-                <h2 className={styles.title}>{Object.keys(content)[0].includes("oxxo") ? "Sí, entregar en esta tienda": "No, entregar en otro lugar" }</h2>
-                <h3 className={styles.sub}>{Object.keys(content)[0].includes("oxxo") ? "El costo de comisión es de $7 MXN por paquete.": "Sin costo de comisión"}</h3>
-                <h3 className={styles.text}>{Object.keys(content)[0].includes("oxxo") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal Skydropx o de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3>
+                <h2 className={styles.title}>{Object.keys(content)[0].includes("OXX") ? "Sí, entregar en esta tienda": "No, entregar en otro lugar" }</h2>
+                <h3 className={styles.sub}>{Object.keys(content)[0].includes("OXX") ? "El costo de comisión es de $7 MXN por paquete.": "Sin costo de comisión"}</h3>
+                <h3 className={styles.text}>{Object.keys(content)[0].includes("OXX") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal Skydropx o de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3>
                 </div>
             )
         case "resumeSenderReceiver":

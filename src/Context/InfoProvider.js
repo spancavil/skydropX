@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import SkydropService from "../Services/Skydrop.service";
 import SwalAlert from "../Utils/sweetAlert";
+import pdf from '../Assets/shipping.pdf'
 
 export const InfoData = createContext({})
 
@@ -15,7 +16,7 @@ const InfoProvider = ({ children }) => {
     const [shippingPackage, setShippingPackage] = useState("");
     const [senderDataCtx, setSenderDataCtx] = useState({});
     const [receiverDataCtx, setReceiverDataCtx] = useState({});
-    const [subcategoryCodeCtx, setSubcategoryCodeCtx] = useState("");
+    const [subcategoryIdCtx, setSubcategoryIdCtx] = useState("");
     const [classCodeCtx, setClassCodeCtx] = useState("");
     const [claseNombre, setClaseNombre] = useState("");
 
@@ -26,6 +27,10 @@ const InfoProvider = ({ children }) => {
 
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
+
+    const [linkPdf, setLinkPdf] = useState(pdf);
+
+    console.log(pdf);
 
     const getServices = async (size) => {
         try {
@@ -59,8 +64,8 @@ const InfoProvider = ({ children }) => {
         try {
             let response = await SkydropService.getDeliveryTypes();
             setDeliveryTypes([
-                {base: response.result["delivery"]},
-                {oxxo: response.result["delivery"] + response.result["parcelReception"]}
+                {OTH: response.result["delivery"]},
+                {OXX: response.result["delivery"] + response.result["parcelReception"]}
             ])
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message)
@@ -70,8 +75,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryCodeCtx, setClassCodeCtx, setClaseNombre,
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryCodeCtx, classCodeCtx, claseNombre,
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, 
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf,
             WEIGHTS, SERVICE_TYPES
         }}
         >

@@ -78,6 +78,59 @@ class skydropxService {
                 return response.data
             })
     }
+     /**
+      * 
+      * @param {*} address_from "province": "Ciudad de México",
+        "city": "Ciudad de México",
+        "name": "Jose Fernando",
+        "zip": "12000",
+        "country": "MX",
+        "address1": "Av. Principal #234",
+        "company": "skydropx",
+        "address2": "Centro",
+        "phone": "5555555555",
+        "email": "skydropx@email.com",
+        "reference": ""
+      * @param {*} address_to idem address_from (pero la reference es OBLIGATORIA)
+      * @param {*} parcel_tag "S M o L"
+      * @param {*} consignment_note_class_code "El código de la clase"
+      * @param {*} consignment_note_subcategory_code "El ID (id ojo eh, el código NO) de la subcategoría"
+      * @param {*} service_tag "STD o EXP"
+      * @param {*} courier_tag "CAR, EST, FED, RED, SEN, es decir la empresa de envío"
+      * @param {*} method_tag "OTH o OXX (otro u oxxo)"
+      * @returns 
+      */
+    async createShipmentAndLabel(
+        address_from,
+        address_to,
+        parcel_tag,
+        consignment_note_class_code,
+        consignment_note_subcategory_code,
+        service_tag,
+        courier_tag,
+        method_tag) {
+            console.log(address_from,
+                address_to,
+                parcel_tag,
+                consignment_note_class_code,
+                consignment_note_subcategory_code,
+                service_tag,
+                courier_tag,
+                method_tag);
+            return await axios.post(BASE_URL + 'shipments', {
+                address_from,
+                address_to,
+                parcel_tag,
+                consignment_note_class_code,
+                consignment_note_subcategory_code,
+                service_tag,
+                courier_tag,
+                method_tag
+            }).then(response => {
+                console.log(response);
+                return response.data;
+            })
+    }
 }
 
 export default new skydropxService();

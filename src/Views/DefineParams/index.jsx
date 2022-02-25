@@ -30,15 +30,15 @@ const DefineParams = () => {
     //Category states
     const [category, setCategory] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
-    const [categorySelected, setCategorySelected] = useState("");
+    // const [categorySelected, setCategorySelected] = useState("");
 
     const [subcategory, setSubcategory] = useState(false);
     const [subCategoryData, setSubCategoryData] = useState([]);
-    const [subCategorySelected, setSubcategorySelected] = useState("");
+    //const [subCategorySelected, setSubcategorySelected] = useState("");
 
     const [clase, setClase] = useState(false);
     const [claseData, setClaseData] = useState([])
-    const [claseSelected, setClaseSelected] = useState("");
+    //const [claseSelected, setClaseSelected] = useState("");
 
     //Delivery states
     const [delivery, setDelivery] = useState(false);
@@ -51,8 +51,9 @@ const DefineParams = () => {
     const [shippingsOn, setShippingsOn] = useState(false)
 
     const {
-        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, subcategoryCodeCtx, classCodeCtx,
-        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryCodeCtx, setClassCodeCtx, setClaseNombre,
+        WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, sizePackage, servicePackage, shippingPackage,
+        setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx,
+        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf,
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -61,25 +62,25 @@ const DefineParams = () => {
         setSizePackage(size);
         getServices(size);
         setWeight(false);
-        // setService(true);
+        setService(true);
 
         //A comentar
-        getDeliveryTypes();
+        /* getDeliveryTypes();
         const response = await SkydropService.getCategories();
         setCategoryData(response.result.data);
-        setCategory(true);
+        setCategory(true); */
     }
 
     const defineService = async (service) => {
         try {
             await setServicePackage(service);
             setService(false)
-    
+
             const shippings = await getShippingServices(Object.keys(service)[0])
-    
+
             /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
             setShippingAvailable(shippingsHardcoded) //Saves in context */
-    
+
             setShippingsOn(shippings);
             setShippingAvailable(shippings);
             setShipping(true)
@@ -148,7 +149,7 @@ const DefineParams = () => {
 
     const handleSelectCategory = async (item) => {
         setSubcategory(true);
-        setCategorySelected(item.id);
+        // setCategorySelected(item.id);
         try {
             const response = await SkydropService.getSubcategories(item.id);
             setSubCategoryData(response.result.data);
@@ -161,8 +162,8 @@ const DefineParams = () => {
 
     const handleSelectSubCategory = async (item) => {
         setClase(true);
-        setSubcategorySelected(item?.id);
-        setSubcategoryCodeCtx(item?.attributes?.code);
+        // setSubcategorySelected(item?.id);
+        setSubcategoryIdCtx(item?.id);
         try {
             const response = await SkydropService.getClasses(item?.id);
             console.log(response);
@@ -175,7 +176,7 @@ const DefineParams = () => {
     }
 
     const handleClase = async (item) => {
-        setClassCodeCtx(item?.id);
+        setClassCodeCtx(item?.attributes?.code);
         setClaseNombre(item?.attributes?.name);
     }
 
@@ -216,7 +217,7 @@ const DefineParams = () => {
             setFormReceiver(false);
             setFormSender(true);
         }
-        if (!formReceiver && (category || subcategory || clase)){
+        if (!formReceiver && (category || subcategory || clase)) {
             setCategory(false);
             setSubcategory(false);
             setClase(false);
@@ -230,6 +231,44 @@ const DefineParams = () => {
             setDeliveryTypeSelected({});
             setConfirmData(false);
             setDelivery(true);
+        }
+    }
+
+    const handlePrint = async () => {
+        const service_tag = Object.keys(servicePackage)[0].includes("standard") ? "STD" : "EXP";
+        const method_tag = Object.keys(deliveryTypeSelected)[0];
+        if (senderDataCtx.address_from &&
+            receiverDataCtx.address_to &&
+            sizePackage &&
+            classCodeCtx &&
+            subcategoryIdCtx &&
+            service_tag &&
+            shippingPackage &&
+            method_tag) {
+
+            try {
+                const response = await SkydropService.createShipmentAndLabel(
+                    senderDataCtx.address_from,
+                    receiverDataCtx.address_to,
+                    sizePackage,
+                    classCodeCtx,
+                    subcategoryIdCtx,
+                    service_tag,
+                    shippingPackage,
+                    method_tag
+                )
+                console.log(response);
+                setLinkPdf(response.result?.label_url)
+                if (response.result !== undefined) {
+                    navigate('/impresion')
+                } else {
+                    navigate('/error-pdf')
+                }
+            }
+            catch (error) {
+                SwalAlert("Error de comunicación con el servidor: " + error.message);
+                // navigate("/");
+            }
         }
     }
 
@@ -353,6 +392,7 @@ const DefineParams = () => {
                     {formSender && <Button2 text="Continuar" width='132px' canContinue={Object.keys(senderData).length !== 0} handleContinue={handleFormSender} />}
                     {formReceiver && <Button2 text="Continuar" width='132px' canContinue={Object.keys(receiverData).length !== 0} handleContinue={handleFormReceiver} />}
                     {(category || subcategory || clase) && <Button2 text="Continuar" width='132px' canContinue={classCodeCtx !== ""} handleContinue={handleContinueCategory} />}
+                    {confirmData && <Button2 text="Imprimir guía" width='132px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
             </div>
         </FlowBackground>
