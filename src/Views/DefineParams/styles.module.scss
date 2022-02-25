@@ -103,4 +103,39 @@
         overflow: visible;
         gap: 10px;
     }
+    .categoriesContainer{
+        position: absolute;
+        left: 70px;
+        top: 208px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px;
+        overflow: visible;
+
+        .titleCategory{
+            width: 100%;
+            text-align: left;
+            font-family: $font-inter500;
+            color: $texto-primary;
+            font-size: 24px;
+            line-height: 32px;
+            padding-bottom: 20px;
+        }
+        .subtitleCategory{
+            width: 100%;
+            text-align: left;
+            font-family: $font-inter400;
+            color: $texto-primary;
+            font-size: 24px;
+            line-height: 32px;
+            padding-bottom: 20px;
+        }
+        .selectContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+        }
+    }
 }

@@ -15,6 +15,9 @@ const InfoProvider = ({ children }) => {
     const [shippingPackage, setShippingPackage] = useState("");
     const [senderDataCtx, setSenderDataCtx] = useState({});
     const [receiverDataCtx, setReceiverDataCtx] = useState({});
+    const [subcategoryCodeCtx, setSubcategoryCodeCtx] = useState("");
+    const [classCodeCtx, setClassCodeCtx] = useState("");
+    const [claseNombre, setClaseNombre] = useState("");
 
     const [shippingAvailable, setShippingAvailable] = useState(null);
     
@@ -67,8 +70,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected,
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected,
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryCodeCtx, setClassCodeCtx, setClaseNombre,
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryCodeCtx, classCodeCtx, claseNombre,
             WEIGHTS, SERVICE_TYPES
         }}
         >

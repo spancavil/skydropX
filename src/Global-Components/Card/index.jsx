@@ -33,7 +33,7 @@ import { InfoData } from "../../Context/InfoProvider";
 const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
     //Importamos los datos del context para utilizalos en el confirm
-    const {senderDataCtx, receiverDataCtx, codigosPostales, stateAndCity, servicePackage: service, sizePackage: size, deliveryTypeSelected, shippingPackage} = useContext(InfoData);
+    const {senderDataCtx, receiverDataCtx, codigosPostales, stateAndCity, servicePackage: service, sizePackage: size, deliveryTypeSelected, shippingPackage, claseNombre} = useContext(InfoData);
 
     const [border, setBorder] = useState(false);
     let express;
@@ -259,7 +259,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
 
                     <div className={styles.packageContent}>
                         <h3 className={styles.title}>Contenido del paquete</h3>
-                        <h3 className={styles.text}>Teléfono móvil</h3>
+                        <h3 className={styles.text}>{claseNombre}</h3>
                     </div>
                 </div>
             )
