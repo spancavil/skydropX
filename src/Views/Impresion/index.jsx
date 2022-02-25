@@ -4,8 +4,6 @@ import './styles.module.scss';
 
 const Impresion = () => {
     const { linkPdf } = useContext(InfoData);
-
-    const [print, setPrint] = useState (true)
     
     useEffect(()=> {
 
