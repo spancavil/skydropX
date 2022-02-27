@@ -53,7 +53,8 @@ const DefineParams = () => {
     const {
         WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, sizePackage, servicePackage, shippingPackage,
         setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx,
-        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf,
+        setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes,
+        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id,
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -258,7 +259,8 @@ const DefineParams = () => {
                     method_tag
                 )
                 console.log(response);
-                setLinkPdf(response.result?.label_url)
+                setLinkPdf(response.result?.label_url);
+                setOrder_id(response.result?.order_id);
                 if (response.result !== undefined) {
                     navigate('/impresion')
                 } else {
@@ -267,6 +269,7 @@ const DefineParams = () => {
             }
             catch (error) {
                 SwalAlert("Error de comunicación con el servidor: " + error.message);
+                //navigate('/error-pdf')
                 // navigate("/");
             }
         }

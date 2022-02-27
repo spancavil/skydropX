@@ -29,8 +29,7 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
     const [linkPdf, setLinkPdf] = useState(pdf);
-
-    console.log(pdf);
+    const [order_id, setOrder_id] = useState(25);
 
     const getServices = async (size) => {
         try {
@@ -75,8 +74,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, 
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf,
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id,
+            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
             WEIGHTS, SERVICE_TYPES
         }}
         >

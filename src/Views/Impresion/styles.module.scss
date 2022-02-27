@@ -1,0 +1,105 @@
+@import "../../Styles/Colors.scss";
+@import "../../Styles/Fonts.scss";
+
+.container {
+    width: 100%;
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    align-items: center;
+
+    .tareaCumplida {
+        background-color: white;
+        width: 1000px;
+        height: 313px;
+        box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
+            0px 4px 18px 3px rgba(152, 167, 204, 0.12);
+        border-radius: 6px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+
+        img {
+            width: 200px;
+            height: 200px;
+        }
+        .textContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+
+            .title {
+                font-family: $font-inter400;
+                font-size: 40px;
+                line-height: 48px;
+                color: $texto-primary;
+            }
+            .subtitle {
+                text-align: center;
+                font-family: $font-inter400;
+                font-size: 24px;
+                line-height: 32px;
+                color: $texto-primary;
+            }
+        }
+    }
+    .acercate {
+        background-color: white;
+        width: 1000px;
+        padding: 24px;
+        height: 120px;
+        box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
+            0px 4px 18px 3px rgba(152, 167, 204, 0.12);
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 8px;
+
+        .acercateTitle {
+            font-family: $font-inter400;
+            font-size: 24px;
+            line-height: 32px;
+            color: $texto-primary;
+
+        }
+        .textInfo {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+
+            .acercateSub {
+                font-family: $font-inter300;
+                font-size: 20px;
+                line-height: 32px;
+                color: $texto-primary;
+            }
+        }
+    }
+    .duda {
+        width: 1000px;
+        height: 34px;
+        background: rgba(35, 51, 98, 0.08);
+        border-radius: 24px;
+
+        .dudaTitle {
+            text-align: center;
+            font-family: $font-inter200;
+            font-size: 20px;
+            line-height: 32px;
+            color: $texto-primary;
+            span {
+                color: blue;
+            }
+        }
+    }
+}

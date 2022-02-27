@@ -131,6 +131,16 @@ class skydropxService {
                 return response.data;
             })
     }
+
+    async resendLabel (order_id, email){
+        return await axios.post(BASE_URL + 'shipments/email-label', {
+            order_id,
+            email
+        }).then(response => {
+            console.log(response);
+            return response.data;
+        })
+    }
 }
 
 export default new skydropxService();
