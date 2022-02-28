@@ -13,14 +13,9 @@ npm run build:develop
 ### Production environment
 
 `
-npm start
 npm run start:production
-npm build
 npm run build:production
 `
-##### Notes
-npm start do the same thing as npm run start:production
-npm build do the same thing as npm run build:production
 
 ### Testing environment
 `

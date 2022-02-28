@@ -22,15 +22,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "env-cmd -f ./environments/.env.production react-scripts start",
+    "start": "react-scripts start",
     "develop": "env-cmd -f ./environments/.env.develop react-scripts start",
     "production": "env-cmd -f ./environments/.env.production react-scripts start",
-    "start:testing": "env-cmd -f ./environments/.env.test react-scripts start",
-    "build": "env-cmd -f ./environments/.env.production react-scripts build",
+    "start:test": "env-cmd -f ./environments/.env.test react-scripts start",
+    "build": "react-scripts build",
     "build:develop": "env-cmd -f ./environments/.env.develop react-scripts build",
     "build:production": "env-cmd -f ./environments/.env.production react-scripts build",
-    "build:testing": "env-cmd -f ./environments/.env.test react-scripts build",
-    "test:": "env-cmd -f ./environments/.env.production react-scripts test",
+    "build:test": "env-cmd -f ./environments/.env.test react-scripts build",
+    "test:": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
