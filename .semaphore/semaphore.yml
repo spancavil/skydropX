@@ -1,0 +1,51 @@
+version: v1.0
+name: sucursales_service
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Install dependencies
+    task:
+      jobs:
+        - name: Install dependencies
+          commands:
+            - checkout
+            - cache restore
+            - sem-version node 16.1.0
+            - sem-version c 8
+            - cd cls-rtracer
+            - npm install
+            - cd ../commons-logger
+            - npm install
+            - cd ../oxxo
+            - npm install
+            - cache store node_modules-$SEMAPHORE_GIT_BRANCH node_modules
+
+  - name: Tests
+    task:
+      prologue:
+        commands:
+          - checkout
+          - mv ~/env_vars_sucursales_service $(pwd)/.env
+          - sem-version c 8
+          - cd cls-rtracer
+          - npm install
+          - cd ../commons-logger
+          - npm install
+          - cd ../oxxo
+          - npm install
+          - cache restore node_modules-$SEMAPHORE_GIT_BRANCH
+          - sem-version node 16.1.0
+      jobs:
+        - name: Run tests
+          commands:
+            - npm test
+      secrets:
+        - name: sucursales-service
+promotions:
+  - name: AWS deploy
+    pipeline_file: aws-deployment.yml
+    auto_promote:
+      when: result = 'passed'
