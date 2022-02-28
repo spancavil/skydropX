@@ -1,6 +1,11 @@
 @import "../../Styles/Colors.scss";
 @import "../../Styles/Fonts.scss";
 
+.WebViewer{
+    width: 100%;
+    height: 100vh;
+}
+
 .container {
     width: 100%;
     height: calc(100vh - 120px);

@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import SkydropService from "../Services/Skydrop.service";
 import SwalAlert from "../Utils/sweetAlert";
-import pdf from '../Assets/shipping.pdf'
+// import pdf from '../Assets/shipping.pdf'
 
 export const InfoData = createContext({})
 
@@ -28,7 +28,7 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
-    const [linkPdf, setLinkPdf] = useState(pdf);
+    const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
     const [order_id, setOrder_id] = useState(25);
 
     const getServices = async (size) => {

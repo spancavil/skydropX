@@ -53,7 +53,6 @@ const OrigenDestino = () => {
     
     const handleContinue = async () => {
 
-        alert("Se continuará con el llamado a la API");
         try {
             const responseOrigen = await SkydropService.getCityByPostalCode(origen)
             const responseDestino = await SkydropService.getCityByPostalCode(destino)

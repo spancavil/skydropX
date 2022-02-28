@@ -6,8 +6,8 @@ Viewport 2000 x 1200 - Samsung Galaxy Tab A7
 
 ### Develop environment
 `
-npm run start:dev
-npm run build:dev
+npm run start:develop
+npm run build:develop
 `
 
 ### Production environment
