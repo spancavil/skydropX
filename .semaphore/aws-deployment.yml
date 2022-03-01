@@ -9,7 +9,7 @@ blocks:
     task:
       secrets:
         - name: AWS
-        - name: sucursales-service
+        - name: sucursales-webapp
       jobs:
         - name: Deployment
           commands:
