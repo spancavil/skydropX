@@ -289,7 +289,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                     </div>
                 }
                 <div className={styles.costContainer}>
-                    <h3 className={styles.left}>Comisión OXXO <br/>por entrega de paquete</h3>
+                    <h3 className={styles.left}>Comisión OXXO <br/>por resguardo de paquete</h3>
                     <h3 className={styles.right}>$7 MXN</h3>
                 </div>
 

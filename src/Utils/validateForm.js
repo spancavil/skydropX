@@ -44,21 +44,11 @@ export const schemaPhone = Joi.object({
 export const schemaCalle = Joi.object({
     calle: Joi.string()
         .empty()
-        .min(2)
+        .min(5)
         .messages({
             "string.base": "El formato no es válido",
-            "string.empty": "El formato no es válido",
-            "string.min: ": "El formato no es válido",
+            "string.min": "Debe contener mínimo 5 caracteres",
     })
-})
-
-export const schemaCalleNumero = Joi.object({
-    numero: Joi.number()
-        .empty()
-        .messages({
-            "num.base": "El formato no es válido",
-            "num.empty": "El formato no es válido",
-        })
 })
 
 export const schemaReferencias = Joi.object({

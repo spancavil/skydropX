@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { schemaCalle, schemaCalleNumero, schemaCompleteName, schemaEmail, schemaPhone, schemaReferencias } from '../../Utils/validateForm';
+import { schemaCalle, schemaCompleteName, schemaEmail, schemaPhone, schemaReferencias } from '../../Utils/validateForm';
 import Input from '../Input';
 import InputDisabled from '../Input/Components/InputDisabled';
 import styles from './styles.module.scss';
@@ -96,16 +96,14 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
 
   const handleCalle = (value) => {
     setCalle(value);
-    const calleYNumero = (value.split(" "));
     if (value === "") {
       setErrorCalle("Este campo es obligatorio")
     }
     else {
-      const validateCalle = schemaCalle.validate({ calle: calleYNumero[0] })
+      const validateCalle = schemaCalle.validate({ calle: value })
       //Validate the last value in the array calleYNumero
-      const validateNumero = schemaCalleNumero.validate({ numero: calleYNumero[calleYNumero.length - 1] })
-      if (validateCalle.error?.message || validateNumero.error?.message) {
-        setErrorCalle("El formato no es válido")
+      if (validateCalle.error?.message) {
+        setErrorCalle(validateCalle.error.message)
       } else {
         setErrorCalle("")
       }

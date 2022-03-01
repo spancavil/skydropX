@@ -39,6 +39,8 @@ const ModalSend = ({ handleClose, handleSend, sendingState = null }) => {
         }
     }, [senderDataCtx, setEmail])
 
+    console.log(sendingState);
+
     return (
         <ModalBackground>
             <div className={styles.modalContainer}>

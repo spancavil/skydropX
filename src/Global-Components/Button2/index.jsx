@@ -12,7 +12,7 @@ const Button2 = ({text, width, canContinue, handleContinue}) => {
                         width
                     }}
                 >
-                    Continuar
+                    {text}
                 </button>
                 :
                 <button className={styles.buttonContinueDisabled}
@@ -20,7 +20,7 @@ const Button2 = ({text, width, canContinue, handleContinue}) => {
                     width
                 }}
                 >
-                    Continuar
+                    {text}
                 </button>
             }
         </>

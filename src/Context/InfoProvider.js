@@ -28,8 +28,8 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
-    const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
-    const [order_id, setOrder_id] = useState(25);
+    const [linkPdf, setLinkPdf] = useState('');
+    const [order_id, setOrder_id] = useState('');
 
     const getServices = async (size) => {
         try {
@@ -71,10 +71,26 @@ const InfoProvider = ({ children }) => {
         }
     }
 
+    const resetValues = () => {
+        setCodigosPostales("")
+        setStateAndCity({stateOrigen: "", stateDestino: "", cityOrigen: "", cityDestino: ""})
+        setSizePackage("");
+        setServicePackage("");
+        setShippingPackage("");
+        setLinkPdf("");
+        setSenderDataCtx({});
+        setReceiverDataCtx({});
+        setSubcategoryIdCtx({});
+        setClassCodeCtx("");
+        setClaseNombre("");
+        setDeliveryTypeSelected({})
+        setOrder_id("");
+    }
+
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id,
+            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues,
             codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
             WEIGHTS, SERVICE_TYPES
         }}
