@@ -90,7 +90,6 @@ const DefineParams = () => {
             setShipping(true)
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
-            navigate("/");
         }
     }
 
@@ -147,7 +146,6 @@ const DefineParams = () => {
             setCategory(true);
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
-            navigate("/");
         }
     }
 
@@ -160,7 +158,6 @@ const DefineParams = () => {
             setCategory(false);
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
-            navigate("/");
         }
     }
 
@@ -175,7 +172,6 @@ const DefineParams = () => {
             setSubcategory(false);
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
-            navigate("/");
         }
     }
 
