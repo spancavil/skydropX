@@ -12,6 +12,7 @@ import Button2 from "../../Global-Components/Button2";
 import CustomDataList from "../../Global-Components/CustomDataList";
 import SkydropService from "../../Services/Skydrop.service";
 import SwalAlert from "../../Utils/sweetAlert";
+import Terms from "./Modals/Terms";
 
 const DefineParams = () => {
 
@@ -28,6 +29,8 @@ const DefineParams = () => {
     const [receiverData, setReceiverData] = useState({});
 
     //Category states
+    const [terms, setTerms] = useState(false)
+
     const [category, setCategory] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
     // const [categorySelected, setCategorySelected] = useState("");
@@ -259,9 +262,9 @@ const DefineParams = () => {
                     method_tag
                 )
                 console.log(response);
-                setLinkPdf(response.result?.label_url);
-                setOrder_id(response.result?.order_id);
                 if (response.result !== undefined) {
+                    setLinkPdf(response.result?.label_url);
+                    setOrder_id(response.result?.order_id);
                     navigate('/impresion')
                 } else {
                     navigate('/error-pdf')
@@ -269,7 +272,7 @@ const DefineParams = () => {
             }
             catch (error) {
                 SwalAlert("Error de comunicación con el servidor: " + error.message);
-                //navigate('/error-pdf')
+                navigate('/error-pdf')
                 // navigate("/");
             }
         }
@@ -358,6 +361,7 @@ const DefineParams = () => {
                                 type="Producto*"
                             />
                         </div>
+                        <h2 className={styles.terms}>Al continuar, confirmo que conozco y acepto los <span onClick={() => setTerms (true) }>términos y políticas</span>.</h2>
                     </div>
                 }
 
@@ -392,8 +396,9 @@ const DefineParams = () => {
                     {formSender && <Button2 text="Continuar" width='132px' canContinue={Object.keys(senderData).length !== 0} handleContinue={handleFormSender} />}
                     {formReceiver && <Button2 text="Continuar" width='132px' canContinue={Object.keys(receiverData).length !== 0} handleContinue={handleFormReceiver} />}
                     {(category || subcategory || clase) && <Button2 text="Continuar" width='132px' canContinue={classCodeCtx !== ""} handleContinue={handleContinueCategory} />}
-                    {confirmData && <Button2 text="Imprimir guía" width='132px' canContinue={true} handleContinue={handlePrint} />}
+                    {confirmData && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
+                {terms && <Terms handleClose={()=> setTerms(false)} width="1000px" height={'656px'}/>}
             </div>
         </FlowBackground>
     )

@@ -136,5 +136,17 @@
             flex-direction: row;
             gap: 24px;
         }
+        .terms{
+            padding-top: 15px;
+            width: 100%;
+            font-family: $font-inter300;
+            font-size: 18px;
+            line-height: 27px;
+            color: $texto-primary;
+            text-align: left;
+            span{
+                color: blue;
+            }
+        }
     }
 }

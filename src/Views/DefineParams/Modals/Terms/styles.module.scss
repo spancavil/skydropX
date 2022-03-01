@@ -1,0 +1,36 @@
+@import '../../../../Styles/Colors.scss';
+@import '../../../../Styles/Fonts.scss';
+.iconContainer {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid #5233ea;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 32px;
+    align-items: center;
+}
+.title {
+    padding-top: 40px;
+    padding-left: 100px;
+    font-family: $font-inter500;
+    color: $home-bg;
+    font-size: 34px;
+    line-height: 46px;
+    text-align: left;
+    padding-bottom: 24px;
+}
+.privacy{
+    width: 930px;
+    height: 400px;
+    align-self: center;
+    .textPrivacy{
+        font-family: $font-inter300;
+        font-size: 18px;
+        line-height: 27px;
+        color: black;
+        text-align: justify;
+    }
+}
