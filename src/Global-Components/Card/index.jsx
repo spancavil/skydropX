@@ -117,8 +117,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                     />
                     }
                     <h1 className={styles.cardTitle}>{content} kg</h1>
-                    <h3 className={styles.cardSubtitle}>Medida máxima:<br/>154 cm lineales*</h3>
-                    
+                                        
                 </div>
             );
 

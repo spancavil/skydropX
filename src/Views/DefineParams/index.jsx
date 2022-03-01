@@ -289,6 +289,10 @@ const DefineParams = () => {
                                 return <Card type="weight" content={weight} key={weight} onClick={defineSize} block={block} setBlock={setBlock} />
                             })}
                         </div>
+                        <div className={styles.subContainer}>
+                            <InfoIcon />
+                            <h2 className={styles.subtitle}>El paquete no puede exceder los 154 cm lineales. Para calcularlos suma el alto, ancho y largo.</h2>
+                        </div>
                     </>
                 )}
                 {service &&
@@ -382,13 +386,6 @@ const DefineParams = () => {
                         </div>
                     </>
                 }
-
-                {weight && (
-                    <div className={styles.subContainer}>
-                        <InfoIcon />
-                        <h2 className={styles.subtitle}>*Para calcular los centímetros lineales suma el largo, ancho y alto del paquete.</h2>
-                    </div>
-                )}
 
                 <div className={styles.buttonContainer}>
                     <Button text="Regresar" width="132px" color="outlined" onClick={() => handleBack()} />

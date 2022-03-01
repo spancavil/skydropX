@@ -31,7 +31,7 @@ const HomeCP = () => {
                     Desde aquí puedes crear envíos de forma sencilla, rápida y segura.
                 </h2>
                 <p className={styles.text3}>
-                    Ingresa el <strong>Código postal</strong> de origen y destino de tu envío.
+                    Ingresa el <strong>código postal</strong> de origen y destino de tu envío.
                 </p>
                 <OrigenDestino />
                 <Footer
