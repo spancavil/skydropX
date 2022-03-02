@@ -230,11 +230,9 @@ const Impresion = () => {
                         <h2 className={styles.acercateTitle}>Ahora acércate a la caja y paga el envío</h2>
                         <div className={styles.textInfo}>
                             <InfoIcon />
-                            <h3 className={styles.acercateSub}>Recuerda que el envío será válido cuando realices el pago.</h3>
+                            <h3 className={styles.acercateSub2}>Recuerda que el envío será válido cuando realices el pago.</h3>
                         </div>
-                    </div>
-                    <div className={styles.duda}>
-                        <h3 className={styles.dudaTitle}>¿No se imprimió la guía?<span onClick={()=> setViewerState(true)}> Reimprimir</span></h3>
+                        <h3 className={styles.acercateSub}>¿No se imprimió la guía? Da click aquí para <span onClick={()=> setViewerState(true)}>reimprimir</span></h3>
                     </div>
                     <div className={styles.duda}>
                         <h3 className={styles.dudaTitle}>Si tienes alguna duda o consulta, escríbenos a <span>clientes@skydropx.com</span></h3>

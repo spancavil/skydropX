@@ -74,14 +74,14 @@
         background-color: white;
         width: 1000px;
         padding: 24px;
-        height: 120px;
+        height: 196px;
         box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
             0px 4px 18px 3px rgba(152, 167, 204, 0.12);
         border-radius: 6px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: center;
+        // justify-content: center;
         gap: 8px;
 
         .acercateTitle {
@@ -98,11 +98,21 @@
             align-items: center;
             gap: 10px;
 
-            .acercateSub {
+            .acercateSub2 {
                 font-family: $font-inter300;
                 font-size: 20px;
                 line-height: 32px;
                 color: $texto-primary;
+            }
+        }
+        .acercateSub {
+            padding-top: 24px;
+            font-family: $font-inter300;
+            font-size: 20px;
+            line-height: 32px;
+            color: $texto-primary;
+            span {
+                color: blue;
             }
         }
     }

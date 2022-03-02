@@ -275,6 +275,11 @@ const DefineParams = () => {
         }
     }
 
+    const handleCloseTerms = () => {
+        setTerms(false); 
+        setPolicies(false);
+    }
+
     return (
         <FlowBackground>
             <div className={styles.container}>
@@ -395,7 +400,7 @@ const DefineParams = () => {
                     {(category || subcategory || clase) && <Button2 text="Continuar" width='132px' canContinue={classCodeCtx !== ""} handleContinue={handleContinueCategory} />}
                     {confirmData && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
-                {(terms || policies) && <Terms handleClose={()=> (setTerms(false), setPolicies(false))} width="1000px" height={'656px'} type ={terms ? "terms" : "policies"}/>}
+                {(terms || policies) && <Terms handleClose={()=> handleCloseTerms()} width="1000px" height={'656px'} type ={terms ? "terms" : "policies"}/>}
             </div>
         </FlowBackground>
     )
