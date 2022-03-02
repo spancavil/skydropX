@@ -13,7 +13,7 @@ class skydropxService {
         console.log(BASE_URL);
         return await axios.get(BASE_URL + `postal-codes/${postalCode}/city`, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         })
             .then(response => {
@@ -28,7 +28,7 @@ class skydropxService {
     async getPricingService(size) {
         return await axios.get(BASE_URL + `pricings/services/${size}`, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         }).then(response => {
             return response.data
@@ -51,7 +51,7 @@ class skydropxService {
             service_tag
         }, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         }).then(response => {
             console.log(response.data);
@@ -65,7 +65,7 @@ class skydropxService {
     async getDeliveryTypes() {
         return await axios.get(BASE_URL + "pricings/oxxo", {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         })
             .then(response => {
@@ -76,7 +76,7 @@ class skydropxService {
     async getCategories() {
         return await axios.get(BASE_URL + "consignment-notes/categories", {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         })
             .then(response => {
@@ -87,7 +87,7 @@ class skydropxService {
     async getSubcategories(categoryId) {
         return await axios.get(BASE_URL + `consignment-notes/categories/${categoryId}/subcategories`, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         })
             .then(response => {
@@ -98,7 +98,7 @@ class skydropxService {
     async getClasses(subcategoryId) {
         return await axios.get(BASE_URL + `consignment-notes/subcategories/${subcategoryId}/classes`, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         })
             .then(response => {
@@ -156,7 +156,7 @@ class skydropxService {
             method_tag
         }, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         }).then(response => {
             console.log(response);
@@ -170,7 +170,7 @@ class skydropxService {
             email
         }, {
             headers: {
-                "Access-Control-Allow-Origin": "true",
+                "Access-Control-Allow-Origin": "*",
             }
         }).then(response => {
             console.log(response);
