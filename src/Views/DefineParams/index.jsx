@@ -29,7 +29,8 @@ const DefineParams = () => {
     const [receiverData, setReceiverData] = useState({});
 
     //Category states
-    const [terms, setTerms] = useState(false)
+    const [terms, setTerms] = useState(false);
+    const [policies, setPolicies] = useState(false);
 
     const [category, setCategory] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
@@ -357,7 +358,7 @@ const DefineParams = () => {
                                 type="Producto*"
                             />
                         </div>
-                        <h2 className={styles.terms}>Al continuar, confirmo que conozco y acepto los <span onClick={() => setTerms (true) }>términos y políticas</span>.</h2>
+                        <h2 className={styles.terms}>Al continuar, confirmo que conozco y acepto los <span onClick={() => setTerms (true) }>términos</span> y <span onClick={()=> setPolicies(true)}>políticas</span>.</h2>
                     </div>
                 }
 
@@ -394,7 +395,7 @@ const DefineParams = () => {
                     {(category || subcategory || clase) && <Button2 text="Continuar" width='132px' canContinue={classCodeCtx !== ""} handleContinue={handleContinueCategory} />}
                     {confirmData && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
-                {terms && <Terms handleClose={()=> setTerms(false)} width="1000px" height={'656px'}/>}
+                {(terms || policies) && <Terms handleClose={()=> (setTerms(false), setPolicies(false))} width="1000px" height={'656px'} type ={terms ? "terms" : "policies"}/>}
             </div>
         </FlowBackground>
     )
