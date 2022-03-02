@@ -1,0 +1,32 @@
+version: v1.0
+name: sucursales_service
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Install dependencies
+    task:
+      jobs:
+        - name: Install dependencies
+          commands:
+            - checkout
+	    - echo "Install dependencies"
+  - name: Tests
+    task:
+      prologue:
+        commands:
+          - checkout
+	  - echo "Please add some test"
+      jobs:
+        - name: Run tests
+          commands:
+            - echo "npm test"
+      secrets:
+        - name: sucursales-webapp
+promotions:
+  - name: AWS deploy
+    pipeline_file: aws-deployment.yml
+    auto_promote:
+      when: result = 'passed'

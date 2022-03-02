@@ -1,0 +1,17 @@
+version: v1.0
+name: AWS-Deploy
+agent:
+  machine: 
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Deploy to AWS ECS
+    task:
+      secrets:
+        - name: AWS
+        - name: sucursales-webapp
+      jobs:
+        - name: Deployment
+          commands:
+            - checkout
+            - /bin/bash ~/semaphore_deploy_v2.sh
