@@ -33,9 +33,9 @@ const Presentation = ({onClick}) => {
                         style = {{
                             transform: "scale(0.25)",
                             position: "absolute",
-                            top: '-220px',
-                            right: '-220px',
+                            top: '425px',
                             cursor: 'pointer',
+                            zIndex: 80,
                         }}
                         onClick = {(e)=> requestFull(e)}
                     />
