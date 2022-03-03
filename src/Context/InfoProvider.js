@@ -29,7 +29,7 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
-    const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
+    const [linkPdf, setLinkPdf] = useState('');
     const [order_id, setOrder_id] = useState('');
 
     const getServices = async (size) => {

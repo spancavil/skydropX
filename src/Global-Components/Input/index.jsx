@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-const Input = ({ width, inputName, inputValue, errorMessage, handleChange}) => {
+const Input = ({ width, inputName, inputValue, errorMessage, handleChange, referenciaSender = false}) => {
 
     return (
         <div className={styles.inputFormat}>
-            <input type="text" placeholder={inputName} name={inputName} id={inputName} value={inputValue}
+            <input type="text" placeholder={`${inputName}${referenciaSender ? '': '*'}`} name={inputName} id={inputName} value={inputValue}
                 className={errorMessage !== "" ? styles.inputError : null}
                 onChange={(e) => handleChange(e.target.value)}
                 style={{width: width}}

@@ -261,6 +261,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
           inputValue={referencias}
           errorMessage={formSender ? "" : errorReferencias}
           handleChange={handleReferencia}
+          referenciaSender={formSender? true : false}
         />
       </div>
     </div>
