@@ -31,42 +31,36 @@ const Impresion = () => {
 
     useEffect(() => {
 
-
         WebViewer({
             initialDoc: linkPdf,
-            licenseKey: "puspE4HWQp7eLp6fIAGB"
+            licenseKey: "puspE4HWQp7eLp6fIAGB",
         }, viewer.current)
             .then(instance => {
                 const { Core } = instance;
 
-                //instance.UI.disableElements(['moreButton'])
-                /* instance.UI.disableElements([ 'leftPanel', 'leftPanelButton', 'zoomOverlayButton', 'viewControlsButton', 'panToolButton']);
-                instance.UI.setHeaderItems(header => {
-                    const items = header.getItems();
-                    items.reverse();
-                    header.update(items)
-                })  */
+                instance.setPrintQuality(4);
 
-                /* instance.UI.updateElements('printButton', {label: 'Imprimir'} )
-                
-                const newButton = {
+                const printButton = {
                     type: 'actionButton',
                     img: 'icon-header-print-line',
                     title: 'action.print',
-                    onClick: () => {
-                        alert('Printing!');
+                    onClick: async () => {
+                        instance.printInBackground(()=> {
+                            setViewerState(false);
+                        })
                     },
                     dataElement: 'printButton',
-                } */
+                }
 
                 // Add a new button that alerts "Printing" when clicked
-                /*  instance.UI.setHeaderItems((header) => {
-                    const items = header.getItems();
-                    console.log((items));
-                    header.push(newButton)
-                }) */
-                // adding an event listener for when a document is loaded
+                instance.UI.setHeaderItems((header) => {
+                    const headerUpdated = header.getItems().slice(8,9)
+                    header.update(headerUpdated); //erase all items
+                    header.push(printButton)
+                    // console.log(header.getItems());
+                })
 
+                // adding an event listener for when a document is loaded
                 Core.documentViewer.addEventListener('documentLoaded', () => {
                     console.log('document loaded');
                 });
@@ -172,7 +166,7 @@ const Impresion = () => {
     }, [linkPdf, viewerState])
 
     const handleSend = async (email) => {
-        console.log("handle send");
+        console.log("handleSend");
         setSendingState("pending");
         try {
             const response = await SkydropService.resendLabel(order_id, email)

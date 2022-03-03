@@ -7,6 +7,7 @@ export const InfoData = createContext({})
 
 const InfoProvider = ({ children }) => {
 
+    const [fullscreen, setFullScreen] = useState(Document.fullScreenElement);
     const [codigosPostales, setCodigosPostales] = useState({origen: "", destino: ""})
     const [stateAndCity, setStateAndCity] = useState(
         {stateOrigen: "", stateDestino: "", cityOrigen: "", cityDestino: ""})
@@ -28,7 +29,7 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
-    const [linkPdf, setLinkPdf] = useState('');
+    const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
     const [order_id, setOrder_id] = useState('');
 
     const getServices = async (size) => {
@@ -90,8 +91,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues,
-            codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
+            {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues,
+            fullscreen, codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
             WEIGHTS, SERVICE_TYPES
         }}
         >

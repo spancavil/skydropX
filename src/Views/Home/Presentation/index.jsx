@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import ElipseHome1 from '../../../Assets/svg/elipseHome1';
 import styles from './styles.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
@@ -8,17 +8,17 @@ import redPack from '../../../Assets/img/redPack.png';
 import carsa from '../../../Assets/img/carsa.png';
 import Estafeta from '../../../Assets/svg/estafeta';
 import fullScreenIcon from '../../../Assets/img/fullScreenIcon.png';
+import { InfoData } from '../../../Context/InfoProvider';
 
 const Presentation = ({onClick}) => {
 
-    const [fullscreen, setFullscreen] = useState(false)
+    const {fullscreen} = useContext(InfoData);
 
     const requestFull = (e) => {
         e.stopPropagation();
-        const elemento = document.getElementById("root")
+        const elemento = document.body
         if (elemento.requestFullscreen){
             elemento.requestFullscreen();
-            setFullscreen(true);
         }
     }
 

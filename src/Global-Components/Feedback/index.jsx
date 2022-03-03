@@ -39,7 +39,7 @@ const Feedback = ({position}) => {
                     fedEx
 
     console.log(codigosPostales, servicePackage, sizePackage, shippingPackage);
-
+    
     useEffect(()=> {
         !codigosPostales.origen && navigate('/')
     })
