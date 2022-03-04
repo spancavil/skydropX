@@ -14,7 +14,7 @@ const Forbidden = ({handleClose, width, height}) => {
         <div className={styles.articles}>
           <div className={styles.container1}>
             <h3 className={styles.body}>
-            Considera las siguientes restricciones para realizar tu envío
+            Considera las siguientes restricciones para realizar tu envío:
             </h3>
             <ul style={{paddingLeft: "35px", listStyle: "disc"}} className ={styles.body}>
                 <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Mercancías peligrosas</li>
@@ -25,12 +25,13 @@ const Forbidden = ({handleClose, width, height}) => {
                 <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Animales vivos, muertos o disecados</li>
                 <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Dinero o equivalentes</li>
                 <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Joyería fina o metales preciosos</li>
-                <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Anuncia o billetes de lotería extranjera</li>
+                <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Anuncios o billetes de lotería extranjera</li>
+                <li><span style={{fontSize: "42px", position:"relative", bottom: "4px", lineHeight: "10px"}}>&#8228;</span> Cualquier otra mercancía prohibida por la ley</li>
               </ul>
           </div>
 
           <div className={styles.container2}>
-            <h2 className={styles.sub}> Escanéa el siguiente código</h2>
+            <h2 className={styles.sub}> Escanea el siguiente código</h2>
             <h3 className={styles.body}>para revisar el listado completo de los artículos prohibidos</h3>
             <ForbiddenArticles className={styles.logo}/>
           </div>

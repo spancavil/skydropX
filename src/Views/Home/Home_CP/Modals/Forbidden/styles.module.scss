@@ -33,7 +33,6 @@
 
     .container1 {
         width: 550px;
-        height: 355px;
         overflow: hidden;
 
         .body {
@@ -51,6 +50,7 @@
     .container2 {
         width: 392px;
         height: 378px;
+        background-color: $flow-bg;
 
         .sub {
             padding: 24px 34px 0 34px;

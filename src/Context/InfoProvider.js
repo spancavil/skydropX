@@ -29,7 +29,7 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
-    const [linkPdf, setLinkPdf] = useState('');
+    const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
     const [order_id, setOrder_id] = useState('');
 
     const getServices = async (size) => {
@@ -64,8 +64,8 @@ const InfoProvider = ({ children }) => {
         try {
             let response = await SkydropService.getDeliveryTypes();
             setDeliveryTypes([
-                {OTH: response.result["delivery"]},
-                {OXX: response.result["delivery"] + response.result["parcelReception"]}
+                {OXX: response.result["delivery"] + response.result["parcelReception"]},
+                {OTH: response.result["delivery"]}
             ])
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message)

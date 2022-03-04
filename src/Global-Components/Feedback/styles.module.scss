@@ -4,13 +4,12 @@
 .feedbackContainer{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     height: 84px;
     border-radius: 100px;
     background-color: white;
-    max-width: calc(100vw - 140px);
 
     .feedbackComponent{
         padding: 0 20px;

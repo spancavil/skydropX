@@ -30,7 +30,7 @@ import email from '../../Assets/img/mail.png';
 import phone from '../../Assets/img/phone.png';
 import { InfoData } from "../../Context/InfoProvider";
 
-const Card = ({type = "weight", content, onClick, block, setBlock}) => {
+const Card = ({type = "weight", content, onClick, block, setBlock, handleEdit = null}) => {
 
     //Importamos los datos del context para utilizalos en el confirm
     const {senderDataCtx, receiverDataCtx, codigosPostales, stateAndCity, servicePackage: service, sizePackage: size, deliveryTypeSelected, shippingPackage, claseNombre} = useContext(InfoData);
@@ -178,7 +178,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                     alt="delivery-type"
                     />
                 <h2 className={styles.title}>{Object.keys(content)[0].includes("OXX") ? "Sí, entregar en esta tienda": "No, entregar en otro lugar" }</h2>
-                <h3 className={styles.sub}>{Object.keys(content)[0].includes("OXX") ? "El costo de comisión es de $7 MXN por paquete.": "Sin costo de comisión"}</h3>
+                <h3 className={styles.sub}>{Object.keys(content)[0].includes("OXX") ? "El costo de comisión es de $7 MXN por paquete.": "Sin costo de comisión."}</h3>
                 <h3 className={styles.text}>{Object.keys(content)[0].includes("OXX") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal Skydropx o de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3>
                 </div>
             )
@@ -187,7 +187,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                 <div
                 className={styles.senderReceiver}
                 >
-                    <h2 className={styles.titulo}>Datos del remitente</h2>
+                    <h2 className={styles.titulo}>Datos del remitente <span className={styles.edit} onClick={()=>handleEdit("sender")}>Editar</span></h2>
 
                     <div className={styles.senderContainer}>
                         <div className={styles.content}>
@@ -222,7 +222,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                         </div>
                     </div>
 
-                    <h2 className={styles.titulo} style={{paddingTop: '12px'}}>Datos del destinatario</h2>
+                    <h2 className={styles.titulo} style={{paddingTop: '12px'}}>Datos del destinatario <span className={styles.edit} onClick={()=>handleEdit("receiver")}>Editar</span></h2>
 
                     <div className={styles.senderContainer}>
                         <div className={styles.content}>
@@ -257,7 +257,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                     </div>
 
                     <div className={styles.packageContent}>
-                        <h3 className={styles.title}>Contenido del paquete</h3>
+                        <h3 className={styles.title}>Contenido del paquete <span className={styles.edit} onClick={()=>handleEdit("category")}>Editar</span></h3>
                         <h3 className={styles.text}>{claseNombre}</h3>
                     </div>
                 </div>
@@ -276,22 +276,22 @@ const Card = ({type = "weight", content, onClick, block, setBlock}) => {
                     style={{height: '55px', padding: '24px 0 0 24px'}}
                 />
                 <h2 className={styles.titleShipping}>Servicio {serviceSTDoEXP}</h2>
-                <h3 className={styles.textShipping}>Paquete {peso} kg (Max)</h3>
+                <h3 className={styles.textShipping}>Paquete {peso} kg <span style={{color: "#58668F"}}>máx.</span></h3>
 
                 <div className={styles.costContainer}>
                     <h3 className={styles.left}>Precio de envío</h3>
                     <h3 className={styles.right}>${precio} MXN</h3>
                 </div>
-                {oxxo &&
                     <div className={styles.costContainer}>
                         <h3 className={styles.left}>Comisión OXXO <br/>por envío</h3>
                         <h3 className={styles.right}>$13 MXN</h3>
                     </div>
-                }
+                {oxxo &&
                 <div className={styles.costContainer}>
                     <h3 className={styles.left}>Comisión OXXO <br/>por resguardo de paquete</h3>
                     <h3 className={styles.right}>$7 MXN</h3>
                 </div>
+                }
 
                 <div className={styles.line}></div>
 

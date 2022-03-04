@@ -11,10 +11,12 @@ const Support = ({handleClose, width, height}) => {
                     <SupportIcon/>
             </div>
             <h1 className={styles.title}>Soporte al cliente</h1>
-            <h2 className={styles.sub}> Escanéa el siguiente código</h2>
-            <h3 className={styles.body}>Solicita soporte al cliente con nuestro equipo o escríbenos a</h3>
-            <h3 className ={styles.link}>clientes@skydropx.com</h3>
-            <QrCode className={styles.logo}/>
+            <div className={styles.containerGris}>
+                <h2 className={styles.sub}> Escanea el siguiente código</h2>
+                <h3 className={styles.body}>Solicita soporte al cliente con nuestro equipo o escríbenos a</h3>
+                <h3 className ={styles.link}>clientes@skydropx.com</h3>
+                <QrCode className={styles.logo}/>
+            </div>
            
         </ModalBackground>
     )

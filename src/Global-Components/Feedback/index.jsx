@@ -49,7 +49,8 @@ const Feedback = ({position}) => {
         style={{
             position: "absolute",
             left: position.x,
-            top: position.y
+            top: position.y,
+            width: shippingPackage ? 'calc(100vw - 170px)': null
         }}
         >   
             <div className={styles.feedbackComponent}>

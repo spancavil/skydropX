@@ -13,6 +13,7 @@ import CustomDataList from "../../Global-Components/CustomDataList";
 import SkydropService from "../../Services/Skydrop.service";
 import SwalAlert from "../../Utils/sweetAlert";
 import Terms from "./Modals/Terms";
+import infoFilled from '../../Assets/img/infoFilledTooltip.png';
 
 const DefineParams = () => {
 
@@ -34,6 +35,7 @@ const DefineParams = () => {
 
     const [category, setCategory] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
+    const [tooltip, setTooltip] = useState(false);
     // const [categorySelected, setCategorySelected] = useState("");
 
     const [subcategory, setSubcategory] = useState(false);
@@ -193,7 +195,25 @@ const DefineParams = () => {
         setDelivery(false);
         setConfirmData(true);
     }
-
+    const handleEditForm = (type) => {
+        console.log(type);
+        switch (type) {
+            case "sender":
+                setConfirmData(false)
+                setFormSender(true);
+                break;
+            case "receiver":
+                setConfirmData(false);
+                setFormReceiver(true);
+                break;
+            case "category":
+                setConfirmData(false);
+                setCategory(true);
+                break;
+            default:
+                break;
+        }
+    }
     const handleBack = () => {
         if (weight && !service && !shipping) {
             setSizePackage("")
@@ -276,7 +296,7 @@ const DefineParams = () => {
     }
 
     const handleCloseTerms = () => {
-        setTerms(false); 
+        setTerms(false);
         setPolicies(false);
     }
 
@@ -312,7 +332,7 @@ const DefineParams = () => {
                 }
                 {shipping &&
                     <>
-                        <h1 className={styles.title}>¿Qué paquetería elijes para realizar el envío?</h1>
+                        <h1 className={styles.title}>¿Qué paquetería eliges para realizar el envío?</h1>
                         <div className={styles.cardContainerShipping}>
                             {shippingsOn.map(shipping => {
                                 return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock={setBlock} />
@@ -341,8 +361,22 @@ const DefineParams = () => {
 
                 {(category || subcategory || clase) &&
                     <div className={styles.categoriesContainer}>
-                        <h2 className={styles.titleCategory}>Qué tipo de producto vas a enviar?</h2>
-                        <h2 className={styles.subtitleCategory}>Contenido del paquete</h2>
+                        <h2 className={styles.titleCategory}>¿Qué tipo de producto vas a enviar?</h2>
+                        <div className={styles.tooltipContainer}>
+                            <h2 className={styles.subtitleCategory}>Contenido del paquete</h2>
+                            <img
+                                src={infoFilled}
+                                alt="tooltip"
+                                onClick={()=> setTooltip(!tooltip)}
+                            />
+                            <div className={tooltip ? styles.tooltipVisible : styles.tooltipHidden}
+                            onClick = {()=> setTooltip(false)}
+                            >
+                                <h4 className={styles.tiptext}>El Sistema de Administración Tributaria (SAT) solicita el complemento legal Carta Porte para realizar envíos.
+                                    Se trata de una declaración jurada sobre lo que contiene el paquete y es una condición obligatoria.
+                                    Conoce más sobre este requisito.</h4>
+                            </div>
+                        </div>
                         <div className={styles.selectContainer}>
                             <CustomDataList
                                 data={categoryData}
@@ -363,7 +397,7 @@ const DefineParams = () => {
                                 type="Producto*"
                             />
                         </div>
-                        <h2 className={styles.terms}>Al continuar, confirmo que conozco y acepto los <span onClick={() => setTerms (true) }>términos</span> y <span onClick={()=> setPolicies(true)}>políticas</span>.</h2>
+                        <h2 className={styles.terms}>Al continuar, confirmo que conozco y acepto los <span onClick={() => setTerms(true)}>términos</span> y <span onClick={() => setPolicies(true)}>políticas</span>.</h2>
                     </div>
                 }
 
@@ -385,6 +419,7 @@ const DefineParams = () => {
                         <div className={styles.confirmDataContainer}>
                             <Card
                                 type="resumeSenderReceiver"
+                                handleEdit={(type) => handleEditForm(type)}
                             />
                             <Card
                                 type="resumeShipping"
@@ -400,7 +435,7 @@ const DefineParams = () => {
                     {(category || subcategory || clase) && <Button2 text="Continuar" width='132px' canContinue={classCodeCtx !== ""} handleContinue={handleContinueCategory} />}
                     {confirmData && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
-                {(terms || policies) && <Terms handleClose={()=> handleCloseTerms()} width="1000px" height={'656px'} type ={terms ? "terms" : "policies"}/>}
+                {(terms || policies) && <Terms handleClose={() => handleCloseTerms()} width="1000px" height={'656px'} type={terms ? "terms" : "policies"} />}
             </div>
         </FlowBackground>
     )

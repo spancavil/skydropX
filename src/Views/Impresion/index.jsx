@@ -14,13 +14,18 @@ import Button2 from '../../Global-Components/Button2';
 import { useNavigate } from 'react-router-dom';
 
 const Impresion = () => {
-    const { linkPdf, order_id, resetValues} = useContext(InfoData);
+    const { linkPdf, order_id, resetValues, deliveryTypeSelected } = useContext(InfoData);
 
     const [viewerState, setViewerState] = useState(true);
     const [sendLabel, setSendLabel] = useState(false);
     const [sendingState, setSendingState] = useState("");
 
     const viewer = useRef(null);
+    let oxxo;
+    if (Object.keys(deliveryTypeSelected).length !== 0) {
+        oxxo = Object.keys(deliveryTypeSelected)[0] === "OXX" ? true : false
+    }
+
 
     const navigate = useNavigate();
 
@@ -45,16 +50,14 @@ const Impresion = () => {
                     img: 'icon-header-print-line',
                     title: 'action.print',
                     onClick: async () => {
-                        instance.printInBackground(()=> {
-                            setViewerState(false);
-                        })
+                        instance.printInBackground()
                     },
                     dataElement: 'printButton',
                 }
 
                 // Add a new button that alerts "Printing" when clicked
                 instance.UI.setHeaderItems((header) => {
-                    const headerUpdated = header.getItems().slice(8,9)
+                    const headerUpdated = header.getItems().slice(8, 9)
                     header.update(headerUpdated); //erase all items
                     header.push(printButton)
                     // console.log(header.getItems());
@@ -209,8 +212,8 @@ const Impresion = () => {
                             alt="envio-exitoso"
                         />
                         <div className={styles.textContainer}>
-                            <h2 className={styles.title}>¡Tarea cumplida!</h2>
-                            <h2 className={styles.subtitle}>Creamos tu envío con éxito <br />Tu guía y ticket ya están impresos.</h2>
+                            <h2 className={styles.title}>Creamos tu envío con éxito</h2>
+                            <h2 className={styles.subtitle}>Tu guía y ticket ya están impresos.</h2>
                             <Button
                                 text="Enviar guía por correo electrónico"
                                 width={'381px'}
@@ -221,12 +224,12 @@ const Impresion = () => {
                         </div>
                     </div>
                     <div className={styles.acercate}>
-                        <h2 className={styles.acercateTitle}>Ahora acércate a la caja y paga el envío</h2>
+                        <h2 className={styles.acercateTitle}>{oxxo ? "Ahora acércate a la caja y paga el envío" : "Ahora, paga el envío en la caja y entrega el paquete en una sucursal"}</h2>
                         <div className={styles.textInfo}>
                             <InfoIcon />
                             <h3 className={styles.acercateSub2}>Recuerda que el envío será válido cuando realices el pago.</h3>
                         </div>
-                        <h3 className={styles.acercateSub}>¿No se imprimió la guía? Da click aquí para <span onClick={()=> setViewerState(true)}>reimprimir</span></h3>
+                        <h3 className={styles.acercateSub}>¿No se imprimió la guía? Da <span onClick={() => setViewerState(true)}>clic aquí para reimprimir</span></h3>
                     </div>
                     <div className={styles.duda}>
                         <h3 className={styles.dudaTitle}>Si tienes alguna duda o consulta, escríbenos a <span>clientes@skydropx.com</span></h3>

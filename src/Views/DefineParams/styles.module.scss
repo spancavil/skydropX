@@ -1,12 +1,12 @@
-@import '../../Styles/Colors.scss';
-@import '../../Styles/Fonts.scss';
+@import "../../Styles/Colors.scss";
+@import "../../Styles/Fonts.scss";
 
 .container {
     width: 100vw;
     height: calc(100vh - 60px);
     background-color: $flow-bg;
 
-    .title{
+    .title {
         position: absolute;
         top: 210px;
         width: 100vw;
@@ -17,7 +17,7 @@
         color: $texto-primary;
     }
 
-    .cardContainer{
+    .cardContainer {
         position: absolute;
         top: 295px;
         width: 100vw;
@@ -29,7 +29,7 @@
         overflow: visible;
     }
 
-    .subContainer{
+    .subContainer {
         position: absolute;
         bottom: 150px;
         width: 100vw;
@@ -38,16 +38,16 @@
         flex-direction: row;
         align-items: center;
         gap: 11px;
-        
-        .subtitle{
+
+        .subtitle {
             font-family: $font-inter400;
             font-size: 20px;
             line-height: 32px;
             color: $texto-primary;
         }
     }
-    
-    .buttonContainer{
+
+    .buttonContainer {
         position: absolute;
         right: 135px;
         bottom: 37px;
@@ -57,8 +57,8 @@
         align-items: center;
         gap: 24px;
     }
-    
-    .cardContainerShipping{
+
+    .cardContainerShipping {
         position: absolute;
         padding: 0 90px;
         top: 295px;
@@ -71,7 +71,7 @@
         gap: 32px;
         overflow: visible;
     }
-    .titleConfirm{
+    .titleConfirm {
         position: absolute;
         top: 84px;
         left: 40px;
@@ -82,7 +82,7 @@
         color: $texto-primary;
     }
 
-    .subtitleConfirm{
+    .subtitleConfirm {
         position: absolute;
         top: 145px;
         left: 40px;
@@ -93,7 +93,7 @@
         color: $texto-primary;
     }
 
-    .confirmDataContainer{
+    .confirmDataContainer {
         position: absolute;
         left: 40px;
         top: 200px;
@@ -102,7 +102,7 @@
         overflow: visible;
         gap: 10px;
     }
-    .categoriesContainer{
+    .categoriesContainer {
         position: absolute;
         left: 70px;
         top: 208px;
@@ -112,7 +112,7 @@
         padding: 24px;
         overflow: visible;
 
-        .titleCategory{
+        .titleCategory {
             width: 100%;
             text-align: left;
             font-family: $font-inter500;
@@ -121,14 +121,39 @@
             line-height: 32px;
             padding-bottom: 20px;
         }
-        .subtitleCategory{
+
+        .tooltipContainer {
             width: 100%;
-            text-align: left;
-            font-family: $font-inter400;
-            color: $texto-primary;
-            font-size: 24px;
-            line-height: 32px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
             padding-bottom: 20px;
+            .subtitleCategory {
+                font-family: $font-inter400;
+                color: $texto-primary;
+                font-size: 24px;
+                line-height: 32px;
+            }
+            .tooltipVisible {
+                position: absolute;
+                z-index: 1;
+                left: 33%;
+                width: 751px;
+                background-color: #4F5C81;
+                border-radius: 6px;
+                padding: 6px 10px;
+                .tiptext {
+                    font-family: $font-inter300;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #fff;
+                }
+            }
+            .tooltipHidden {
+                display: none;
+            }
         }
         .selectContainer {
             width: 100%;
@@ -136,7 +161,7 @@
             flex-direction: row;
             gap: 24px;
         }
-        .terms{
+        .terms {
             padding-top: 15px;
             width: 100%;
             font-family: $font-inter300;
@@ -144,7 +169,7 @@
             line-height: 27px;
             color: $texto-primary;
             text-align: left;
-            span{
+            span {
                 color: blue;
             }
         }

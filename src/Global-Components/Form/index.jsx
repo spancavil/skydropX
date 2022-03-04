@@ -199,7 +199,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
       >
         <Input
           width={'300px'}
-          inputName="Nombre Completo"
+          inputName="Nombre completo"
           inputValue={nombreCompleto}
           errorMessage={errorNombreCompleto}
           handleChange={handleNombreCompleto}
@@ -234,7 +234,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
         />
         <InputDisabled
           width={'226px'}
-          inputName="Código Postal"
+          inputName="Código postal"
           inputValue={codigoPostal}
         />
       </div>
@@ -245,7 +245,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
         }}
       >
         <InputDisabled
-          width={'400px'}
+          width={'305px'}
           inputName="Ciudad y Estado"
           inputValue={`${formSender ? stateAndCity.cityOrigen : stateAndCity.cityDestino}, ${ formSender ? stateAndCity.stateOrigen : stateAndCity.stateDestino}`}
         />
@@ -257,6 +257,7 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
           handleChange={handleColonia}
         />
         <Input
+          width={'300px'}
           inputName="Referencias"
           inputValue={referencias}
           errorMessage={formSender ? "" : errorReferencias}

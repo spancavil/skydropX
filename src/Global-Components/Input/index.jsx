@@ -5,7 +5,7 @@ const Input = ({ width, inputName, inputValue, errorMessage, handleChange, refer
 
     return (
         <div className={styles.inputFormat}>
-            <input type="text" placeholder={`${inputName}${referenciaSender ? '': '*'}`} name={inputName} id={inputName} value={inputValue}
+            <input type="text" placeholder={`${inputName}${referenciaSender ? ' (opcional)': '*'}`} name={inputName} id={inputName} value={inputValue}
                 className={errorMessage !== "" ? styles.inputError : null}
                 onChange={(e) => handleChange(e.target.value)}
                 style={{width: width}}

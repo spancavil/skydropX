@@ -144,7 +144,6 @@
     box-shadow: 0px 6px 6px -3px rgba(152, 167, 204, 0.2), 0px 10px 14px 1px rgba(152, 167, 204, 0.14),
         0px 4px 18px 3px rgba(152, 167, 204, 0.12);
     border-radius: 6px;
-    cursor: pointer;
 
     .titulo {
         font-family: $font-inter500;
@@ -154,6 +153,13 @@
         padding-left: 24px;
         // padding-top: 24px;
         padding-bottom: 8px;
+        .edit{
+            color: #2196F3;
+            font-family: $font-inter500;
+            font-size: 18px;
+            line-height: 29px;
+            cursor: pointer;
+        }
     }
     .senderContainer {
         padding: 0px 24px;
@@ -190,6 +196,13 @@
             color: $texto-primary;
             padding-bottom: 8px;
             text-align: left;
+            .edit{
+                color: #2196F3;
+                font-family: $font-inter500;
+                font-size: 16px;
+                line-height: 29px;
+                cursor: pointer;
+            }
         }
         .text {
             font-family: $font-inter300;

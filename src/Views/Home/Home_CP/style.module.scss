@@ -42,7 +42,13 @@
             font-family: $font-inter500;
             font-size: 30px;
             line-height: 40.5px;
-            color: $texto-primary
+            color: $texto-primary;
+            .subtext3{
+                font-family: $font-inter700;
+                font-size: 30px;
+                line-height: 40.5px;
+                color: $texto-primary
+            }
         }
         .text4{
             font-family: $font-inter600;
