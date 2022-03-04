@@ -1,5 +1,5 @@
 version: v1.0
-name: sucursales_service
+name: sucursales_webapp
 agent:
   machine:
     type: e1-standard-2
@@ -12,19 +12,17 @@ blocks:
         - name: Install dependencies
           commands:
             - checkout
-	    - echo "Install dependencies"
-  - name: Tests
+            - npm install
+            - cache store
+  - name: Build static files 
     task:
-      prologue:
-        commands:
-          - checkout
-	  - echo "Please add some test"
       jobs:
-        - name: Run tests
+        - name: Build static files
           commands:
-            - echo "npm test"
-      secrets:
-        - name: sucursales-webapp
+            - checkout
+            - cache restore
+            - npm run build:develop
+            - cache store sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH build
 promotions:
   - name: AWS deploy
     pipeline_file: aws-deployment.yml
