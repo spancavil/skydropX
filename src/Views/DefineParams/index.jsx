@@ -372,9 +372,8 @@ const DefineParams = () => {
                             <div className={tooltip ? styles.tooltipVisible : styles.tooltipHidden}
                             onClick = {()=> setTooltip(false)}
                             >
-                                <h4 className={styles.tiptext}>El Sistema de Administración Tributaria (SAT) solicita el complemento legal Carta Porte para realizar envíos.
-                                    Se trata de una declaración jurada sobre lo que contiene el paquete y es una condición obligatoria.
-                                    Conoce más sobre este requisito.</h4>
+                                <h4 className={styles.tiptext}>El Sistema de Administración Tributaria (SAT) solicita el complemento legal Carta Porte para realizar envíos. 
+Se trata de una declaración jurada sobre lo que contiene el paquete y es una condición obligatoria.</h4>
                             </div>
                         </div>
                         <div className={styles.selectContainer}>
