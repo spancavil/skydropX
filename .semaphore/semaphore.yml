@@ -21,7 +21,7 @@ blocks:
             - checkout
             - cache restore
             - 'npm run build:develop'
-            - cache store sucursales-webapp-static_$SEMAPHORE_JOB_ID
+            - cache store sucursales-webapp-static_$SEMAPHORE_WORKFLOW_NUMBER
 promotions:
   - name: AWS deploy
     pipeline_file: aws-deployment.yml
