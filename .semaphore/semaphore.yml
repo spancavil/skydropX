@@ -4,7 +4,6 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-
 blocks:
   - name: Install dependencies
     task:
@@ -14,15 +13,15 @@ blocks:
             - checkout
             - npm install
             - cache store
-  - name: Build static files 
+  - name: Build static files
     task:
       jobs:
         - name: Build static files
           commands:
             - checkout
             - cache restore
-            - npm run build:develop
-            - cache store sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH build
+            - 'npm run build:develop'
+            - cache store sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH_SEMAPHORE_JOB_ID
 promotions:
   - name: AWS deploy
     pipeline_file: aws-deployment.yml
