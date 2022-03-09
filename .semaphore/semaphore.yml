@@ -14,11 +14,11 @@ blocks:
             - npm install
             - cache store
   - name: Build static files
+    run:
+      when: "branch = 'pepito'"
     task:
       jobs:
         - name: Build static files
-          run:
-            when: "branch = 'pepito'"
           commands:
             - checkout
             - cache restore
