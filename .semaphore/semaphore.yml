@@ -17,6 +17,8 @@ blocks:
     task:
       jobs:
         - name: Build static files
+          run:
+            when: "branch = 'pepito'"
           commands:
             - checkout
             - cache restore
