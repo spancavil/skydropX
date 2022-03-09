@@ -31,7 +31,12 @@ const OrigenDestino = () => {
                     setErrorOrigen("")
                     setResponseOrigen(responseOrigen)
                 } catch (error) {
-                    setErrorOrigen("Código postal no válido")
+                    if (error.response?.status === 400){
+                        if (error.response.request.responseURL.includes(origen)) setErrorOrigen("Código postal no válido");
+                    }
+                    else{
+                        SwalAlert("Error de comunicación con el servidor: " + error.message)
+                    }
                 }
             }
         } 
@@ -54,7 +59,12 @@ const OrigenDestino = () => {
                     setErrorDestino("")
                     setResponseDestino(responseDestino)
                 } catch (error) {
-                    setErrorDestino("Código postal no válido")
+                    if (error.response?.status === 400){
+                        if (error.response.request.responseURL.includes(destino)) setErrorDestino("Código postal no válido");
+                    }
+                    else{
+                        SwalAlert("Error de comunicación con el servidor: " + error.message)
+                    }                
                 }
             }
         }
