@@ -32,6 +32,8 @@ const InfoProvider = ({ children }) => {
     const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
     const [order_id, setOrder_id] = useState('');
 
+    const [CPView, setCPView] = useState(false)
+
     const getServices = async (size) => {
         try {
             const response = await SkydropService.getPricingService(size)
@@ -86,14 +88,15 @@ const InfoProvider = ({ children }) => {
         setClaseNombre("");
         setDeliveryTypeSelected({})
         setOrder_id("");
+        setCPView(false);
     }
 
     return (
         <InfoData.Provider 
         value = {
-            {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues,
+            {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues, setCPView,
             fullscreen, codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
-            WEIGHTS, SERVICE_TYPES
+            WEIGHTS, SERVICE_TYPES, CPView
         }}
         >
             {children}

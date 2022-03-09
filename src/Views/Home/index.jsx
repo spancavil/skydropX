@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { InfoData } from '../../Context/InfoProvider';
 import HomeCP from './Home_CP';
 import Presentation from './Presentation';
 
 const Home = () => {
+
+    //En caso que se haya pulsado Regresar desde define-params
+    const { CPView } = useContext(InfoData);
+
     const [cp, setCp] = useState(false)
     const [launcher, setLauncher] = useState(null)
 
@@ -25,12 +30,19 @@ const Home = () => {
         }
     }, [launcher, setLauncher]);
 
-    return (
-        <div>
-            {!cp && <Presentation onClick={() => setCp(true)} />}
-            {cp && <HomeCP />}
-        </div>
-    );
+    if (CPView) {
+        return (
+            <HomeCP />
+        )
+    }
+    else {
+        return (
+            <div>
+                {!cp && <Presentation onClick={() => setCp(true)} />}
+                {cp && <HomeCP />}
+            </div>
+        )
+    }
 };
 
 export default Home;

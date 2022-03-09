@@ -36,44 +36,46 @@ const Impresion = () => {
 
     useEffect(() => {
 
-        WebViewer({
-            initialDoc: linkPdf,
-            licenseKey: "puspE4HWQp7eLp6fIAGB",
-        }, viewer.current)
-            .then(instance => {
-                const { Core } = instance;
-
-                instance.setPrintQuality(4);
-
-                const printButton = {
-                    type: 'actionButton',
-                    img: 'icon-header-print-line',
-                    title: 'action.print',
-                    onClick: async () => {
-                        instance.printInBackground()
-                    },
-                    dataElement: 'printButton',
-                }
-
-                // Add a new button that alerts "Printing" when clicked
-                instance.UI.setHeaderItems((header) => {
-                    const headerUpdated = header.getItems().slice(8, 9)
-                    header.update(headerUpdated); //erase all items
-                    header.push(printButton)
-                    // console.log(header.getItems());
-                })
-
-                // adding an event listener for when a document is loaded
-                Core.documentViewer.addEventListener('documentLoaded', () => {
-                    console.log('document loaded');
+        if (viewerState) {
+            WebViewer({
+                initialDoc: linkPdf,
+                licenseKey: "puspE4HWQp7eLp6fIAGB",
+            }, viewer.current)
+                .then(instance => {
+                    const { Core } = instance;
+    
+                    instance.setPrintQuality(4);
+    
+                    const printButton = {
+                        type: 'actionButton',
+                        img: 'icon-header-print-line',
+                        title: 'action.print',
+                        onClick: async () => {
+                            instance.printInBackground()
+                        },
+                        dataElement: 'printButton',
+                    }
+    
+                    // Add a new button that alerts "Printing" when clicked
+                    instance.UI.setHeaderItems((header) => {
+                        const headerUpdated = header.getItems().slice(8, 9)
+                        header.update(headerUpdated); //erase all items
+                        header.push(printButton)
+                        // console.log(header.getItems());
+                    })
+    
+                    // adding an event listener for when a document is loaded
+                    Core.documentViewer.addEventListener('documentLoaded', () => {
+                        console.log('document loaded');
+                    });
+    
+                    // adding an event listener for when the page number has changed
+                    Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
+                        console.log(`Page number is: ${pageNumber}`);
+                    });
+    
                 });
-
-                // adding an event listener for when the page number has changed
-                Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
-                    console.log(`Page number is: ${pageNumber}`);
-                });
-
-            });
+        }
 
         //THIS WORKS ON BROWSERS
         /* let objFra = document.getElementById('pdfDocument');

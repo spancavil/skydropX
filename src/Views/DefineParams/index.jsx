@@ -60,7 +60,7 @@ const DefineParams = () => {
         WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, sizePackage, servicePackage, shippingPackage,
         setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx,
         setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes,
-        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id,
+        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, setCPView
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -216,7 +216,8 @@ const DefineParams = () => {
     }
     const handleBack = () => {
         if (weight && !service && !shipping) {
-            setSizePackage("")
+            setSizePackage("");
+            setCPView(true);
             navigate("/");
         }
         if (!weight && service && !shipping) {

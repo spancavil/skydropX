@@ -15,53 +15,68 @@ const OrigenDestino = () => {
     const [errorOrigen, setErrorOrigen] = useState("");
     const [destino, setDestino] = useState("");
     const [errorDestino, setErrorDestino] = useState("");
+    const [responseOrigen, setResponseOrigen] = useState();
+    const [responseDestino, setResponseDestino] = useState()
 
     const {setCodigosPostales, setStateAndCity} = useContext(InfoData);
 
-    const handleOrigen = (value) => {
+    const handleOrigen = async (value) => {
         let valorRecortado = origen;
         if (value.length <= 5){
             valorRecortado = value.replace(/[^0-9]/g, '')
             setOrigen(valorRecortado)
+            if (valorRecortado.length === 5){
+                try {
+                    const responseOrigen = await SkydropService.getCityByPostalCode(valorRecortado)
+                    setErrorOrigen("")
+                    setResponseOrigen(responseOrigen)
+                } catch (error) {
+                    setErrorOrigen("Código postal no válido")
+                }
+            }
         } 
         if (value.length < 5){
             setErrorOrigen("Debe tener 5 dígitos")
         } 
         else if (parseInt(value) === 0){
             setErrorOrigen("Código postal no válido")
-        } else {
-            setErrorOrigen("")
         }
     }
     
-    const handleDestino = (value) => {
+    const handleDestino = async (value) => {
         let valorRecortado = destino;
         if (value.length <= 5){
             valorRecortado = value.replace(/[^0-9]/g, '')
             setDestino(valorRecortado)
+            if (valorRecortado.length === 5){
+                try {
+                    const responseDestino = await SkydropService.getCityByPostalCode(valorRecortado)
+                    setErrorDestino("")
+                    setResponseDestino(responseDestino)
+                } catch (error) {
+                    setErrorDestino("Código postal no válido")
+                }
+            }
         }
         if (valorRecortado.length < 5){
             setErrorDestino("Debe tener 5 dígitos")
         } 
         else if (parseInt(valorRecortado) === 0){
             setErrorDestino("Código postal no válido")
-        } else {
-            
-            setErrorDestino("")
         }
     }
     
     const handleContinue = async () => {
 
         try {
-            const responseOrigen = await SkydropService.getCityByPostalCode(origen)
+            /* const responseOrigen = await SkydropService.getCityByPostalCode(origen)
             const responseDestino = await SkydropService.getCityByPostalCode(destino)
             console.log(responseOrigen);
             if (responseDestino.error !== undefined){
                 setErrorDestino("Código postal no válido")
             } else if (responseOrigen.error !== undefined) {
                 setErrorOrigen("Código postal no válido")
-            } else {
+            } else { */
                 //console.log(responseOrigen, responseDestino);
                 const responseOrigenSplit = responseOrigen.result.city.split(', ')
                 const responseDestinoSplit = responseDestino.result.city.split(', ')
@@ -77,7 +92,7 @@ const OrigenDestino = () => {
                     cityDestino: responseDestinoSplit[1] || ""
                 })
                 navigate('/definir-parametros');
-            }
+            // }
             
         } catch (error) {
             if (error.response?.status === 400){
