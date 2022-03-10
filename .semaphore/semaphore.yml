@@ -15,14 +15,14 @@ blocks:
             - cache store
   - name: Build static files
     run:
-      when: "branch = 'pepito'"
+      when: "branch = 'develop' OR branch = 'master' OR branch = 'staging'"
     task:
       jobs:
         - name: Build static files
           commands:
             - checkout
             - cache restore
-            - 'npm run build:develop'
+            - '[[ if branch == 'develop']]; then npm run build:develop; fi'
             - cache delete sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH
             - cache store sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH build
 promotions:
