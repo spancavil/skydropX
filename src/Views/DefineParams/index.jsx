@@ -443,7 +443,7 @@ const DefineParams = () => {
                         </div>
                     </>
                     :
-                    confirmLoading && <Loader text={"Estamos cargando su guía..."} />
+                    confirmLoading && <Loader text={"Estamos cargando tu guía..."} />
                 }
 
                 <div className={styles.buttonContainer}>
