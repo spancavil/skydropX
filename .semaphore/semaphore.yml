@@ -15,14 +15,14 @@ blocks:
             - cache store
   - name: Build static files
     run:
-      when: "branch = 'develop' OR branch = 'master' OR branch = 'staging' OR branch = 'DVPS-164-testing-build-by-environment' "
+      when: "branch = 'develop' OR branch = 'master' OR branch = 'staging' "
     task:
       jobs:
         - name: Build static files
           commands:
             - checkout
             - cache restore
-            - npm run build:branch
+            - npm run build:$SEMAPHORE_GIT_BRANCH
             - cache delete sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH
             - cache store sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH build
 promotions:
