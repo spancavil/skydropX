@@ -301,7 +301,6 @@ const DefineParams = () => {
                 }
             }
             catch (error) {
-                SwalAlert("Error de comunicación con el servidor: " + error.message);
                 navigate('/error-pdf')
                 // navigate("/");
             }
