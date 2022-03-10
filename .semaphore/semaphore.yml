@@ -15,7 +15,7 @@ blocks:
             - cache store
   - name: Build static files
     run:
-      when: "branch = 'develop' OR branch = 'master' OR branch = 'staging'"
+      when: "branch = 'develop' OR branch = 'master' OR branch = 'staging' OR branch = 'DVPS-164-testing-build-by-environment' "
     task:
       jobs:
         - name: Build static files
