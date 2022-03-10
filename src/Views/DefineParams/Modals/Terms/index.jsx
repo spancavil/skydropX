@@ -23,7 +23,7 @@ const Terms = ({handleClose, width, height, type}) => {
       <div className={styles.iconContainer}>
               <PrivacyIcon/>
       </div>
-      <h1 className={styles.title}>{type === "terms" ? "Términos y condiciones" : "Políticas"} de la plataforma digital y sitio web skydropx.com"</h1>
+      <h1 className={styles.title}>{type === "terms" ? "Términos y condiciones" : "Políticas"} de la plataforma digital y sitio web skydropx.com</h1>
       <div className={styles.privacy}>
         <p id= "contenidoTerms" className={styles.textPrivacy} ></p>
       </div>

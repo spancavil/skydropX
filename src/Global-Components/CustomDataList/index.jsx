@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import flecha from '../../Assets/img/flechaSelect.png';
 import styles from './styles.module.scss';
 
-const CustomDataList = ({ data = [], onSelect, disabled = false, type }) => {
+const CustomDataList = ({ data = [], onSelect, disabled = false, type, selected = ""}) => {
 
     const [input, setInput] = useState("");
     const [hideList, setHideList] = useState(true);
     const [focus, setFocus] = useState(!disabled);
     const [dataArranged, setDataArranged] = useState([]);
-    const [hideArrow, setHideArrow] = useState(false);
 
     const handleFocus = () => {
         setHideList(false)
@@ -25,16 +24,25 @@ const CustomDataList = ({ data = [], onSelect, disabled = false, type }) => {
         onSelect(item);
         setFocus(false);
         setHideList(true);
-        setHideArrow(true);
     }
 
     useEffect(()=> {
-        setDataArranged(data)
+        console.log(data);
+        const dataSorted = data.sort((a,b) => {
+            if (a.attributes.name > b.attributes.name) return 1
+            if (a.attributes.name < b.attributes.name) return -1
+            return 0
+        })
+        setDataArranged(dataSorted)
     }, [data, setDataArranged])
 
     useEffect(()=> {
         setFocus(!disabled)
     }, [disabled])
+
+    useEffect(()=> {
+        setInput(selected)
+    }, [selected] )
 
     console.log(`${type}: ${disabled}`);
     
@@ -51,7 +59,7 @@ const CustomDataList = ({ data = [], onSelect, disabled = false, type }) => {
                     disabled={disabled}
                     placeholder={type}
                 />
-                {!hideArrow && 
+                {!input && 
                     <img
                         src={flecha}
                         alt="arrow"

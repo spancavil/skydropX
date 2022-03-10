@@ -12,24 +12,19 @@ const ModalBackground = ({ children, handleClose, width, height }) => {
             }}
             >
                 {children}
-            </div>
-            <div
-            style={
-            width === "452px" ?     
-            {
-                position: "relative",
-                bottom: '90px',
-                left: "120px", 
-            }
-            :
-            {
-                position: "absolute",
-                bottom: '90px',
-                right: "200px",
-                zIndex: '10' 
-            }
-            }>
-                <Button text="Cerrar" color="filled" onClick={handleClose} width='130px'/>
+                
+                <div
+                style={
+                    {
+                        position: "absolute",
+                        bottom: '30px',
+                        right: "50px",
+                        zIndex: '10' 
+                    }
+                }>
+                    <Button text="Cerrar" color="filled" onClick={handleClose} width='130px'/>
+                </div>
+
             </div>
         </div>
     )

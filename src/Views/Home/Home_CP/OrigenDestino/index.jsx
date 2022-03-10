@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../../../Assets/svg/arrow';
 import { InfoData } from '../../../../Context/InfoProvider';
@@ -7,7 +7,7 @@ import SwalAlert from '../../../../Utils/sweetAlert';
 import styles from './styles.module.scss';
 
 
-const OrigenDestino = () => {
+const OrigenDestino = ({codigosPostales}) => {
 
     let navigate = useNavigate()
 
@@ -15,8 +15,6 @@ const OrigenDestino = () => {
     const [errorOrigen, setErrorOrigen] = useState("");
     const [destino, setDestino] = useState("");
     const [errorDestino, setErrorDestino] = useState("");
-    const [responseOrigen, setResponseOrigen] = useState();
-    const [responseDestino, setResponseDestino] = useState()
 
     const {setCodigosPostales, setStateAndCity} = useContext(InfoData);
 
@@ -27,9 +25,8 @@ const OrigenDestino = () => {
             setOrigen(valorRecortado)
             if (valorRecortado.length === 5){
                 try {
-                    const responseOrigen = await SkydropService.getCityByPostalCode(valorRecortado)
+                    await SkydropService.getCityByPostalCode(valorRecortado)
                     setErrorOrigen("")
-                    setResponseOrigen(responseOrigen)
                 } catch (error) {
                     if (error.response?.status === 400){
                         if (error.response.request.responseURL.includes(origen)) setErrorOrigen("Código postal no válido");
@@ -55,9 +52,8 @@ const OrigenDestino = () => {
             setDestino(valorRecortado)
             if (valorRecortado.length === 5){
                 try {
-                    const responseDestino = await SkydropService.getCityByPostalCode(valorRecortado)
+                    await SkydropService.getCityByPostalCode(valorRecortado)
                     setErrorDestino("")
-                    setResponseDestino(responseDestino)
                 } catch (error) {
                     if (error.response?.status === 400){
                         if (error.response.request.responseURL.includes(destino)) setErrorDestino("Código postal no válido");
@@ -79,14 +75,15 @@ const OrigenDestino = () => {
     const handleContinue = async () => {
 
         try {
-            /* const responseOrigen = await SkydropService.getCityByPostalCode(origen)
+        
+            const responseOrigen = await SkydropService.getCityByPostalCode(origen)
             const responseDestino = await SkydropService.getCityByPostalCode(destino)
             console.log(responseOrigen);
             if (responseDestino.error !== undefined){
                 setErrorDestino("Código postal no válido")
             } else if (responseOrigen.error !== undefined) {
                 setErrorOrigen("Código postal no válido")
-            } else { */
+            } else {
                 //console.log(responseOrigen, responseDestino);
                 const responseOrigenSplit = responseOrigen.result.city.split(', ')
                 const responseDestinoSplit = responseDestino.result.city.split(', ')
@@ -102,7 +99,7 @@ const OrigenDestino = () => {
                     cityDestino: responseDestinoSplit[1] || ""
                 })
                 navigate('/definir-parametros');
-            // }
+            }
             
         } catch (error) {
             if (error.response?.status === 400){
@@ -120,6 +117,15 @@ const OrigenDestino = () => {
         // })
         // navigate('/definir-parametros');
     }
+
+    useEffect(()=> {
+
+        if (codigosPostales.origen !== "" && codigosPostales.destino !== ""){
+            setOrigen(codigosPostales.origen);
+            setDestino(codigosPostales.destino);
+        }
+
+    }, [codigosPostales])
 
     return (
         <div className={styles.container}>

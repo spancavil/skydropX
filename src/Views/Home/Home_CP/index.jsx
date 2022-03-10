@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './style.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
 import Footer from './Footer';
@@ -7,12 +7,17 @@ import OrigenDestino from './OrigenDestino';
 import Support from './Modals/Support';
 import Privacy from './Modals/Privacy';
 import Forbidden from './Modals/Forbidden';
+import {InfoData} from '../../../Context/InfoProvider';
 
 const HomeCP = () => {
 
     const [support, setSupport] = useState(false)
     const [forbidden, setForbidden] = useState(false)
     const [privacy, setPrivacy] = useState(false)
+
+    const {codigosPostales} = useContext(InfoData);
+
+    console.log(codigosPostales);
 
     return (
         <div className={styles.background}>
@@ -33,7 +38,7 @@ const HomeCP = () => {
                 <p className={styles.text3}>
                     Ingresa el <span className={styles.subtext3}>código postal</span> de origen y destino de tu envío.
                 </p>
-                <OrigenDestino />
+                <OrigenDestino codigosPostales={codigosPostales}/>
                 <Footer
                     onSupport={() => setSupport(true)}
                     onForbidden={() => setForbidden(true)}

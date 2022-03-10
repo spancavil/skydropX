@@ -14,6 +14,7 @@ import SkydropService from "../../Services/Skydrop.service";
 import SwalAlert from "../../Utils/sweetAlert";
 import Terms from "./Modals/Terms";
 import infoFilled from '../../Assets/img/infoFilledTooltip.png';
+import Loader from "../../Global-Components/Loader";
 
 const DefineParams = () => {
 
@@ -21,6 +22,9 @@ const DefineParams = () => {
     const [weight, setWeight] = useState(true)
     const [service, setService] = useState(false)
     const [shipping, setShipping] = useState(false)
+
+    //State para el loader
+    const [shippingLoading, setShippingLoading] = useState(false);
 
     //Sender form states
     const [formSender, setFormSender] = useState(false);
@@ -36,15 +40,15 @@ const DefineParams = () => {
     const [category, setCategory] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
     const [tooltip, setTooltip] = useState(false);
-    // const [categorySelected, setCategorySelected] = useState("");
+    const [categorySelected, setCategorySelected] = useState("");
 
     const [subcategory, setSubcategory] = useState(false);
     const [subCategoryData, setSubCategoryData] = useState([]);
-    //const [subCategorySelected, setSubcategorySelected] = useState("");
+    const [subCategorySelected, setSubcategorySelected] = useState("");
 
     const [clase, setClase] = useState(false);
     const [claseData, setClaseData] = useState([])
-    //const [claseSelected, setClaseSelected] = useState("");
+    const [claseSelected, setClaseSelected] = useState("");
 
     //Delivery states
     const [delivery, setDelivery] = useState(false);
@@ -52,6 +56,7 @@ const DefineParams = () => {
 
     //Confirm data state
     const [confirmData, setConfirmData] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
     const [shippingsOn, setShippingsOn] = useState(false)
@@ -83,13 +88,14 @@ const DefineParams = () => {
             await setServicePackage(service);
             setService(false)
 
+            setShippingLoading(true);
             const shippings = await getShippingServices(Object.keys(service)[0])
 
             /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
             setShippingAvailable(shippingsHardcoded) //Saves in context */
-
             setShippingsOn(shippings);
             setShippingAvailable(shippings);
+            setShippingLoading(false);
             setShipping(true)
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
@@ -154,10 +160,12 @@ const DefineParams = () => {
 
     const handleSelectCategory = async (item) => {
         setSubcategory(true);
-        // setCategorySelected(item.id);
+        setCategorySelected(item?.attributes.name);
         try {
             const response = await SkydropService.getSubcategories(item.id);
             setSubCategoryData(response.result.data);
+            setSubcategorySelected("");
+            setClaseSelected("");
             setCategory(false);
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
@@ -166,12 +174,12 @@ const DefineParams = () => {
 
     const handleSelectSubCategory = async (item) => {
         setClase(true);
-        // setSubcategorySelected(item?.id);
+        setSubcategorySelected(item?.attributes.name);
         setSubcategoryIdCtx(item?.id);
         try {
             const response = await SkydropService.getClasses(item?.id);
-            console.log(response);
             setClaseData(response.result.data);
+            setClaseSelected("")
             setSubcategory(false);
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
@@ -180,6 +188,7 @@ const DefineParams = () => {
 
     const handleClase = async (item) => {
         setClassCodeCtx(item?.attributes?.code);
+        setClaseSelected(item?.attributes.name);
         setClaseNombre(item?.attributes?.name);
     }
 
@@ -257,6 +266,8 @@ const DefineParams = () => {
     }
 
     const handlePrint = async () => {
+        setConfirmData(false);
+        setConfirmLoading(true);
         const service_tag = Object.keys(servicePackage)[0].includes("standard") ? "STD" : "EXP";
         const method_tag = Object.keys(deliveryTypeSelected)[0];
         if (senderDataCtx.address_from &&
@@ -280,6 +291,7 @@ const DefineParams = () => {
                     method_tag
                 )
                 console.log(response);
+                setConfirmLoading(false);
                 if (response.result !== undefined) {
                     setLinkPdf(response.result?.label_url);
                     setOrder_id(response.result?.order_id);
@@ -331,16 +343,17 @@ const DefineParams = () => {
                         </div>
                     </>
                 }
-                {shipping &&
+                {shipping ?
                     <>
-                        <h1 className={styles.title}>¿Qué paquetería eliges para realizar el envío?</h1>
+                        <h1 className={styles.title}>Estas son las paqueterías disponibles para<br />tus códigos postales</h1>
                         <div className={styles.cardContainerShipping}>
                             {shippingsOn.map(shipping => {
                                 return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock={setBlock} />
                             })}
                         </div>
                     </>
-
+                    :
+                    shippingLoading && <Loader text={"Estamos buscando paqueterías disponibles..."} />
                 }
                 {formSender && <Form
                     width={'calc(100vw - 170px)'}
@@ -368,13 +381,13 @@ const DefineParams = () => {
                             <img
                                 src={infoFilled}
                                 alt="tooltip"
-                                onClick={()=> setTooltip(!tooltip)}
+                                onClick={() => setTooltip(!tooltip)}
                             />
                             <div className={tooltip ? styles.tooltipVisible : styles.tooltipHidden}
-                            onClick = {()=> setTooltip(false)}
+                                onClick={() => setTooltip(false)}
                             >
-                                <h4 className={styles.tiptext}>El Sistema de Administración Tributaria (SAT) solicita el complemento legal Carta Porte para realizar envíos. 
-Se trata de una declaración jurada sobre lo que contiene el paquete y es una condición obligatoria.</h4>
+                                <h4 className={styles.tiptext}>El Sistema de Administración Tributaria (SAT) solicita el complemento legal Carta Porte para realizar envíos.
+                                    Se trata de una declaración jurada sobre lo que contiene el paquete y es una condición obligatoria.</h4>
                             </div>
                         </div>
                         <div className={styles.selectContainer}>
@@ -383,18 +396,21 @@ Se trata de una declaración jurada sobre lo que contiene el paquete y es una co
                                 onSelect={handleSelectCategory}
                                 disabled={!category}
                                 type="Categoría*"
+                                selected={categorySelected}
                             />
                             <CustomDataList
                                 data={subCategoryData}
                                 onSelect={handleSelectSubCategory}
                                 disabled={!subcategory}
                                 type="Subcategoría*"
+                                selected={subCategorySelected}
                             />
                             <CustomDataList
                                 data={claseData}
                                 onSelect={handleClase}
                                 disabled={!clase}
                                 type="Producto*"
+                                selected={claseSelected}
                             />
                         </div>
                         <h2 className={styles.terms}>Al continuar, confirmo que conozco y acepto los <span onClick={() => setTerms(true)}>términos</span> y <span onClick={() => setPolicies(true)}>políticas</span>.</h2>
@@ -412,7 +428,7 @@ Se trata de una declaración jurada sobre lo que contiene el paquete y es una co
                     </>
                 }
 
-                {confirmData &&
+                {confirmData ?
                     <>
                         <h1 className={styles.titleConfirm}>Este es tu resumen de envío</h1>
                         <h3 className={styles.subtitleConfirm}>Con estos datos imprimiremos tu guía. Si necesitas editarlos, puedes hacerlo.</h3>
@@ -426,13 +442,19 @@ Se trata de una declaración jurada sobre lo que contiene el paquete y es una co
                             />
                         </div>
                     </>
+                    :
+                    confirmLoading && <Loader text={"Estamos cargando su guía..."} />
                 }
 
                 <div className={styles.buttonContainer}>
                     <Button text="Regresar" width="132px" color="outlined" onClick={() => handleBack()} />
                     {formSender && <Button2 text="Continuar" width='132px' canContinue={Object.keys(senderData).length !== 0} handleContinue={handleFormSender} />}
                     {formReceiver && <Button2 text="Continuar" width='132px' canContinue={Object.keys(receiverData).length !== 0} handleContinue={handleFormReceiver} />}
-                    {(category || subcategory || clase) && <Button2 text="Continuar" width='132px' canContinue={classCodeCtx !== ""} handleContinue={handleContinueCategory} />}
+                    {(category || subcategory || clase) && <Button2
+                        text="Continuar"
+                        width='132px'
+                        canContinue={classCodeCtx && categorySelected && subCategorySelected && claseSelected}
+                        handleContinue={handleContinueCategory} />}
                     {confirmData && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
                 {(terms || policies) && <Terms handleClose={() => handleCloseTerms()} width="1000px" height={'656px'} type={terms ? "terms" : "policies"} />}
