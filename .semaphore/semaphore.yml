@@ -22,7 +22,7 @@ blocks:
           commands:
             - checkout
             - cache restore
-            - '[[ if branch == 'develop']]; then npm run build:develop; fi'
+            - '[[ if branch == 'develop' ]]; then npm run build:develop; fi'
             - cache delete sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH
             - cache store sucursales-webapp-static_$SEMAPHORE_GIT_BRANCH build
 promotions:
