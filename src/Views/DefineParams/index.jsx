@@ -352,7 +352,7 @@ const DefineParams = () => {
                         </div>
                     </>
                     :
-                    shippingLoading && <Loader text={"Estamos buscando paqueterías disponibles..."} />
+                    shippingLoading && <Loader text={`Estamos buscando paqueterías disponibles`}/>
                 }
                 {formSender && <Form
                     width={'calc(100vw - 170px)'}
@@ -442,7 +442,7 @@ const DefineParams = () => {
                         </div>
                     </>
                     :
-                    confirmLoading && <Loader text={"Estamos cargando tu guía..."} />
+                    confirmLoading && <Loader text={<p>Estamos creando tu guía.<br/>Aguarda un momento... </p>} />
                 }
 
                 <div className={styles.buttonContainer}>

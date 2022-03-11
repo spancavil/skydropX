@@ -6,7 +6,7 @@ const Loader = ({text}) => {
   return (
     <div className={styles.loaderContainer}>
         <img src={loader} alt="loader" className={styles.loader}/>
-        {text && <h2 className={styles.text}>{text}</h2>}    
+        {text && <p className={styles.text}>{text}</p>}    
     </div>
   )
 }
