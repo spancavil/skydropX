@@ -120,7 +120,7 @@ const OrigenDestino = ({codigosPostales}) => {
 
     useEffect(()=> {
 
-        if (codigosPostales.origen !== "" && codigosPostales.destino !== ""){
+        if (codigosPostales?.origen !== "" && codigosPostales?.destino !== ""){
             setOrigen(codigosPostales.origen);
             setDestino(codigosPostales.destino);
         }

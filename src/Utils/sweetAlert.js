@@ -6,6 +6,7 @@ export default function SwalAlert (error = null) {
         '¡Lo sentimos! Si lo necesitas, puedes contactarte con nuestro <strong>chat de ayuda.</strong>',
         icon: 'error',
         showConfirmButton: true,
+        confirmButtonText: "Cerrar",
         width: '470px',
     })
 }

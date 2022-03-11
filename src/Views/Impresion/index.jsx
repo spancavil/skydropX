@@ -14,7 +14,7 @@ import Button2 from '../../Global-Components/Button2';
 import { useNavigate } from 'react-router-dom';
 
 const Impresion = () => {
-    const { linkPdf, order_id, resetValues, deliveryTypeSelected } = useContext(InfoData);
+    const { linkPdf, order_id, resetValues, deliveryTypeSelected, setCPView } = useContext(InfoData);
 
     const [viewerState, setViewerState] = useState(true);
     const [sendLabel, setSendLabel] = useState(false);
@@ -26,12 +26,19 @@ const Impresion = () => {
         oxxo = Object.keys(deliveryTypeSelected)[0] === "OXX" ? true : false
     }
 
-
     const navigate = useNavigate();
 
-    const handleTerminate = () => {
-        resetValues();
-        navigate('/');
+    const handleTerminate = (value) => {
+        console.log(value);
+        if (value === "nuevo"){
+            resetValues();
+            setCPView(true);
+            navigate('/');
+        } else {
+            resetValues();
+            setCPView(false);
+            navigate('/');
+        }
     }
 
     useEffect(() => {
@@ -237,11 +244,17 @@ const Impresion = () => {
                         <h3 className={styles.dudaTitle}>Si tienes alguna duda o consulta, escríbenos a <span>clientes@skydropx.com</span></h3>
                     </div>
                     <div className={styles.buttonsContainer}>
-                        <Button2
+                        <Button
                             text="Finalizar"
-                            width='190px'
+                            width='130px'
+                            color = "outlined"
+                            onClick={() => handleTerminate("finalizar")}
+                        />
+                        <Button2
+                            text="Crear nuevo envío"
+                            width='230px'
                             canContinue={true}
-                            handleContinue={() => handleTerminate()}
+                            handleContinue={() => handleTerminate("nuevo")}
                         />
                     </div>
                 </div>

@@ -12,7 +12,7 @@ import SwalAlert from '../../Utils/sweetAlert';
 const ErrorPdf = () => {
 
     const {servicePackage, deliveryTypeSelected, senderDataCtx, receiverDataCtx,
-        sizePackage, classCodeCtx, subcategoryIdCtx, shippingPackage, setLinkPdf, setOrder_id} = useContext(InfoData);
+        sizePackage, classCodeCtx, subcategoryIdCtx, shippingPackage, setLinkPdf, setOrder_id, setCPView} = useContext(InfoData);
 
     const navigate = useNavigate();
 
@@ -54,6 +54,11 @@ const ErrorPdf = () => {
         }
     }
 
+    const navigateInicio = () => {
+        setCPView(true);
+        navigate('/')
+    }
+
     return (
         <FlowBackground>
             <div className={styles.container}>
@@ -64,7 +69,7 @@ const ErrorPdf = () => {
                         text="Volver a inicio"
                         width='190px'
                         color='outlined'
-                        onClick={() => navigate('/')}
+                        onClick={navigateInicio}
                     />
                     <Button2
                         text="Imprimir guía"

@@ -21,6 +21,10 @@ const InfoProvider = ({ children }) => {
     const [classCodeCtx, setClassCodeCtx] = useState("");
     const [claseNombre, setClaseNombre] = useState("");
 
+    const [categorySelected, setCategorySelected] = useState("");
+    const [subCategorySelected, setSubCategorySelected] = useState("");
+    const [claseSelected, setClaseSelected] = useState("");
+
     const [shippingAvailable, setShippingAvailable] = useState(null);
     
     const [SERVICE_TYPES, setSERVICE_TYPES] = useState([]);
@@ -75,7 +79,7 @@ const InfoProvider = ({ children }) => {
     }
 
     const resetValues = () => {
-        setCodigosPostales("")
+        setCodigosPostales({origen: "", destino: ""})
         setStateAndCity({stateOrigen: "", stateDestino: "", cityOrigen: "", cityDestino: ""})
         setSizePackage("");
         setServicePackage("");
@@ -88,7 +92,9 @@ const InfoProvider = ({ children }) => {
         setClaseNombre("");
         setDeliveryTypeSelected({})
         setOrder_id("");
-        setCPView(false);
+        setCategorySelected("");
+        setSubCategorySelected("");
+        setClaseSelected("");
     }
 
     return (
@@ -96,7 +102,7 @@ const InfoProvider = ({ children }) => {
         value = {
             {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues, setCPView,
             fullscreen, codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
-            WEIGHTS, SERVICE_TYPES, CPView
+            WEIGHTS, SERVICE_TYPES, CPView, categorySelected, subCategorySelected, claseSelected, setCategorySelected, setSubCategorySelected, setClaseSelected,
         }}
         >
             {children}

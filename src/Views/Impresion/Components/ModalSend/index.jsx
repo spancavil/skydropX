@@ -75,7 +75,7 @@ const ModalSend = ({ handleClose, handleSend, sendingState = null }) => {
                 </div>
                 <div className={styles.buttonContainer}>
                     <Button
-                        text={sendingState === "completed" ? "Regresar" : "Cancelar"}
+                        text={sendingState === "completed" ? "Cerrar" : "Cancelar"}
                         width="131px"
                         color="outlined"
                         onClick={handleClose}

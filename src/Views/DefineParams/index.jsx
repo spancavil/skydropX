@@ -40,15 +40,12 @@ const DefineParams = () => {
     const [category, setCategory] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
     const [tooltip, setTooltip] = useState(false);
-    const [categorySelected, setCategorySelected] = useState("");
 
     const [subcategory, setSubcategory] = useState(false);
     const [subCategoryData, setSubCategoryData] = useState([]);
-    const [subCategorySelected, setSubcategorySelected] = useState("");
 
     const [clase, setClase] = useState(false);
     const [claseData, setClaseData] = useState([])
-    const [claseSelected, setClaseSelected] = useState("");
 
     //Delivery states
     const [delivery, setDelivery] = useState(false);
@@ -65,7 +62,8 @@ const DefineParams = () => {
         WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, sizePackage, servicePackage, shippingPackage,
         setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx,
         setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes,
-        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, setCPView
+        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, setCPView,
+        categorySelected, setCategorySelected, subCategorySelected, setSubCategorySelected, claseSelected, setClaseSelected,
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -164,7 +162,7 @@ const DefineParams = () => {
         try {
             const response = await SkydropService.getSubcategories(item.id);
             setSubCategoryData(response.result.data);
-            setSubcategorySelected("");
+            setSubCategorySelected("");
             setClaseSelected("");
             setCategory(false);
         } catch (error) {
@@ -174,7 +172,7 @@ const DefineParams = () => {
 
     const handleSelectSubCategory = async (item) => {
         setClase(true);
-        setSubcategorySelected(item?.attributes.name);
+        setSubCategorySelected(item?.attributes.name);
         setSubcategoryIdCtx(item?.id);
         try {
             const response = await SkydropService.getClasses(item?.id);
@@ -290,7 +288,6 @@ const DefineParams = () => {
                     shippingPackage,
                     method_tag
                 )
-                console.log(response);
                 setConfirmLoading(false);
                 if (response.result !== undefined) {
                     setLinkPdf(response.result?.label_url);

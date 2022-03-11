@@ -17,8 +17,6 @@ const HomeCP = () => {
 
     const {codigosPostales} = useContext(InfoData);
 
-    console.log(codigosPostales);
-
     return (
         <div className={styles.background}>
             <div className={styles.elipseCp}></div>
