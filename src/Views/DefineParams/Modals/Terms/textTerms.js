@@ -11,15 +11,8 @@ SKYDROPX pone la Plataforma a disposición del Usuario, como una herramienta de 
 B. GENERACIÓN DE ENVÍOS, que permite al Usuario, la gestión y administración de los envíos mediante la generación de múltiples etiquetas de envío en un solo paso por medio de una plantilla CSV o XLS; así como el acceso al historial de sus órdenes.
 C. SOPORTE. Acceso directo al servicio de soporte de SKYDROPX que permite gestionar:
 ● la solución de problemas y dudas con el uso del Software
-● solicitud y apoyo para realizar cambios en la información de envíos, aclaraciones o cancelación de los
-Servicios con los Socios Comerciales.
-● generación de folios en línea para que los Socios Comerciales realicen la recolección de los objetos sujetos de servicio; y 
-El programa permite al Usuario, la visualización de los reportes levantados, el status que guardan hasta su solución, así como los movimientos realizados en la cuenta del Usuario.
-C. SOPORTE. Acceso directo al servicio de soporte de SKYDROPX que permite gestionar:
-● la solución de problemas y dudas con el uso del Software
 ● solicitud y apoyo para realizar cambios en la información de envíos, aclaraciones o cancelación de los Servicios con los Socios Comerciales.
-● generación de folios en línea para que los Socios Comerciales realicen la recolección de los objetos sujetos
-de servicio; y 
+● generación de folios en línea para que los Socios Comerciales realicen la recolección de los objetos sujetos de servicio; y 
 El programa permite al Usuario, la visualización de los reportes levantados, el status que guardan hasta su solución, así como los movimientos realizados en la cuenta del Usuario.</div>
 <p style="padding-left: 30px;">2. MÓDULO DE RASTREO. Permite al Usuario, mediante el acceso al Panel de Seguimiento y envío, hacer un monitoreo del estado, tiempos de entrega, eficiencia y efectividad de los envíos realizados a través de la Plataforma y, por medio del Panel de Analíticas el Usuario podrá identificar mediante el uso de diferentes filtros y criterios, el número de envíos, notificaciones, la tasa de efectividad de los envíos, lugares de envíos, socios comerciales utilizados, entre otros. Adicional a lo anterior, este Módulo permite al Usuario crear su página web de rastreo mediante la personalización de la misma, para que sus clientes puedan seguir sus envíos, sin necesidad de que ingresen al Sitio de los Socios Comerciales.</p>
 El Usuario acepta cumplir con todos y cada uno de los procedimientos que las leyes aplicables señalen, respecto a la adquisición de servicios en línea o digitales; y, por su parte, SKYDROPX se compromete a respetar y hacer cumplir los derechos del Usuario y dar un correcto uso a los datos que se recaben con dicho propósito, conforme al Aviso de Privacidad que se encuentra en la Plataforma.
