@@ -8,9 +8,7 @@ SKYDROPX pone la Plataforma a disposición del Usuario, como una herramienta de 
 ● Detección de cobros adicionales por razón de destino.
 ● Cálculo de zonas extendidas
 ● Identificación de zonas definidas como “remotas”
-B. GENERACIÓN DE ENVÍOS, que permite al Usuario, la gestión y administración de los envíos mediante la
-generación de múltiples etiquetas de envío en un solo paso por medio de una plantilla CSV o XLS; así como el acceso
-al historial de sus órdenes.
+B. GENERACIÓN DE ENVÍOS, que permite al Usuario, la gestión y administración de los envíos mediante la generación de múltiples etiquetas de envío en un solo paso por medio de una plantilla CSV o XLS; así como el acceso al historial de sus órdenes.
 C. SOPORTE. Acceso directo al servicio de soporte de SKYDROPX que permite gestionar:
 ● la solución de problemas y dudas con el uso del Software
 ● solicitud y apoyo para realizar cambios en la información de envíos, aclaraciones o cancelación de los

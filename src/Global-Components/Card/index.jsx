@@ -217,7 +217,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock, handleEdit = 
                         <div className={styles.content}>
                             <h3 className={styles.title}>Dirección</h3>
                             <h3 className={styles.text}>{senderDataCtx?.address_from?.address1}</h3>
-                            <h3 className={styles.text}>{senderDataCtx?.address_from?.address2}, CP: {codigosPostales?.origen}</h3>
+                            <h3 className={styles.text}>{senderDataCtx?.address_from?.address2}, C.P. {codigosPostales?.origen}</h3>
                             <h3 className={styles.text}>{stateAndCity.cityOrigen}, {stateAndCity.stateOrigen}</h3>
                         </div>
                     </div>
@@ -251,7 +251,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock, handleEdit = 
                         <div className={styles.content}>
                             <h3 className={styles.title}>Dirección</h3>
                             <h3 className={styles.text}>{receiverDataCtx.address_to?.address1}</h3>
-                            <h3 className={styles.text}>{receiverDataCtx.address_to?.address2} CP, {codigosPostales?.destino}</h3>
+                            <h3 className={styles.text}>{receiverDataCtx.address_to?.address2} C.P. {codigosPostales?.destino}</h3>
                             <h3 className={styles.text}>{stateAndCity.cityDestino}, {stateAndCity.stateDestino}</h3>
                         </div>
                     </div>
@@ -276,7 +276,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock, handleEdit = 
                     style={{height: '55px', padding: '24px 0 0 24px'}}
                 />
                 <h2 className={styles.titleShipping}>Servicio {serviceSTDoEXP}</h2>
-                <h3 className={styles.textShipping}>Paquete {peso} kg <span style={{color: "#58668F"}}>máx.</span></h3>
+                <h3 className={styles.textShipping}>Paquete {peso} kg</h3>
 
                 <div className={styles.costContainer}>
                     <h3 className={styles.left}>Precio de envío</h3>
@@ -297,7 +297,7 @@ const Card = ({type = "weight", content, onClick, block, setBlock, handleEdit = 
 
                 <div className={styles.costContainer}>
                     <h3 className={styles.leftPower}>TOTAL <span className={styles.leftMinusPower}><br/>(incluye IVA)</span></h3>
-                    <h3 className={styles.rightPower}>${parseInt(precio) + (oxxo ? 20 : 7)} MXN</h3>
+                    <h3 className={styles.rightPower}>${parseInt(precio) + (oxxo ? 20 : 13)} MXN</h3>
                 </div>
             </div>)
 

@@ -33,9 +33,11 @@ const ModalSend = ({ handleClose, handleSend, sendingState = null }) => {
         }
     }
 
+    console.log(senderDataCtx);
+
     useEffect(() => {
-        if (senderDataCtx?.address_to?.email) {
-            setEmail(senderDataCtx?.address_to?.email)
+        if (senderDataCtx?.address_from?.email) {
+            setEmail(senderDataCtx?.address_from?.email)
         }
     }, [senderDataCtx, setEmail])
 

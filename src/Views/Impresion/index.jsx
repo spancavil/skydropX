@@ -197,7 +197,7 @@ const Impresion = () => {
                     <div className={styles.WebViewer} ref={viewer}></div>
                     <div className={styles.buttonContainer}>
                         <Button
-                            text="Cerrar visor"
+                            text="Cerrar"
                             width='172px'
                             color='outlined'
                             onClick={() => setViewerState(false)}
