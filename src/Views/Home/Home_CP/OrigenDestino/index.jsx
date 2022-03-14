@@ -95,8 +95,8 @@ const OrigenDestino = ({codigosPostales}) => {
                 setStateAndCity({
                     stateOrigen: responseOrigenSplit[0],
                     stateDestino: responseDestinoSplit[0],
-                    cityOrigen: responseOrigenSplit[1] || "",
-                    cityDestino: responseDestinoSplit[1] || ""
+                    cityOrigen: responseOrigenSplit[1] === "" ? responseOrigenSplit[0]: responseOrigenSplit[1],
+                    cityDestino: responseDestinoSplit[1] === "" ? responseDestinoSplit[0] : responseDestinoSplit[1]
                 })
                 navigate('/definir-parametros');
             }

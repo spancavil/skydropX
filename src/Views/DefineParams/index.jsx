@@ -333,7 +333,7 @@ const DefineParams = () => {
                     <>
                         <h1 className={styles.title}>¿Qué precio y tipo de servicio prefieres?</h1>
                         <div className={styles.cardContainer}>
-                            {SERVICE_TYPES.map((serviceCost, idx) => {
+                            {SERVICE_TYPES?.map((serviceCost, idx) => {
                                 return <Card type="service" content={serviceCost} key={idx} onClick={defineService} block={block} setBlock={setBlock} />
                             })}
                         </div>
@@ -343,7 +343,7 @@ const DefineParams = () => {
                     <>
                         <h1 className={styles.title}>Estas son las paqueterías disponibles para<br />tus códigos postales</h1>
                         <div className={styles.cardContainerShipping}>
-                            {shippingsOn.map(shipping => {
+                            {shippingsOn?.map(shipping => {
                                 return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock={setBlock} />
                             })}
                         </div>
