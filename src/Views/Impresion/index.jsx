@@ -13,6 +13,12 @@ import WebViewer from '@pdftron/pdfjs-express-viewer';
 import Button2 from '../../Global-Components/Button2';
 import { useNavigate } from 'react-router-dom';
 
+const licenseKey = process.env.REACT_APP_LICENSE_WEB_VIEWER;
+
+console.log(process.env)
+
+console.log(licenseKey);
+
 const Impresion = () => {
     const { linkPdf, order_id, resetValues, deliveryTypeSelected, setCPView } = useContext(InfoData);
 
@@ -46,17 +52,36 @@ const Impresion = () => {
         if (viewerState) {
             WebViewer({
                 initialDoc: linkPdf,
-                licenseKey: "puspE4HWQp7eLp6fIAGB",
+                licenseKey: licenseKey,
             }, viewer.current)
                 .then(instance => {
                     const { Core } = instance;
     
                     instance.setPrintQuality(4);
+
+                    const renderPrint = () => {
+                        return (
+                            <h3 
+                                onClick={()=>instance.printInBackground()}
+                                style = {{
+                                    fontSize: '20px',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                Imprimir
+                            </h3>
+                        )
+                    }
+
+                    const printMessage = {
+                        type: 'customElement',
+                        render: renderPrint,
+                    }
     
                     const printButton = {
                         type: 'actionButton',
-                        img: 'icon-header-print-line',
-                        title: 'action.print',
+                        img: '/printIcon.png',
+                        title: '',
                         onClick: async () => {
                             instance.printInBackground()
                         },
@@ -67,6 +92,7 @@ const Impresion = () => {
                     instance.UI.setHeaderItems((header) => {
                         const headerUpdated = header.getItems().slice(8, 9)
                         header.update(headerUpdated); //erase all items
+                        header.push(printMessage)
                         header.push(printButton)
                         // console.log(header.getItems());
                     })
