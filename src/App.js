@@ -43,7 +43,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Impresion/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/definir-parametros" element={<DefineParams />} />
         <Route path="/impresion" element={<Impresion />} />
         <Route path="/error-pdf" element={<ErrorPdf />} />
