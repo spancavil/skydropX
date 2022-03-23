@@ -15,24 +15,23 @@ import { useNavigate } from 'react-router-dom';
 
 const licenseKey = process.env.REACT_APP_LICENSE_WEB_VIEWER;
 
-console.log(process.env)
-
-console.log(licenseKey);
-
 const Impresion = () => {
-    const { linkPdf, order_id, resetValues, deliveryTypeSelected, setCPView } = useContext(InfoData);
+    const { linkPdf, order_id, resetValues, deliveryTypeSelected, setCPView, ticketLinkPdf } = useContext(InfoData);
 
-    const [viewerState, setViewerState] = useState(true);
+    const [viewerState, setViewerState] = useState("link");
     const [sendLabel, setSendLabel] = useState(false);
     const [sendingState, setSendingState] = useState("");
 
-    const viewer = useRef(null);
+    const viewerLink = useRef(null);
+    const viewerTicket = useRef(null);
     let oxxo;
     if (Object.keys(deliveryTypeSelected).length !== 0) {
         oxxo = Object.keys(deliveryTypeSelected)[0] === "OXX" ? true : false
     }
 
     const navigate = useNavigate();
+
+    console.log(ticketLinkPdf);
 
     const handleTerminate = (value) => {
         console.log(value);
@@ -51,9 +50,9 @@ const Impresion = () => {
 
         if (viewerState) {
             WebViewer({
-                initialDoc: linkPdf,
+                initialDoc: viewerState === "link" ? linkPdf : ticketLinkPdf,
                 licenseKey: licenseKey,
-            }, viewer.current)
+            }, viewerState === "link" ? viewerLink.current: viewerTicket.current)
                 .then(instance => {
                     const { Core } = instance;
     
@@ -201,7 +200,7 @@ const Impresion = () => {
 
         printPdf('https://shipkraken-demo.s3.amazonaws.com/uploads/label/label_file/015fe3d5-ab76-427a-9ac1-715940da7bb8.pdf')
         */
-    }, [linkPdf, viewerState])
+    }, [linkPdf, viewerState, ticketLinkPdf])
 
     const handleSend = async (email) => {
         console.log("handleSend");
@@ -225,15 +224,19 @@ const Impresion = () => {
 
     return (
         <>
-            {(linkPdf !== "" && viewerState) && (
+            {(linkPdf !== "" && ticketLinkPdf !== "" && viewerState) && (
                 <>
-                    <div className={styles.WebViewer} ref={viewer}></div>
+                    {viewerState === "link" && <div className={styles.WebViewer} ref={viewerLink}></div>}
+                    {viewerState === "ticket" && <div className={styles.WebViewer} ref={viewerTicket}></div>}
                     <div className={styles.buttonContainer}>
                         <Button
-                            text="Cerrar"
+                            text= {viewerState === "link" ? "Siguiente" : "Cerrar"}
                             width='172px'
                             color='outlined'
-                            onClick={() => setViewerState(false)}
+                            onClick={() => setViewerState(prev => {
+                                if (prev === "link") return "ticket"
+                                if (prev === "ticket") return false
+                            })}
                         />
                     </div>
                 </>
@@ -264,7 +267,7 @@ const Impresion = () => {
                             <InfoIcon />
                             <h3 className={styles.acercateSub2}>Recuerda que el envío será válido cuando realices el pago.</h3>
                         </div>
-                        <h3 className={styles.acercateSub}>¿No se imprimió la guía? Da <span onClick={() => setViewerState(true)}>clic aquí para reimprimir</span></h3>
+                        <h3 className={styles.acercateSub}>¿No se imprimió la guía? Da <span onClick={() => setViewerState("link")}>clic aquí para reimprimir</span></h3>
                     </div>
                     <div className={styles.duda}>
                         <h3 className={styles.dudaTitle}>Si tienes alguna duda o consulta, escríbenos a <span>clientes@skydropx.com</span></h3>

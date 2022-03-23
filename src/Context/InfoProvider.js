@@ -34,6 +34,7 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
     const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
+    const [ticketLinkPdf, setTicketLinkPdf] = useState('');
     const [order_id, setOrder_id] = useState('');
 
     const [CPView, setCPView] = useState(false)
@@ -59,7 +60,7 @@ const InfoProvider = ({ children }) => {
         try {
             let serviceSTDoEXP = service.includes("standard") ? "STD" : "EXP"
             const response = await SkydropService.getAvailableShipping(
-                codigosPostales.origen, codigosPostales.destino, sizePackage, serviceSTDoEXP)
+                codigosPostales.destino, codigosPostales.origen, sizePackage, serviceSTDoEXP)
             return (response.result);
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message)
@@ -100,8 +101,8 @@ const InfoProvider = ({ children }) => {
     return (
         <InfoData.Provider 
         value = {
-            {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, resetValues, setCPView,
-            fullscreen, codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, order_id,
+            {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setTicketLinkPdf, setOrder_id, resetValues, setCPView,
+            fullscreen, codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, ticketLinkPdf, order_id,
             WEIGHTS, SERVICE_TYPES, CPView, categorySelected, subCategorySelected, claseSelected, setCategorySelected, setSubCategorySelected, setClaseSelected,
         }}
         >

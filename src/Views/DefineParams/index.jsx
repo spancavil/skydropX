@@ -62,7 +62,7 @@ const DefineParams = () => {
         WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, sizePackage, servicePackage, shippingPackage,
         setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx,
         setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes,
-        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setOrder_id, setCPView,
+        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setTicketLinkPdf, setOrder_id, setCPView,
         categorySelected, setCategorySelected, subCategorySelected, setSubCategorySelected, claseSelected, setClaseSelected,
     } = useContext(InfoData);
 
@@ -291,6 +291,7 @@ const DefineParams = () => {
                 setConfirmLoading(false);
                 if (response.result !== undefined) {
                     setLinkPdf(response.result?.label_url);
+                    setTicketLinkPdf(response.result?.ticket_url);
                     setOrder_id(response.result?.order_id);
                     navigate('/impresion')
                 } else {
