@@ -24,7 +24,7 @@ const HomeCP = () => {
         useEffect(() => {
             if (!listeners) {
                 const resetAllValuesAndRedirect = () => {
-                    navigate('/Home');
+                    navigate('/');
                     window.location.reload();
                 }
                 const clear = () => {
