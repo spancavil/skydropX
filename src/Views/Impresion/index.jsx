@@ -230,7 +230,7 @@ const Impresion = () => {
                     {viewerState === "ticket" && <div className={styles.WebViewer} ref={viewerTicket}></div>}
                     <div className={styles.buttonContainer}>
                         <Button
-                            text= {viewerState === "link" ? "Siguiente" : "Cerrar"}
+                            text= {viewerState === "link" ? "Siguiente" : "Siguiente"}
                             width='172px'
                             color='outlined'
                             onClick={() => setViewerState(prev => {

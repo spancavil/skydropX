@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import styles from './style.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
 import Footer from './Footer';
@@ -8,14 +8,38 @@ import Support from './Modals/Support';
 import Privacy from './Modals/Privacy';
 import Forbidden from './Modals/Forbidden';
 import {InfoData} from '../../../Context/InfoProvider';
+import { useNavigate } from 'react-router-dom';
 
 const HomeCP = () => {
 
     const [support, setSupport] = useState(false)
     const [forbidden, setForbidden] = useState(false)
     const [privacy, setPrivacy] = useState(false)
+    const navigate = useNavigate()
+    const timer = useRef(null)
 
-    const {codigosPostales} = useContext(InfoData);
+    const {codigosPostales, listeners, setListeners, resetValues} = useContext(InfoData);
+
+        //Timer for inactivity
+        useEffect(() => {
+            if (!listeners) {
+                const resetAllValuesAndRedirect = () => {
+                    navigate('/Home');
+                    window.location.reload();
+                }
+                const clear = () => {
+                    console.log('reset the timer');
+                    clearTimeout(timer.current);
+                    timer.current = setTimeout(resetAllValuesAndRedirect, 600000);
+                }
+                timer.current = setTimeout(resetAllValuesAndRedirect, 600000)
+                window.addEventListener('keydown', clear)
+                window.addEventListener('click', clear)
+                console.log("Listeners added");
+                setListeners(true)
+            }
+
+        }, [listeners, navigate, resetValues, setListeners])
 
     return (
         <div className={styles.background}>

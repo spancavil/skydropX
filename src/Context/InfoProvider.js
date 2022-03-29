@@ -39,6 +39,8 @@ const InfoProvider = ({ children }) => {
 
     const [CPView, setCPView] = useState(false)
 
+    const [listeners, setListeners] = useState(false);
+
     const getServices = async (size) => {
         try {
             const response = await SkydropService.getPricingService(size)
@@ -103,7 +105,7 @@ const InfoProvider = ({ children }) => {
         value = {
             {setFullScreen, setCodigosPostales, setStateAndCity, setSizePackage, setServicePackage, setShippingPackage, getShippingServices, setShippingAvailable, getServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes, setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setTicketLinkPdf, setOrder_id, resetValues, setCPView,
             fullscreen, codigosPostales, stateAndCity, servicePackage, sizePackage, shippingPackage, shippingAvailable, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx, claseNombre, linkPdf, ticketLinkPdf, order_id,
-            WEIGHTS, SERVICE_TYPES, CPView, categorySelected, subCategorySelected, claseSelected, setCategorySelected, setSubCategorySelected, setClaseSelected,
+            WEIGHTS, SERVICE_TYPES, CPView, categorySelected, subCategorySelected, claseSelected, setCategorySelected, setSubCategorySelected, setClaseSelected, listeners, setListeners,
         }}
         >
             {children}

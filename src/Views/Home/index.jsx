@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { InfoData } from '../../Context/InfoProvider';
 import HomeCP from './Home_CP';
 import Presentation from './Presentation';
@@ -7,34 +7,14 @@ const Home = () => {
 
     //En caso que se haya pulsado Regresar desde define-params
     const { CPView } = useContext(InfoData);
-
     const [cp, setCp] = useState(false)
-    const [launcher, setLauncher] = useState(null)
-
-    useEffect(() => {
-
-        const launcherFn = () => {
-            setLauncher(document.getElementById("launcher"));
-        }
-
-        const repetir = setInterval(launcherFn, 500);
-
-        if (launcher !== null) {
-            launcher.style.left = "46px";
-            launcher.style.bottom = "35px";
-            launcher.style.transform = "scale(1.5)";
-            clearInterval(repetir)
-        }
-        return () => {
-            clearInterval(repetir)
-        }
-    }, [launcher, setLauncher]);
-
+        
     if (CPView) {
         return (
             <HomeCP />
         )
     }
+
     else {
         return (
             <div>

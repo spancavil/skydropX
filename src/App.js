@@ -21,23 +21,23 @@ function App() {
 
   }, [setFullScreen])
 
-  //Moves launcher when its available
   useEffect(() => {
+    
+    //Moves launcher when its available
     const launcherFn = () => {
       setLauncher(document.getElementById("launcher"));
     }
-
     const repetir = setInterval(launcherFn, 500);
-
     if (launcher !== null) {
       launcher.style.left = "46px";
       launcher.style.bottom = "35px";
       launcher.style.transform = "scale(1.5)";
       clearInterval(repetir)
     }
-    return () => {
-      clearInterval(repetir)
+    return ()=> {
+      clearInterval(repetir);
     }
+    
   }, [launcher, setLauncher]);
 
   return (
