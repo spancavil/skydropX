@@ -9,6 +9,7 @@ const Input = ({ width, inputName, inputValue, errorMessage, handleChange, refer
                 className={errorMessage !== "" ? styles.inputError : null}
                 onChange={(e) => handleChange(e.target.value)}
                 style={{width: width}}
+                autoComplete = "off"
             />
             {inputValue !== "" && <h4 className={
                 errorMessage ? styles.superTextOrigenError : styles.superTextOrigen

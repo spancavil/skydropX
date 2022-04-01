@@ -12,6 +12,7 @@ const Input = ({ width, inputName, inputValue, errorMessage, handleChange}) => {
             <input type="text" placeholder={inputName} name={inputName} id={inputName} value={inputValue}
                 className={errorMessage !== "" ? styles.inputError : null}
                 onChange={(e) => handleChange(e.target.value)}
+                autoComplete = "off"
                 style = {{
                     width: width
                 }}

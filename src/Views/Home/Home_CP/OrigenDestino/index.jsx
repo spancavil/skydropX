@@ -133,6 +133,7 @@ const OrigenDestino = ({codigosPostales}) => {
                 <div style={{display: "flex", flexDirection: "column"}}>
                     <input type="text" placeholder='Origen' name="Origen" id="origen" value={origen}
                     className={errorOrigen !== "" ? styles.inputError: null}
+                    autoComplete = 'off'
                     onChange={(e)=> handleOrigen(e.target.value)}
                     />
                     {origen !== "" && <h4 className={
@@ -147,6 +148,7 @@ const OrigenDestino = ({codigosPostales}) => {
                     <input type="text" placeholder='Destino' name="Destino" id="destino" value={destino}
                     className={errorDestino !== "" ? styles.inputError: null}
                     onChange={(e)=> handleDestino(e.target.value)}
+                    autoComplete = 'off'
                     />
                     {destino !== "" && <h4 className={
                         errorDestino ? styles.superTextDestinoError: styles.superTextDestino
