@@ -12,28 +12,23 @@
 </body>
 <!-- Start of sucursales-skydropx Zendesk Widget script -->
 <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ffe4f31a-9932-4bfb-a66e-fabf854edd56"> </script>
-<!-- End of sucursales-skydropx Zendesk Widget script -->
 <script type="text/javascript">
- zE('webWidget', 'updateSettings', {
-   webWidget: {
-     contactForm: {
-        ticketForms: [
-          { id: 1260814821510 }
-          ]
-     },
-     chat: {
-       suppress: false,
-       departments: {
-         enabled: [' GRUPOSUCURSALES '],
-         select: ' GRUPOSUCURSALES '
-       }
-     },
-     contactOptions: {
-       enabled: true,
-     }
-   }
- });
- zE('webWidget', 'chat:addTags', 'chat_sucursales');
- </script>
+  zE('webWidget', 'updateSettings', {
+      webWidget: {
+        chat: {
+          suppress: false,
+          departments: {
+            enabled: ['CHAT SUCURSALES'],
+            select: 'CHAT SUCURSALES'
+          }
+        },
+        contactOptions: {
+          enabled: true,
+        }
+      }
+    });
+  zE('webWidget', 'chat:addTags', 'chat_mexico');
+</script>
+<!-- End of sucursales-skydropx Zendesk Widget script -->
 
 </html>
