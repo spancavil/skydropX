@@ -30,7 +30,6 @@ function App() {
     const repetir = setInterval(launcherFn, 500);
     if (launcher !== null) {
       launcher.style.bottom = "35px";
-      launcher.style.marginLeft = "46px";
       launcher.style.transform = "scale(1.5)";
       clearInterval(repetir)
     }
