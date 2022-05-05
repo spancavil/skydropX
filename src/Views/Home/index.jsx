@@ -1,28 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InfoData } from '../../Context/InfoProvider';
-import HomeCP from './Home_CP';
 import Presentation from './Presentation';
 
 const Home = () => {
 
     //En caso que se haya pulsado Regresar desde define-params
     const { CPView } = useContext(InfoData);
-    const [cp, setCp] = useState(false)
-        
+    const navigate = useNavigate()
+
     if (CPView) {
-        return (
-            <HomeCP />
-        )
+        navigate('/codigos-postales')
     }
 
-    else {
-        return (
-            <div>
-                {!cp && <Presentation onClick={() => setCp(true)} />}
-                {cp && <HomeCP />}
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Presentation onClick={() => navigate('/codigos-postales')} />
+        </div>
+    )
 };
 
 export default Home;

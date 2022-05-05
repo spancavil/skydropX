@@ -3,7 +3,7 @@ import Button from '../../../../Global-Components/Button';
 import Button2 from '../../../../Global-Components/Button2';
 import ModalBackground from '../Background';
 import styles from './styles.module.scss';
-import Input from '../../Components/Input';
+import Input from '../Input';
 import { schemaEmail } from '../../../../Utils/validateForm';
 import { InfoData } from '../../../../Context/InfoProvider';
 

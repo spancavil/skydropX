@@ -6,6 +6,8 @@ import Impresion from './Views/Impresion';
 import ErrorPdf from './Views/ErrorPdf';
 import { useState, useEffect, useContext } from 'react';
 import { InfoData } from './Context/InfoProvider';
+import HomeCP from './Views/Home/Home_CP';
+import EnvioExitoso from './Views/EnvioExitoso';
 
 function App() {
 
@@ -43,9 +45,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/codigos-postales" element ={<HomeCP />} />
         <Route path="/definir-parametros" element={<DefineParams />} />
         <Route path="/impresion" element={<Impresion />} />
         <Route path="/error-pdf" element={<ErrorPdf />} />
+        <Route path="/envio-exitoso" element={<EnvioExitoso/>} />
         <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
