@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 import InfoIcon from '../../Assets/svg/infoIcon';
 import { InfoData } from "../../Context/InfoProvider";
 import Button from "../../Global-Components/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Form from "../../Global-Components/Form";
 import Button2 from "../../Global-Components/Button2";
 import CustomDataList from "../../Global-Components/CustomDataList";
@@ -18,19 +18,23 @@ import Loader from "../../Global-Components/Loader";
 
 const DefineParams = () => {
 
+    //Possible params:
+    //peso - servicio - paqueteria - remitente - destinatario - producto - entrega - confirmacion
+    const {paramId} = useParams()
+
+    console.log(paramId);
+    
     //States for show or hide
-    const [weight, setWeight] = useState(true)
-    const [service, setService] = useState(false)
-    const [shipping, setShipping] = useState(false)
+    // const [weight, setWeight] = useState(true)
+    // const [service, setService] = useState(false)
+    // const [shipping, setShipping] = useState(false)
 
     //State para el loader
     const [shippingLoading, setShippingLoading] = useState(false);
 
     //Sender form states
-    const [formSender, setFormSender] = useState(false);
     const [senderData, setSenderData] = useState({});
 
-    const [formReceiver, setFormReceiver] = useState(false);
     const [receiverData, setReceiverData] = useState({});
 
     //Category states
@@ -47,23 +51,25 @@ const DefineParams = () => {
     const [clase, setClase] = useState(false);
     const [claseData, setClaseData] = useState([])
 
+    console.log(`Category: ${category}`);
+    console.log(`Subcategory: ${subcategory}`);
+    console.log(`Clase: ${clase}`);
+
     //Delivery states
-    const [delivery, setDelivery] = useState(false);
+    // const [delivery, setDelivery] = useState(false);
     // const [deliveryData, setDeliveryData] = useState({})
 
-    //Confirm data state
-    const [confirmData, setConfirmData] = useState(false);
+    //Confirm data loading
     const [confirmLoading, setConfirmLoading] = useState(false);
 
     const [block, setBlock] = useState(false) //Bloquea momentáneamente las cards para que no se le haga click
-    const [shippingsOn, setShippingsOn] = useState(false)
 
     const {
         WEIGHTS, SERVICE_TYPES, codigosPostales, stateAndCity, sizePackage, servicePackage, shippingPackage,
         setSizePackage, getServices, senderDataCtx, receiverDataCtx, deliveryTypes, deliveryTypeSelected, subcategoryIdCtx, classCodeCtx,
         setServicePackage, setShippingPackage, setShippingAvailable, getShippingServices, setSenderDataCtx, setReceiverDataCtx, getDeliveryTypes,
-        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setTicketLinkPdf, setOrder_id, setCPView,
-        categorySelected, setCategorySelected, subCategorySelected, setSubCategorySelected, claseSelected, setClaseSelected,
+        setDeliveryTypeSelected, setSubcategoryIdCtx, setClassCodeCtx, setClaseNombre, setLinkPdf, setTicketLinkPdf, setOrder_id,
+        categorySelected, setCategorySelected, subCategorySelected, setSubCategorySelected, claseSelected, setClaseSelected, shippingAvailable
     } = useContext(InfoData);
 
     const navigate = useNavigate();
@@ -71,8 +77,7 @@ const DefineParams = () => {
     const defineSize = async (size) => {
         setSizePackage(size);
         getServices(size);
-        setWeight(false);
-        setService(true);
+        navigate('/definir-parametros/servicio')
 
         //A comentar
         /* getDeliveryTypes();
@@ -84,17 +89,15 @@ const DefineParams = () => {
     const defineService = async (service) => {
         try {
             await setServicePackage(service);
-            setService(false)
 
             setShippingLoading(true);
             const shippings = await getShippingServices(Object.keys(service)[0])
 
             /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
             setShippingAvailable(shippingsHardcoded) //Saves in context */
-            setShippingsOn(shippings);
             setShippingAvailable(shippings);
-            setShippingLoading(false);
-            setShipping(true)
+            navigate('/definir-parametros/paqueteria')
+
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
         }
@@ -102,8 +105,7 @@ const DefineParams = () => {
 
     const defineShipping = (shipping) => {
         setShippingPackage(shipping);
-        setShipping(false)
-        setFormSender(true)
+        navigate('/definir-parametros/remitente')
     }
 
     const handleFormSender = () => {
@@ -123,8 +125,7 @@ const DefineParams = () => {
                 reference: senderData.referencia,
             }
         })
-        setFormSender(false);
-        setFormReceiver(true)
+        navigate('/definir-parametros/destinatario')
     }
 
     const handleFormReceiver = async () => {
@@ -144,13 +145,12 @@ const DefineParams = () => {
                 reference: receiverData.referencia,
             }
         })
-        setFormReceiver(false);
 
         try {
             getDeliveryTypes();
             const response = await SkydropService.getCategories();
             setCategoryData(response.result.data);
-            setCategory(true);
+            navigate('/definir-parametros/producto')
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
         }
@@ -191,80 +191,67 @@ const DefineParams = () => {
     }
 
     const handleContinueCategory = () => {
-        setCategory(false);
-        setSubcategory(false);
-        setClase(false);
-        setDelivery(true);
+        navigate('/definir-parametros/entrega')
     }
 
     const defineDelivery = (delivery) => {
         setDeliveryTypeSelected(delivery);
-        setDelivery(false);
-        setConfirmData(true);
+        navigate('/definir-parametros/confirmacion')
+
     }
     const handleEditForm = (type) => {
         console.log(type);
         switch (type) {
             case "sender":
-                setConfirmData(false)
-                setFormSender(true);
+                navigate('/definir-parametros/remitente')
                 break;
             case "receiver":
-                setConfirmData(false);
-                setFormReceiver(true);
+                navigate('/definir-parametros/destinatario')
                 break;
             case "category":
-                setConfirmData(false);
-                setCategory(true);
+                setClase(false)
+                setSubcategory(false)
+                setCategory(true)
+                navigate('/definir-parametros/producto')
                 break;
             default:
                 break;
         }
     }
     const handleBack = () => {
-        if (weight && !service && !shipping) {
+        console.log(paramId);
+        if (paramId === "peso") {
             setSizePackage("");
-            setCPView(true);
-            navigate("/");
+            navigate("/codigos-postales");
         }
-        if (!weight && service && !shipping) {
+        if (paramId === "servicio") {
             setSizePackage("")
-            setService(false)
-            setWeight(true)
+            navigate("/definir-parametros/peso");
         }
-        if (!weight && !service && shipping) {
+        if (paramId === "paqueteria") {
             setServicePackage("")
-            setShipping(false)
-            setService(true)
+            navigate("/definir-parametros/servicio");
         }
-        if (!weight && !service && !shipping && formSender) {
+        if (paramId === "remitente") {
             setShippingPackage("");
-            setFormSender(false)
-            setShipping(true)
+            navigate("/definir-parametros/paqueteria");
         }
-        if (!weight && !service && !shipping && !formSender && formReceiver) {
-            setFormReceiver(false);
-            setFormSender(true);
+        if (paramId === "destinatario") {
+            navigate("/definir-parametros/remitente");
         }
-        if (!formReceiver && (category || subcategory || clase)) {
-            setCategory(false);
-            setSubcategory(false);
-            setClase(false);
-            setFormReceiver(true);
+        if (paramId === "producto") {
+            navigate("/definir-parametros/destinatario");
         }
-        if (!category && delivery) {
-            setDelivery(false);
-            setCategory(true);
+        else if (paramId === "entrega") {
+            navigate("/definir-parametros/producto");
         }
-        if (!delivery && confirmData) {
+        if (paramId === "confirmacion") {
             setDeliveryTypeSelected({});
-            setConfirmData(false);
-            setDelivery(true);
+            navigate("/definir-parametros/entrega");
         }
     }
 
     const handlePrint = async () => {
-        setConfirmData(false);
         setConfirmLoading(true);
         const service_tag = Object.keys(servicePackage)[0].includes("standard") ? "STD" : "EXP";
         const method_tag = Object.keys(deliveryTypeSelected)[0];
@@ -310,13 +297,15 @@ const DefineParams = () => {
         setPolicies(false);
     }
 
+    console.log(`Confirm loading: ${confirmLoading}`);
+
     return (
         <FlowBackground>
             <div className={styles.container}>
-                {!confirmData && <Feedback
+                {paramId !== "confirmacion" && <Feedback
                     position={{ x: "70px", y: "92px" }}
                 />}
-                {weight && (
+                {paramId === "peso" && (
                     <>
                         <h1 className={styles.title}>¿Cuál es el peso de tu envío?</h1>
                         <div className={styles.cardContainer}>
@@ -330,7 +319,10 @@ const DefineParams = () => {
                         </div>
                     </>
                 )}
-                {service &&
+                {paramId === "servicio" && (
+                    shippingLoading ?
+                    <Loader text={`Estamos buscando paqueterías disponibles`}/>
+                    :
                     <>
                         <h1 className={styles.title}>¿Qué precio y tipo de servicio prefieres?</h1>
                         <div className={styles.cardContainer}>
@@ -339,20 +331,19 @@ const DefineParams = () => {
                             })}
                         </div>
                     </>
+                    )
                 }
-                {shipping ?
+                {paramId === "paqueteria" && 
                     <>
                         <h1 className={styles.title}>Estas son las paqueterías disponibles para<br />tus códigos postales</h1>
                         <div className={styles.cardContainerShipping}>
-                            {shippingsOn?.map(shipping => {
+                            {shippingAvailable?.map(shipping => {
                                 return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock={setBlock} />
                             })}
                         </div>
                     </>
-                    :
-                    shippingLoading && <Loader text={`Estamos buscando paqueterías disponibles`}/>
                 }
-                {formSender && <Form
+                {paramId === "remitente" && <Form
                     width={'calc(100vw - 170px)'}
                     // height={"490px"}
                     codigoPostal={codigosPostales.origen}
@@ -361,7 +352,7 @@ const DefineParams = () => {
                     formSender={true}
                 />}
 
-                {formReceiver && <Form
+                {paramId === "destinatario" && <Form
                     width={'calc(100vw - 170px)'}
                     // height={"414px"}
                     codigoPostal={codigosPostales.destino}
@@ -370,7 +361,7 @@ const DefineParams = () => {
                     formReceiver={true}
                 />}
 
-                {(category || subcategory || clase) &&
+                {paramId === "producto" &&
                     <div className={styles.categoriesContainer}>
                         <h2 className={styles.titleCategory}>¿Qué tipo de producto vas a enviar?</h2>
                         <div className={styles.tooltipContainer}>
@@ -414,7 +405,7 @@ const DefineParams = () => {
                     </div>
                 }
 
-                {delivery &&
+                {paramId === "entrega" &&
                     <>
                         <h1 className={styles.title}>¿Quieres entregar tu paquete en esta tienda?</h1>
                         <div className={styles.cardContainer}>
@@ -425,7 +416,8 @@ const DefineParams = () => {
                     </>
                 }
 
-                {confirmData ?
+                {paramId === "confirmacion" && (
+                    !confirmLoading ? 
                     <>
                         <h1 className={styles.titleConfirm}>Este es tu resumen de envío</h1>
                         <h3 className={styles.subtitleConfirm}>Con estos datos imprimiremos tu guía. Si necesitas editarlos, puedes hacerlo.</h3>
@@ -440,20 +432,23 @@ const DefineParams = () => {
                         </div>
                     </>
                     :
-                    confirmLoading && <Loader text={<p>Estamos creando tu guía.<br/>Aguarda un momento... </p>} />
+                    <Loader text={<p>Estamos creando tu guía.<br/>Aguarda un momento... </p>} />
+                    )
                 }
 
+                {/* Buttons container */}
                 <div className={styles.buttonContainer}>
-                    <Button text="Regresar" width="132px" color="outlined" onClick={() => handleBack()} />
-                    {formSender && <Button2 text="Continuar" width='132px' canContinue={Object.keys(senderData).length !== 0} handleContinue={handleFormSender} />}
-                    {formReceiver && <Button2 text="Continuar" width='132px' canContinue={Object.keys(receiverData).length !== 0} handleContinue={handleFormReceiver} />}
-                    {(category || subcategory || clase) && <Button2
+                    {!confirmLoading && <Button text="Regresar" width="132px" color="outlined" onClick={() => handleBack()} />}
+                    {paramId === "remitente" && <Button2 text="Continuar" width='132px' canContinue={Object.keys(senderData).length !== 0} handleContinue={handleFormSender} />}
+                    {paramId === "destinatario" && <Button2 text="Continuar" width='132px' canContinue={Object.keys(receiverData).length !== 0} handleContinue={handleFormReceiver} />}
+                    {paramId === "producto" && <Button2
                         text="Continuar"
                         width='132px'
                         canContinue={classCodeCtx && categorySelected && subCategorySelected && claseSelected}
                         handleContinue={handleContinueCategory} />}
-                    {confirmData && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
+                    {paramId === "confirmacion" && !confirmLoading && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
+
                 {(terms || policies) && <Terms handleClose={() => handleCloseTerms()} width="1000px" height={'656px'} type={terms ? "terms" : "policies"} />}
             </div>
         </FlowBackground>

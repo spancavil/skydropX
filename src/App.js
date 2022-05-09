@@ -46,7 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/codigos-postales" element ={<HomeCP />} />
-        <Route path="/definir-parametros" element={<DefineParams />} />
+        <Route path="/definir-parametros/:paramId" element={<DefineParams />} />
         <Route path="/impresion" element={<Impresion />} />
         <Route path="/error-pdf" element={<ErrorPdf />} />
         <Route path="/envio-exitoso" element={<EnvioExitoso/>} />

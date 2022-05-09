@@ -98,7 +98,7 @@ const OrigenDestino = ({codigosPostales}) => {
                     cityOrigen: responseOrigenSplit[1] === "" ? responseOrigenSplit[0]: responseOrigenSplit[1],
                     cityDestino: responseDestinoSplit[1] === "" ? responseDestinoSplit[0] : responseDestinoSplit[1]
                 })
-                navigate('/definir-parametros');
+                navigate('/definir-parametros/peso');
             }
             
         } catch (error) {

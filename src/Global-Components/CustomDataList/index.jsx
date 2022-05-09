@@ -44,7 +44,7 @@ const CustomDataList = ({ data = [], onSelect, disabled = false, type, selected 
         setInput(selected)
     }, [selected] )
 
-    console.log(`${type}: ${disabled}`);
+    // console.log(`${type}: ${disabled}`);
     
     return (
         <>
