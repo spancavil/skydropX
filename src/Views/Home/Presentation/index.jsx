@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import ElipseHome1 from '../../../Assets/svg/elipseHome1';
 import styles from './styles.module.scss';
 import logo from '../../../Assets/img/logoSkydrop.png';
-import fedEx from '../../../Assets/img/fedEx.png';
 import sendEx from '../../../Assets/img/sendEx.png';
 import redPack from '../../../Assets/img/redPack.png';
 import carsa from '../../../Assets/img/carsa.png';
@@ -55,11 +54,6 @@ const Presentation = ({onClick}) => {
                     
                     <Estafeta
                         style={{ width: "155px", objectFit: "contain" }}
-                    />
-                    <img
-                        src={fedEx}
-                        alt="fedEx"
-                        style={{ width: "79px", objectFit: "contain" }}
                     />
                     <img
                         src={sendEx}

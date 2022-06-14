@@ -21,10 +21,12 @@ export const schemaEmail = Joi.object({
     email: Joi.string()
         .email({ tlds: {allow: false} })
         .empty()
+        .pattern(/.ñ+$/, {invert: true})
         .messages({
             "string.base": "Debe ser un string",
             "string.email": "El formato no es válido",
             "string.empty": "Este campo es obligatorio",
+            "string.pattern.base": "La letra ñ es inválida en la dirección de correo electrónico",
         })
     })
         

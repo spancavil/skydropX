@@ -80,7 +80,12 @@ const Form = ({ width, height, codigoPostal, stateAndCity, setData, formSender =
     if (validate.error?.message) {
       setErrorCorreoElectronico(validate.error.message)
     } else {
-      setErrorCorreoElectronico("")
+      if (value.includes("ñ")){
+        setErrorCorreoElectronico("La letra ñ es inválida en la dirección de correo electrónico")
+      }
+      else {
+        setErrorCorreoElectronico("")
+      }
     }
   }
 
