@@ -8,11 +8,20 @@ import { useState, useEffect, useContext } from 'react';
 import { InfoData } from './Context/InfoProvider';
 import HomeCP from './Views/Home/Home_CP';
 import EnvioExitoso from './Views/EnvioExitoso';
+import useScript from './Hooks/useScript';
+
+const mouseflowUrl = process.env.REACT_APP_MOUSEFLOW;
+
 
 function App() {
 
+  console.log(mouseflowUrl);
+
   const { setFullScreen } = useContext(InfoData);
   const [launcher, setLauncher] = useState(null)
+
+  //Mouseflow scripts loads
+  useScript(mouseflowUrl)
 
   //Detect changes on fullscreen and set corresponding state
   useEffect(() => {
@@ -20,6 +29,7 @@ function App() {
     elemento.addEventListener('fullscreenchange', () => {
       setFullScreen(fullscreen => !fullscreen);
     })
+
 
   }, [setFullScreen])
 
