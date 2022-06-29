@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import Button from '../../Global-Components/Button';
 import WebViewer from '@pdftron/pdfjs-express-viewer';
 import { useNavigate } from 'react-router-dom';
+import ButtonImpresion from './Components/Button';
 
 const licenseKey = process.env.REACT_APP_LICENSE_WEB_VIEWER;
 
@@ -25,23 +26,34 @@ const Impresion = () => {
             WebViewer({
                 initialDoc: viewerState === "link" ? linkPdf : ticketLinkPdf,
                 licenseKey: licenseKey,
-            }, viewerState === "link" ? viewerLink.current: viewerTicket.current)
+            }, viewerState === "link" ? viewerLink.current : viewerTicket.current)
                 .then(instance => {
                     const { Core } = instance;
-    
+
                     instance.setPrintQuality(4);
 
                     const renderPrint = () => {
                         return (
-                            <h3 
-                                onClick={()=>instance.printInBackground()}
-                                style = {{
-                                    fontSize: '20px',
-                                    cursor: 'pointer',
-                                }}
+                            <ButtonImpresion
+                                onClick={() => instance.printInBackground()}
                             >
-                                Imprimir
-                            </h3>
+                                <h3
+                                    style={{
+                                        fontSize: '20px',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    Imprimir
+                                </h3>
+                                <img src="/printIcon.png"
+                                    alt="print-icon"
+                                    style={{
+                                        width: '30px',
+                                        height: '30px',
+                                        marginLeft: '20px',
+                                    }}
+                                />
+                            </ButtonImpresion>
                         )
                     }
 
@@ -49,36 +61,25 @@ const Impresion = () => {
                         type: 'customElement',
                         render: renderPrint,
                     }
-    
-                    const printButton = {
-                        type: 'actionButton',
-                        img: '/printIcon.png',
-                        title: '',
-                        onClick: async () => {
-                            instance.printInBackground()
-                        },
-                        dataElement: 'printButton',
-                    }
-    
+
                     // Add a new button that alerts "Printing" when clicked
                     instance.UI.setHeaderItems((header) => {
                         const headerUpdated = header.getItems().slice(8, 9)
                         header.update(headerUpdated); //erase all items
                         header.push(printMessage)
-                        header.push(printButton)
                         // console.log(header.getItems());
                     })
-    
+
                     // adding an event listener for when a document is loaded
                     Core.documentViewer.addEventListener('documentLoaded', () => {
                         console.log('document loaded');
                     });
-    
+
                     // adding an event listener for when the page number has changed
                     Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
                         console.log(`Page number is: ${pageNumber}`);
                     });
-    
+
                 });
         }
 
@@ -177,9 +178,9 @@ const Impresion = () => {
 
     console.log(linkPdf);
 
-    useEffect(()=> {
+    useEffect(() => {
         if (!viewerState) navigate('/envio-exitoso')
-    },[viewerState, navigate])
+    }, [viewerState, navigate])
 
     return (
         <>
@@ -189,7 +190,7 @@ const Impresion = () => {
                     {viewerState === "ticket" && <div className={styles.WebViewer} ref={viewerTicket}></div>}
                     <div className={styles.buttonContainer}>
                         <Button
-                            text= {viewerState === "link" ? "Siguiente" : "Siguiente"}
+                            text={viewerState === "link" ? "Siguiente" : "Siguiente"}
                             width='172px'
                             color='outlined'
                             onClick={() => setViewerState(prev => {
