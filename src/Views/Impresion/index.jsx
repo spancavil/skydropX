@@ -5,13 +5,14 @@ import Button from '../../Global-Components/Button';
 import WebViewer from '@pdftron/pdfjs-express-viewer';
 import { useNavigate } from 'react-router-dom';
 import ButtonImpresion from './Components/Button';
+import printIcon from '../../Assets/img/printIcon.png';
 
 const licenseKey = process.env.REACT_APP_LICENSE_WEB_VIEWER;
 
 const Impresion = () => {
     const { linkPdf, ticketLinkPdf } = useContext(InfoData);
 
-    const [viewerState, setViewerState] = useState("link");
+    const [viewerState, setViewerState] = useState('link');
 
     const viewerLink = useRef(null);
     const viewerTicket = useRef(null);
@@ -28,7 +29,7 @@ const Impresion = () => {
                 licenseKey: licenseKey,
             }, viewerState === "link" ? viewerLink.current : viewerTicket.current)
                 .then(instance => {
-                    const { Core } = instance;
+                    // const { Core } = instance;
 
                     instance.setPrintQuality(4);
 
@@ -37,20 +38,13 @@ const Impresion = () => {
                             <ButtonImpresion
                                 onClick={() => instance.printInBackground()}
                             >
-                                <h3
-                                    style={{
-                                        fontSize: '20px',
-                                        cursor: 'pointer',
-                                    }}
-                                >
                                     Imprimir
-                                </h3>
-                                <img src="/printIcon.png"
+                                <img src={printIcon}
                                     alt="print-icon"
                                     style={{
-                                        width: '30px',
-                                        height: '30px',
-                                        marginLeft: '20px',
+                                        width: '20px',
+                                        height: '20px',
+                                        marginLeft: '10px',
                                     }}
                                 />
                             </ButtonImpresion>
@@ -69,16 +63,6 @@ const Impresion = () => {
                         header.push(printMessage)
                         // console.log(header.getItems());
                     })
-
-                    // adding an event listener for when a document is loaded
-                    Core.documentViewer.addEventListener('documentLoaded', () => {
-                        console.log('document loaded');
-                    });
-
-                    // adding an event listener for when the page number has changed
-                    Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
-                        console.log(`Page number is: ${pageNumber}`);
-                    });
 
                 });
         }
@@ -191,7 +175,7 @@ const Impresion = () => {
                     <div className={styles.buttonContainer}>
                         <Button
                             text={viewerState === "link" ? "Siguiente" : "Siguiente"}
-                            width='172px'
+                            width='150px'
                             color='outlined'
                             onClick={() => setViewerState(prev => {
                                 if (prev === "link") return "ticket"
