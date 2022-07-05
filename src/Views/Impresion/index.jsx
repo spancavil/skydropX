@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { InfoData } from '../../Context/InfoProvider';
 import styles from './styles.module.scss';
-import Button from '../../Global-Components/Button';
 import WebViewer from '@pdftron/pdfjs-express-viewer';
 import { useNavigate } from 'react-router-dom';
 import ButtonImpresion from './Components/Button';
 import printIcon from '../../Assets/img/printIcon.png';
+import Button3 from '../../Global-Components/Button3';
 
 const licenseKey = process.env.REACT_APP_LICENSE_WEB_VIEWER;
 
@@ -13,6 +13,7 @@ const Impresion = () => {
     const { linkPdf, ticketLinkPdf } = useContext(InfoData);
 
     const [viewerState, setViewerState] = useState('link');
+    const [canContinue, setCanContinue] = useState(false);
 
     const viewerLink = useRef(null);
     const viewerTicket = useRef(null);
@@ -36,9 +37,13 @@ const Impresion = () => {
                     const renderPrint = () => {
                         return (
                             <ButtonImpresion
-                                onClick={() => instance.printInBackground()}
+                                onClick={() => {
+                                    instance.printInBackground()
+                                    setCanContinue(true);
+                                }
+                                }
                             >
-                                    Imprimir
+                                Imprimir
                                 <img src={printIcon}
                                     alt="print-icon"
                                     style={{
@@ -173,14 +178,18 @@ const Impresion = () => {
                     {viewerState === "link" && <div className={styles.WebViewer} ref={viewerLink}></div>}
                     {viewerState === "ticket" && <div className={styles.WebViewer} ref={viewerTicket}></div>}
                     <div className={styles.buttonContainer}>
-                        <Button
+                        <Button3
                             text={viewerState === "link" ? "Siguiente" : "Siguiente"}
                             width='150px'
-                            color='outlined'
-                            onClick={() => setViewerState(prev => {
-                                if (prev === "link") return "ticket"
-                                if (prev === "ticket") return false
-                            })}
+                            canContinue={canContinue}
+                            handleContinue={() => {
+                                setViewerState(prev => {
+                                    if (prev === "link") return "ticket"
+                                    if (prev === "ticket") return false
+                                })
+                                setCanContinue(false);
+                            }
+                            }
                         />
                     </div>
                 </>
