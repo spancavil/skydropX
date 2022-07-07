@@ -18,9 +18,13 @@ const Impresion = () => {
     const viewerLink = useRef(null);
     const viewerTicket = useRef(null);
 
+    const fnImprimir = useRef(null)
+
     const navigate = useNavigate();
 
     console.log(ticketLinkPdf);
+
+    console.log(typeof fnImprimir.current);
 
     useEffect(() => {
 
@@ -34,38 +38,23 @@ const Impresion = () => {
 
                     instance.setPrintQuality(4);
 
-                    const renderPrint = () => {
-                        return (
-                            <ButtonImpresion
-                                onClick={() => {
-                                    instance.printInBackground()
-                                    setCanContinue(true);
-                                }
-                                }
-                            >
-                                Imprimir
-                                <img src={printIcon}
-                                    alt="print-icon"
-                                    style={{
-                                        width: '20px',
-                                        height: '20px',
-                                        marginLeft: '10px',
-                                    }}
-                                />
-                            </ButtonImpresion>
-                        )
-                    }
+                    //Asignamos la referencia para la función.
+                    fnImprimir.current = instance.printInBackground
 
-                    const printMessage = {
+                    /* const renderPrint = () => {
+                        return (null
+                        )
+                    } */
+
+                    /* const printMessage = {
                         type: 'customElement',
                         render: renderPrint,
-                    }
+                    } */
 
                     // Add a new button that alerts "Printing" when clicked
                     instance.UI.setHeaderItems((header) => {
-                        const headerUpdated = header.getItems().slice(8, 9)
-                        header.update(headerUpdated); //erase all items
-                        header.push(printMessage)
+                        // const headerUpdated = header.getItems().slice(8, 9)
+                        header.update([]); //erase all items
                         // console.log(header.getItems());
                     })
 
@@ -188,9 +177,29 @@ const Impresion = () => {
                                     if (prev === "ticket") return false
                                 })
                                 setCanContinue(false);
+                                fnImprimir.current = null;
                             }
                             }
                         />
+                        <ButtonImpresion
+                            onClick={() => {
+                                if (typeof fnImprimir.current === 'function') {
+                                    fnImprimir.current()
+                                    setCanContinue(true);
+                                }
+                            }
+                            }
+                        >
+                            Imprimir
+                            <img src={printIcon}
+                                alt="print-icon"
+                                style={{
+                                    width: '20px',
+                                    height: '20px',
+                                    marginLeft: '10px',
+                                }}
+                            />
+                        </ButtonImpresion>
                     </div>
                 </>
             )}
