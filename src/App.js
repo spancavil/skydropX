@@ -55,7 +55,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Impresion/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/codigos-postales" element ={<HomeCP />} />
         <Route path="/definir-parametros/:paramId" element={<DefineParams />} />
         <Route path="/impresion" element={<Impresion />} />
