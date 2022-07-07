@@ -33,8 +33,8 @@ const InfoProvider = ({ children }) => {
     const [deliveryTypes, setDeliveryTypes] = useState([])
     const [deliveryTypeSelected, setDeliveryTypeSelected] = useState({})
 
-    const [linkPdf, setLinkPdf] = useState('/shipping.pdf');
-    const [ticketLinkPdf, setTicketLinkPdf] = useState('/workshop.pdf');
+    const [linkPdf, setLinkPdf] = useState('');
+    const [ticketLinkPdf, setTicketLinkPdf] = useState('');
     const [order_id, setOrder_id] = useState('');
 
     const [CPView, setCPView] = useState(false)
