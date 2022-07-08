@@ -88,10 +88,12 @@ const DefineParams = () => {
 
     const defineService = async (service) => {
         try {
+        
             await setServicePackage(service);
 
             setShippingLoading(true);
             const shippings = await getShippingServices(Object.keys(service)[0])
+            setShippingLoading(false);
 
             /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
             setShippingAvailable(shippingsHardcoded) //Saves in context */
