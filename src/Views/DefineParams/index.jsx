@@ -20,10 +20,10 @@ const DefineParams = () => {
 
     //Possible params:
     //peso - servicio - paqueteria - remitente - destinatario - producto - entrega - confirmacion
-    const {paramId} = useParams()
+    const { paramId } = useParams()
 
     console.log(paramId);
-    
+
     //States for show or hide
     // const [weight, setWeight] = useState(true)
     // const [service, setService] = useState(false)
@@ -88,17 +88,17 @@ const DefineParams = () => {
 
     const defineService = async (service) => {
         try {
-        
+
             await setServicePackage(service);
 
             setShippingLoading(true);
+            navigate('/definir-parametros/paqueteria')
             const shippings = await getShippingServices(Object.keys(service)[0])
             setShippingLoading(false);
 
             /* const shippingsHardcoded = ["EST", "FED", "CAR", "RED", "SEN"];
             setShippingAvailable(shippingsHardcoded) //Saves in context */
             setShippingAvailable(shippings);
-            navigate('/definir-parametros/paqueteria')
 
         } catch (error) {
             SwalAlert("Error de comunicación con el servidor: " + error.message);
@@ -300,6 +300,7 @@ const DefineParams = () => {
     }
 
     console.log(`Confirm loading: ${confirmLoading}`);
+    console.log(`Este es el paramId: ${paramId}`);
 
     return (
         <FlowBackground>
@@ -322,9 +323,6 @@ const DefineParams = () => {
                     </>
                 )}
                 {paramId === "servicio" && (
-                    shippingLoading ?
-                    <Loader text={`Estamos buscando paqueterías disponibles`}/>
-                    :
                     <>
                         <h1 className={styles.title}>¿Qué precio y tipo de servicio prefieres?</h1>
                         <div className={styles.cardContainer}>
@@ -333,16 +331,22 @@ const DefineParams = () => {
                             })}
                         </div>
                     </>
-                    )
+                )
                 }
-                {paramId === "paqueteria" && 
+                {paramId === "paqueteria" &&
                     <>
-                        <h1 className={styles.title}>Estas son las paqueterías disponibles para<br />tus códigos postales</h1>
-                        <div className={styles.cardContainerShipping}>
-                            {shippingAvailable?.map(shipping => {
-                                return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock={setBlock} />
-                            })}
-                        </div>
+                        {shippingLoading ?
+                            <Loader text={`Estamos buscando paqueterías disponibles`} />
+                            :
+                        <>
+                            <h1 className={styles.title}>Estas son las paqueterías disponibles para<br />tus códigos postales</h1>
+                            <div className={styles.cardContainerShipping}>
+                                {shippingAvailable?.map(shipping => {
+                                    return <Card type="shipping" content={shipping} key={shipping} onClick={defineShipping} block={block} setBlock={setBlock} />
+                                })}
+                            </div>
+                        </>
+                        }
                     </>
                 }
                 {paramId === "remitente" && <Form
@@ -419,23 +423,23 @@ const DefineParams = () => {
                 }
 
                 {paramId === "confirmacion" && (
-                    !confirmLoading ? 
-                    <>
-                        <h1 className={styles.titleConfirm}>Este es tu resumen de envío</h1>
-                        <h3 className={styles.subtitleConfirm}>Con estos datos imprimiremos tu guía. Si necesitas editarlos, puedes hacerlo.</h3>
-                        <div className={styles.confirmDataContainer}>
-                            <Card
-                                type="resumeSenderReceiver"
-                                handleEdit={(type) => handleEditForm(type)}
-                            />
-                            <Card
-                                type="resumeShipping"
-                            />
-                        </div>
-                    </>
-                    :
-                    <Loader text={<p>Estamos creando tu guía.<br/>Aguarda un momento... </p>} />
-                    )
+                    !confirmLoading ?
+                        <>
+                            <h1 className={styles.titleConfirm}>Este es tu resumen de envío</h1>
+                            <h3 className={styles.subtitleConfirm}>Con estos datos imprimiremos tu guía. Si necesitas editarlos, puedes hacerlo.</h3>
+                            <div className={styles.confirmDataContainer}>
+                                <Card
+                                    type="resumeSenderReceiver"
+                                    handleEdit={(type) => handleEditForm(type)}
+                                />
+                                <Card
+                                    type="resumeShipping"
+                                />
+                            </div>
+                        </>
+                        :
+                        <Loader text={<p>Estamos creando tu guía.<br />Aguarda un momento... </p>} />
+                )
                 }
 
                 {/* Buttons container */}
