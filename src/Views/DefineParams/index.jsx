@@ -452,7 +452,7 @@ const DefineParams = () => {
                         width='132px'
                         canContinue={classCodeCtx && categorySelected && subCategorySelected && claseSelected}
                         handleContinue={handleContinueCategory} />}
-                    {paramId === "confirmacion" && !confirmLoading && <Button2 text="Imprimir guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
+                    {paramId === "confirmacion" && !confirmLoading && <Button2 text="Crear guía" width='172px' canContinue={true} handleContinue={handlePrint} />}
                 </div>
 
                 {(terms || policies) && <Terms handleClose={() => handleCloseTerms()} width="1000px" height={'656px'} type={terms ? "terms" : "policies"} />}

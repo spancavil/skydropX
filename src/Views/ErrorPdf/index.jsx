@@ -72,7 +72,7 @@ const ErrorPdf = () => {
                         onClick={navigateInicio}
                     />
                     <Button2
-                        text="Imprimir guía"
+                        text="Crear guía"
                         width='179px'
                         canContinue={true}
                         handleContinue={() => handlePrint()}
