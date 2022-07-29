@@ -178,8 +178,8 @@ const Card = ({type = "weight", content, onClick, block, setBlock, handleEdit = 
                     alt="delivery-type"
                     />
                 <h2 className={styles.title}>{Object.keys(content)[0].includes("OXX") ? "Sí, entregar en esta tienda": "No, entregar en otro lugar" }</h2>
-                <h3 className={styles.sub}>{Object.keys(content)[0].includes("OXX") ? "El costo de comisión es de $7 MXN por paquete.": "Sin costo de comisión."}</h3>
-                <h3 className={styles.text}>{Object.keys(content)[0].includes("OXX") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3>
+                <h3 className={styles.sub}>{Object.keys(content)[0].includes("OXX") ? "Se cobrarán comisiones por envío y recepción de paquete.": "Se cobrará comisión por envío."}</h3>
+                {/* <h3 className={styles.text}>{Object.keys(content)[0].includes("OXX") ? "Entrega tu envío en la caja para que la paquetería que elegiste pueda pasar a buscarlo." : "Acude a una sucursal de la paquetería que elegiste. No podrás dejar tu paquete en esta tienda."}</h3> */}
                 </div>
             )
         case "resumeSenderReceiver":
